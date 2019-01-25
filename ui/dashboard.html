@@ -9,6 +9,13 @@
     <title>Politico</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="./assets/js/jquery-3.3.1.min.js"></script>
+    <style>
+        body {
+            background: #f5f5f5;
+            color: #626262;
+        }
+    </style>
+    <script src="./assets/js/jquery-3.3.1.min.js"></script>
     <script src="./assets/js/glider.min.js"></script>
 </head>
 <body>
@@ -25,5 +32,78 @@
             </ul>
         </nav>
     </div>
+    <div class="dashboard-wrapper">
+        <header class="top-header">
+            <div class="search_area mv_left">
+                <form role="search" method="POST">
+                    <i class="fa fa-search" aria-hidden="true" for="search"></i>
+                    <input type="text" name="q" placeholder="Type here to Search" id="search">
+                </form>
+            </div>
+            <div class="user_area mv_right">
+                <span></span>
+                    <a href="#"><i class="fa fa-plus"></i> Add</a>
+                </span>
+                <span>
+                    <a href="#" class="noti">
+                        <i class="fa fa-bell-o" aria-hidden="true"></i>
+                        <span class="circle">3</span>
+                    </a>
+                </span>
+                <span>
+                    <a href="#">
+                        <div class="user-img"></div>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </a>
+                </span>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <h2 style="font-weight: 500;margin-bottom: 10px;">Dashboard</h2>
+            <div class="d-flex-lg d-md">
+                <div class="cards text-right">
+                    <h2 class="card_title">Users</h2>
+                    <div class="card_body">
+                        101
+                    </div>
+                </div>
+                <div class="cards text-right">
+                    <h2 class="card_title">Offices</h2>
+                    <div class="card_body">
+                        20
+                    </div>
+                </div>
+                <div class="cards text-right">
+                    <h2 class="card_title">Parties</h2>
+                    <div class="card_body">
+                        50
+                    </div>
+                </div>
+            </div>
+
+            <div class="datatable">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Party</th>
+                            <th>Office</th>
+                            <th>Votes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data">
+
+                    </tbody>
+                </table>
+            </div>
+
+            <footer class="dashboard_footer text-center">
+                <p>@ 2019 - Designed by Malik Godwin Onimisi</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>
