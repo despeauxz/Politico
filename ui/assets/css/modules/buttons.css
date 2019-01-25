@@ -1,0 +1,25 @@
+.btn {
+    position: relative;
+    margin: 2em auto;
+    width: 80%;
+    padding: 12px 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    transition: .5s;
+}
+.btn-block {
+    display: block;
+}
+
+.btn-primary {
+    background: #4dc0b5;
+}
+
+.btn-primary:hover {
+    background: #38a89d;
+}

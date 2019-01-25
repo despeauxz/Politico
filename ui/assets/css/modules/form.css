@@ -1,0 +1,31 @@
+.auth_form {
+    margin-top: 2em;
+}
+
+.control-label {
+    display: block;
+    text-align: left;
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: .6em;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    border: 1px solid #DFE6E6;
+    border-radius: 4px;
+    margin: 0 0 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    font-size: 14px;
+}
+
+.form-control::placeholder {
+    color: #B0C2C1;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}

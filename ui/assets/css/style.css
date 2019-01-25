@@ -8,6 +8,7 @@
 @import url('./modules/modals.css');
 @import url('./modules/sidebar.css');
 @import url('./modules/table.css');
+@import url('./modules/form.css');
 
 body {
     margin: 0;
@@ -39,7 +40,7 @@ ul {
     display: none;
 }
 
-header {
+header.home-landing {
     display: flex;
     justify-content: space-between;
 }
@@ -317,14 +318,19 @@ nav ul li a:hover {
     nav ul li a:hover {
         font-weight: bold;
     }
+
+    .auth {
+        width: 40%;
+        padding: 10px 35px;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
     .enterprise .cta {
         width: 40%;
     }
-
     .container {
+
         width: 90%;
         margin: 0 auto;
     }
@@ -365,6 +371,42 @@ nav ul li a:hover {
 }
 
 
+@media (min-width: 451px) and (max-width: 575.98px) {
+
+    .auth {
+        width: 75%;
+        padding: 10px 35px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .auth {
+        width: 60%;
+        padding: 10px 35px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .auth {
+        width: 60%;
+        padding: 20px 50px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .auth {
+        width: 50%;
+        padding: 10px 50px;
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -385,4 +427,45 @@ nav ul li a:hover {
     font-size: 1.7em;
     font-weight: 400;
     letter-spacing: 5px;
+}
+
+
+
+
+
+
+
+
+
+.main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3em;
+    width: 100%;
+}
+
+.auth-wrapper {
+    margin-top: 1em;
+}
+
+.auth {
+    padding: 10px 30px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+.text-center {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.link {
+    color: #26D3C6;
+    font-weight: bold;
 }
