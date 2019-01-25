@@ -1,0 +1,47 @@
+.datatable {
+    margin-top: 2em;
+    width: 100%;
+    display: block;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table thead th {
+    text-align: left;
+    color: #2c2c2c;
+    padding: 30px;
+    width: 30%;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: .06em;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(230, 230, 230, .7);
+    border-top: none;
+    line-height: 1.428; 
+}
+
+tr td{
+    color: #000;
+    background: #fff;
+    border-bottom: 1px solid rgba(230, 230, 230, .7);
+    border-top: 0;
+    padding: 5px 20px;
+    font-size: 15px;
+}
+
+tbody tr:hover {
+    background: lightgoldenrodyellow;
+}
+
+.v-align-middle {
+    vertical-align: middle;
+}
+
+.semi-bold {
+    font-weight: 400;
+}
