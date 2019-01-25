@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 @import url('./modules/normalize.css');
 @import url('./modules/palette.css');
@@ -70,8 +71,22 @@ ul {
         display: none !important;
     }
 
+    .cards {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1em;
+    }
+
     .sidebar {
         display: none;
+    }
+
+    .dashboard-wrapper {
+        margin-left: 0;
+    }
+
+    .search_area {
+        visibility: hidden;
     }
 }
 
@@ -334,6 +349,10 @@ ul.footer-links li a{
     .page_header h1 {
         font-size: 2.2em;
         margin: 0;
+    }
+
+    .cards {
+        width: 50%;
     }
 
     .subhead {
