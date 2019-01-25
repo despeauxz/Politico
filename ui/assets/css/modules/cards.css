@@ -1,0 +1,23 @@
+.cards {
+    background: var(--white);
+    border-radius: 0.25rem;
+    margin-right: 1em;
+    padding: 1em;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    flex: 1;
+}
+
+.card_title {
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.cards:last-child {
+    margin-right: 0;
+}
+
+.card_body {
+    font-size: 3em;
+    font-weight: 700;
+}
