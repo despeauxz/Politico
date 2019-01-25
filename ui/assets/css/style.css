@@ -1,3 +1,388 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900");
+
 @import url('./modules/normalize.css');
+@import url('./modules/buttons.css');
+@import url('./modules/cards.css');
+@import url('./modules/dashboard.css');
+@import url('./modules/glider.min.css');
+@import url('./modules/modals.css');
+@import url('./modules/sidebar.css');
+@import url('./modules/table.css');
+
+body {
+    margin: 0;
+    font-family: "Montserrat", Helvetica, sans-serif;
+    color: #666;
+}
+
+p, blockquote {
+    font-size: .9em;
+    line-height: 1.6em;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    padding: .8em 1.2em;
+}
+
+.logo {
+    width: 135px;
+}
+
+.hide-mobile {
+    display: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu {
+    width: 90%;
+}
+
+.page_header {
+    display: flex;
+    margin-top: 3em;
+}
+.page_header h1, .subhead {
+    position: relative;
+}
+
+.page_header section img {
+    display: none;
+}
+
+.subhead {
+    font-size: 1.1em;
+    margin-bottom: 2em;
+}
+
+.blue-container {
+    width: 100%;
+    background: #00C2FF;
+    color: #fff;
+    margin: 15% 0 0;
+    padding: 2em 0;
+    border-top-left-radius: 40px;
+    transform: skewY(-2deg);
+}
+
+.blue-container:before {
+    content: "";
+    width: 40px;
+    height: 40px;
+    background: #00C2FF;
+    position: absolute;
+    top: -39px;
+    right: 0;
+    z-index: -2;;
+}
+
+.blue-container:after {
+    content: "";
+    width: 80px;
+    height: 80px;
+    background: #fff;
+    top: -80px;
+    position: absolute;
+    right: 0;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.blue-container ul {
+    transform: skewY(2deg);
+}
+
+.blue-container ul li {
+    margin-bottom: 3em;
+
+}
+
+.blue-container ul li p {
+    padding: 0 .5em;
+}
+
+.gray-container {
+    background-color: #f5f5f5;
+    padding: 4em 0 2em;
+    margin-top: -3%;
+}
+
+.gray-container ul li:first-child {
+    margin-bottom: 2em;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+figcaption {
+    font-weight: bold;
+    color: #666;
+}
+
+.enterprise h2 {
+    margin-top: 7%;
+    font-size: 1.8em;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.enterprise .cta {
+    background: #00CC80;
+    width: calc(100% - 1em);
+    display: block;
+    color: #fff;
+    border-radius: 20px;
+    padding: .5em;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin: 3% auto 7%;
+    position: relative;
+    z-index: 4;
+}
+
+.cta_link {
+    text-decoration: none;
+    color: #fff;
+    background: crimson;
+    border-radius: 20px;
+    padding: .8em 3em;
+}
+
+.footer-container {
+    width: 100%;
+    background: #3D444A;
+    color: #fff;
+    padding: 3em 0;
+    border-top-right-radius: 40px;
+    transform: skewY(2deg);
+}
+
+.footer-container .container {
+    transform: skewY(-2deg);
+}
+.footer-container:before {
+    content: "";
+    width: 40px;
+    height: 40px;
+    background-color: #3D444A;
+    position: absolute;
+    top: -39px;
+    left: 0;
+    z-index: -2;
+}
+
+.footer-container:after {
+    content: "";
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    position: absolute;
+    top: -80px;
+    left: 0;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+ul.footer-links {
+    margin: 0 auto;
+}
+
+ul.footer-links li {
+    display: inline-block;
+    margin-left: 1em;
+}
+
+ul.footer-links li a{
+    color: #9D9D9D;
+    font-size: .8em;
+}
+
+nav ul {
+    position: fixed;
+    width: 60%;
+    top: 0;
+    right: 0;
+    text-align: left;
+    background: rgb(36, 41, 44);
+    height: 100%;
+    padding-top: 4em;
+    z-index: 7;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 1em 2em;
+    transition: .3s ease-in-out;
+}
+
+nav ul li a:hover {
+    background-color: rgb(65, 73, 78);
+}
+
+.exit-btn {
+    margin-bottom: 1em;
+    margin-top: -1.3em;
+    float: right;
+    padding: 0 1.4em;
+}
+
+.exit-btn img {
+    width: 20px;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 650px) {
+    .page_header h1 {
+        font-size: 2.2em;
+        margin: 0;
+    }
+
+    .subhead {
+        font-size: 1.3em;
+        margin-bottom: 12%;
+    }
+
+    .blue-container {
+        margin: 0;
+    }
+
+    .blue-container ul {
+        display: flex;
+        margin-top: -1em;
+        align-items: center;
+    }
+
+    .blue-container ul li {
+        margin-bottom: 0;
+    }
+
+    .blue-container ul li p {
+        padding: 0 .8em;
+    }
+
+    .gray-container ul {
+        display: flex;
+    }
+
+    nav ul {
+        width: 40%;
+        z-index: 20;
+    }
+}
+
+@media only screen and (min-width: 875px) {
+    .subhead {
+        margin-bottom: 10%;
+    }
+
+    .blue-container ul {
+        margin: 0 0 4% 0;
+    }
+
+    .gray-container ul {
+        margin: 4% 0 0;
+    }
+
+    .page_header .intro {
+        flex: 1;
+    }
+
+    .page_header section:nth-child(2) {
+        flex: 1;
+    }
+
+    .page_header section img {
+        width: 80%;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        display: block;
+    }
+
+    nav ul li a:hover {
+        font-weight: bold;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .enterprise .cta {
+        width: 40%;
+    }
+
+    .container {
+        width: 90%;
+        margin: 0 auto;
+    }
 
 
+    .show-desktop {
+        display: block;
+        margin: 0 auto 13% auto;
+    }
+
+    .hide-desktop {
+        display: none;
+    }
+
+    nav ul {
+        position: inherit;
+        width: auto;
+        background: none;
+        height: auto;
+        display: flex;
+        padding-top: 0;
+    }
+
+    nav ul li {
+        float: left;
+    }
+
+    nav ul li a {
+        color: #666;
+        background: inherit;
+        text-align: right;
+        padding: .8em;
+    }
+
+    nav ul li a:hover {
+        background-color: inherit;
+    }
+}
+
+
+
+
+
+.overlay {
+    z-index: 20;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    top: 0;
+}
+
+.overlay h1 {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.7em;
+    font-weight: 400;
+    letter-spacing: 5px;
+}
