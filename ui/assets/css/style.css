@@ -27,6 +27,80 @@ ul {
     padding: 0;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.d-flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.d-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-small {
+    font-size: 0.83em;
+}
+
+.d-flex {
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    .d-md {
+        display: block;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .d-flex-md {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .d-flex-md {
+        display: flex;
+    }
+}
+
+@media (min-width: 992px) {
+    .d-lg {
+        display: block;
+    }
+}
+
+@media (min-width: 992px) {
+    .d-flex-lg {
+        display: flex;
+    }
+}
+
+@media (min-width: 768px) {
+    .d-none-md {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .d-none-lg {
+        display: none;
+    }
+}
+
+.text-right {
+    text-align: right;
+}
+
+
 .container {
     text-align: center;
     padding: .8em 1.2em;
@@ -441,7 +515,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 3em;
+    margin: 3em 0;
     width: 100%;
 }
 
@@ -468,4 +542,8 @@ a {
 .link {
     color: #26D3C6;
     font-weight: bold;
+}
+
+.addon_info {
+    font-weight: 500;
 }
