@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900");
 
 @import url('./modules/normalize.css');
+@import url('./modules/palette.css');
 @import url('./modules/buttons.css');
 @import url('./modules/cards.css');
 @import url('./modules/dashboard.css');
@@ -9,6 +10,10 @@
 @import url('./modules/sidebar.css');
 @import url('./modules/table.css');
 @import url('./modules/form.css');
+
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -284,7 +289,7 @@ ul.footer-links li a{
     font-size: .8em;
 }
 
-nav ul {
+.home-landing nav ul {
     position: fixed;
     width: 60%;
     top: 0;
@@ -296,7 +301,7 @@ nav ul {
     z-index: 7;
 }
 
-nav ul li a {
+.home-landing nav ul li a {
     color: #fff;
     text-decoration: none;
     display: block;
@@ -305,7 +310,7 @@ nav ul li a {
     transition: .3s ease-in-out;
 }
 
-nav ul li a:hover {
+.home-landing nav ul li a:hover {
     background-color: rgb(65, 73, 78);
 }
 
@@ -354,7 +359,7 @@ nav ul li a:hover {
         display: flex;
     }
 
-    nav ul {
+    .home-landing nav ul {
         width: 40%;
         z-index: 20;
     }
@@ -389,7 +394,7 @@ nav ul li a:hover {
         display: block;
     }
 
-    nav ul li a:hover {
+    .home-landing nav ul li a:hover {
         font-weight: bold;
     }
 
@@ -419,7 +424,7 @@ nav ul li a:hover {
         display: none;
     }
 
-    nav ul {
+    .home-landing nav ul {
         position: inherit;
         width: auto;
         background: none;
@@ -428,18 +433,18 @@ nav ul li a:hover {
         padding-top: 0;
     }
 
-    nav ul li {
+    .home-landing nav ul li {
         float: left;
     }
 
-    nav ul li a {
+    .home-landing nav ul li a {
         color: #666;
         background: inherit;
         text-align: right;
         padding: .8em;
     }
 
-    nav ul li a:hover {
+    .home-landing nav ul li a:hover {
         background-color: inherit;
     }
 }
