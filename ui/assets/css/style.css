@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css");
 
 @import url('./modules/normalize.css');
 @import url('./modules/palette.css');
@@ -574,4 +575,13 @@ a {
 
 .addon_info {
     font-weight: 500;
+}
+
+.text-lg {
+    font-size: 3em;
+    font-weight: 700;
+}
+
+.text-sm {
+    font-size: 1em;
 }
