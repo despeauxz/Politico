@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon.png">
+    <link rel="manifest" href="./assets/img/manifest.json">
+    <title>Politico</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/jquery-3.3.1.min.js"></script>
+    <script src="./assets/js/glider.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <header class="home-landing">
+            <a href="index.html" class="">
+                <img src="./assets/img/logo2.png" alt="logo" class="logo">
+            </a>
+
+            <nav>
+                <a href="#" class="hide-desktop">
+                    <img src="./assets/img/ham.svg" alt="toggle menu" class="menu" id="menu">
+                </a>
+                <ul class="show-desktop hide-mobile" id="nav">
+                    <li id="exit" class="exit-btn hide-desktop exit">
+                        <img src="./assets/img/exit.svg" alt="Exit toggle">
+                    </li>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="#">Policy</a></li>
+                    <li><a href="./login.html">Login</a></li>
+                    <li><a href="./signup.html">Sign Up</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <div class="main-wrapper auth-wrapper">
+        <div class="auth text-center">
+            <h2>Start Making Your Voice Heard</h2>
+            <hr>
+            <form role="signup" class="auth_form" method="POST">
+                <div class="d-flex-lg">
+                    <div>
+                        <div class="form-group">
+                            <label for="firstname" class="control-label">Full name</label>
+                            <input type="text" name="fullname" class="form-control" placeholder="Full name">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="lastname" class="control-label">Last name</label>
+                            <input type="text" name="lastname" class="form-control" placeholder="Last name">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex-lg">
+                    <div>
+                        <div class="form-group">
+                            <label for="othername" class="control-label">Other name</label>
+                            <input type="text" name="othername" class="form-control" placeholder="Other name">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="phone" class="control-label">Phone number</label>
+                            <input type="text" name="phone" class="form-control" placeholder="081 086 776 21">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex-col">
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email Address</label>
+                        <input type="text" name="email" class="form-control" placeholder="exampe@email.com">
+                    </div>
+                </div>
+                <div class="d-flex-col">
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="*********">
+                    </div>
+                </div>
+                <div class="d-flex-col">
+                    <div class="form-group">
+                        <label for="confirm-password" class="control-label">Confirm Password</label>
+                        <input type="password" name="confirm-password" class="form-control" placeholder="********">
+                    </div>
+                </div>
+
+                <button class="btn btn-block btn-primary" type="submit">Sign Up</button>
+            </form>
+
+            <div class="addon_info">
+                <p>By clicking the "Sign Up" button, you have agreed to our 
+                    <a href="#" class="link">Privacy Policy</a>, 
+                    <a href="#" class="link">Terms and Conditions</a> and you are a Nigerian
+                </p>
+                <p>Already have an account, Login <a href="./login.html" class="link">here</a></p>
+                <p><a href="./reset-password.html" class="link">Forgot Password</a></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>

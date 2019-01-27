@@ -1,0 +1,118 @@
+/* Header section */
+.dashboard-wrapper {
+    margin-left: 300px;
+}
+
+header.top-header {
+    display: block;
+    padding: 20px 30px;
+    background: var(--white);
+    font-weight: bold;
+}
+
+.search_area {
+    display: inline-block;
+}
+
+.search_area .fa {
+    color: lightgrey;
+}
+
+.search_area input[type="text"] {
+    background: transparent;
+    border: none;
+    font-size: .9em;
+    font-weight: 500;
+    color: var(--gray);
+    padding: 10px;
+    outline: none;
+}
+
+.user_area {
+    display: inline-block;
+    float: right;
+    padding: 10px;
+    position: relative;
+}
+
+.user_area a {
+    display: inline-block;
+    padding-right: 10px;
+    text-decoration: none;
+    vertical-align: top;
+}
+
+
+.user_area a.noti {
+    position: relative;
+}
+
+.user_area a.noti .circle {
+    background: #21B7B7;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--white);
+    text-align: center;
+    position: absolute;
+    top: -3px;
+    left: 5px;
+}
+
+.user_area .user-img {
+    background: url("https://s3.amazonaws.com/uifaces/faces/twitter/mlane/128.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-left: .5em;
+    position: relative;
+}
+
+
+
+
+/* Content Area */
+.content-container {
+    padding: 1.5em 2em 0;
+}
+
+
+
+
+
+/* Footer */
+.dashboard_footer {
+    margin-top: 4em;
+}
+.dashboard_footer p {
+    font-weight: 700;
+}
+
+.dropdown-menu {
+    background: #e9f0f3;
+    position: absolute;
+    z-index: 5;
+    right: 0;
+    top: 60px;
+    text-align: center;
+    border-radius: 10px;
+    display: none;
+}
+
+.dropdown-menu li a {
+    font-size: .9em;
+    padding: .8em 3em;
+    font-weight: 500;
+    border-bottom: 1px solid var(--light);
+    transition: background .2s;
+}
+
+.dropdown-menu li a:hover {
+    background: #9FB6C3;
+}
