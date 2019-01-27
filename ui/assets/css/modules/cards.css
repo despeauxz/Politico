@@ -107,3 +107,8 @@
     background-color: #F1F2F2;
     transition: color 0.5s, background-color 0.5s;
 }
+
+.profile-card img {
+    border-radius: 50%;
+    border: 5px solid #999;
+}
