@@ -32,6 +32,7 @@ header.top-header {
     display: inline-block;
     float: right;
     padding: 10px;
+    position: relative;
 }
 
 .user_area a {
@@ -41,12 +42,13 @@ header.top-header {
     vertical-align: top;
 }
 
+
 .user_area a.noti {
     position: relative;
 }
 
 .user_area a.noti .circle {
-    background:var(--red);
+    background: #21B7B7;
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -68,7 +70,7 @@ header.top-header {
     height: 30px;
     display: inline-block;
     border-radius: 50%;
-    margin-right: .5em;
+    margin-left: .5em;
     position: relative;
 }
 
@@ -90,4 +92,27 @@ header.top-header {
 }
 .dashboard_footer p {
     font-weight: 700;
+}
+
+.dropdown-menu {
+    background: #e9f0f3;
+    position: absolute;
+    z-index: 5;
+    right: 0;
+    top: 60px;
+    text-align: center;
+    border-radius: 10px;
+    display: none;
+}
+
+.dropdown-menu li a {
+    font-size: .9em;
+    padding: .8em 3em;
+    font-weight: 500;
+    border-bottom: 1px solid var(--light);
+    transition: background .2s;
+}
+
+.dropdown-menu li a:hover {
+    background: #9FB6C3;
 }
