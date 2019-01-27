@@ -4,6 +4,7 @@
 
 @import url('./modules/normalize.css');
 @import url('./modules/palette.css');
+@import url('./modules/animate.css');
 @import url('./modules/buttons.css');
 @import url('./modules/cards.css');
 @import url('./modules/dashboard.css');
@@ -32,6 +33,10 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+.fa {
+    font-size: 18px;
 }
 
 .hide {
@@ -352,10 +357,6 @@ ul.footer-links li a{
         margin: 0;
     }
 
-    .cards {
-        width: 50%;
-    }
-
     .subhead {
         font-size: 1.3em;
         margin-bottom: 12%;
@@ -584,4 +585,9 @@ a {
 
 .text-sm {
     font-size: 1em;
+}
+
+.inline {
+    display: inline-block;
+    margin: 0;
 }

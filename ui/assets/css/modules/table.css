@@ -5,6 +5,7 @@
 }
 
 table {
+    width: 100%;
     border-collapse: collapse;
 }
 
@@ -12,7 +13,7 @@ table thead th {
     text-align: left;
     color: #2c2c2c;
     padding: 30px;
-    width: 30%;
+    width: auto;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 13px;
@@ -29,13 +30,9 @@ tr td{
     color: #000;
     background: #fff;
     border-bottom: 1px solid rgba(230, 230, 230, .7);
-    border-top: 0;
+    /* border-top: 0; */
     padding: 5px 20px;
     font-size: 15px;
-}
-
-tbody tr:hover {
-    background: lightgoldenrodyellow;
 }
 
 .v-align-middle {

@@ -37,4 +37,14 @@ $(document).ready(function () {
             $form_modal.removeClass('is-visible');
         }
     });
+
+    // Dropdown
+    $('.dropdown').on('click', function () {
+        var target = $('.dropdown-menu');
+        if (target.hasClass('fadeInDown')) {
+            target.removeClass('fadeInDown').addClass('fadeOutUp').css({ display: 'none' });
+        } else {
+            target.css({ display: 'block' }).removeClass('fadeOutUp').addClass('fadeInDown');
+        }
+    });
 });

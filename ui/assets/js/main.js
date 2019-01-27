@@ -55,7 +55,7 @@ const partyInfo = [
 ];
 
 const partiesData = partyInfo.map(party => 
-    `<div class="cards">
+    `<div class="cards card-wrap">
         <h2 class="card_title">${party.name}</h2>
         <p class="card_body">${party.fullname}</p>
         <p class="card_body">${party.hq}</p>
