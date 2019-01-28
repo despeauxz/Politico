@@ -1,5 +1,7 @@
 # Politico
 Politico is an application that enables users(voters) cast their votes for their respective candidate(politicians)
+[![Build Status](https://travis-ci.com/despeauxz/Politico.svg?branch=develop)](https://travis-ci.com/despeauxz/Politico)
+[![Maintainability](https://api.codeclimate.com/v1/badges/814a9da87eef36008c63/maintainability)](https://codeclimate.com/github/despeauxz/Politico/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/814a9da87eef36008c63/test_coverage)](https://codeclimate.com/github/despeauxz/Politico/test_coverage)
 
 ## Features
 ---
