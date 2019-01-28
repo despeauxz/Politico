@@ -1,7 +1,10 @@
 # Politico
-Politico is an application that enables users(voters) cast their votes for their respective candidate(politicians)
+
 [![Build Status](https://travis-ci.com/despeauxz/Politico.svg?branch=develop)](https://travis-ci.com/despeauxz/Politico)
+[![Coverage Status](https://coveralls.io/repos/github/despeauxz/Politico/badge.svg?branch=develop)](https://coveralls.io/github/despeauxz/Politico?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/814a9da87eef36008c63/maintainability)](https://codeclimate.com/github/despeauxz/Politico/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/814a9da87eef36008c63/test_coverage)](https://codeclimate.com/github/despeauxz/Politico/test_coverage)
+
+Politico is an application that enables users(voters) cast their votes for their respective candidate(politicians)
 
 ## Features
 ---
@@ -10,15 +13,13 @@ Politico is an application that enables users(voters) cast their votes for their
 - Modify Party
 - Delete Party
 - Create Offices
+- Politicians can aspire for a post and he can register them for an office
 
 ### Users
 - Signup and Login
 - Cast vote for respective candidate
 - View Parties
 - View offices
-
-### Politician
-- Aspire as candidate for an office
 
 ## Getting Started
 ---
