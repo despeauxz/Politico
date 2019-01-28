@@ -4,7 +4,10 @@
   "description": "Politico is an application that enables users(voters) cast their votes for their respective candidate(politicians)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=development nodemon --exec babel-node -- ./server/src/app.js",
+    "build": "babel ./server/src -d ./server/dist",
+    "lint": "eslint server/**/*.js --fix",
+    "test": "mocha ./server/test/ --require babel-register --recursive --timeout 50000 --exit"
   },
   "repository": {
     "type": "git",
