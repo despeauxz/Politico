@@ -1,1 +1,2 @@
 import './addParty';
+import './getParties';
