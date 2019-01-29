@@ -16,11 +16,19 @@ class PartyController {
      * @returns {(function|object)} Function next() or JSON object
      */
   static async create(req, res) {
-    const party = models.create(req.body);
+    const party = await models.create(req.body);
     return res.status(201).json({
       status: res.statusCode,
       message: 'Party added successfully',
       data: party,
+    });
+  }
+
+  static async getAll(req, res) {
+    const parties = await models.findAll();
+    return res.status(200).json({
+      status: res.statusCode,
+      data: parties,
     });
   }
 }
