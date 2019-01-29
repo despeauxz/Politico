@@ -1,5 +1,6 @@
 import moment from 'moment';
 import uuidv4 from 'uuid/v4';
+import partyData from '../../data/party';
 
 /**
  * @exports
@@ -12,7 +13,7 @@ class Party {
      * @param { object } data
      */
     constructor() {
-        this.parties = [];
+        this.parties = [ ...partyData ];
     }
 
     /**
@@ -30,9 +31,16 @@ class Party {
             createdAt: moment.now(),
             updatedAt: moment.now(),
         }
-
+        
         this.parties.push(newParty);
         return newParty;
+    }
+
+    /**
+     * @returns {object} returns all parties
+     */
+    findAll() {
+        return this.parties;
     }
 }
 
