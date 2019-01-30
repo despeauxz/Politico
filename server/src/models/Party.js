@@ -37,10 +37,21 @@ class Party {
     }
 
     /**
-     * @returns {object} returns all parties
+     * @returns
+     * @memberof Party
+     * @returns { object } returns all parties
      */
     findAll() {
         return this.parties;
+    }
+
+    /**
+     * @param {uuid} id
+     * @returns { object } returns party details
+     * @memberof Party
+     */
+    findOne(id) {
+        return this.parties.find(party => party.id === id);
     }
 }
 
