@@ -31,6 +31,20 @@ class PartyController {
       data: parties,
     });
   }
+
+  static async getParty(req, res) {
+    const party = models.findOne(req.params.id);
+    if (!party) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'party not found',
+      });
+    }
+    return res.status(200).json({
+      status: res.statusCode,
+      data: party,
+    });
+  }
 }
 
 export default PartyController;
