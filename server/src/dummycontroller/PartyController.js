@@ -46,6 +46,15 @@ class PartyController {
     });
   }
 
+  /**
+   *
+   *
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof PartyController
+   */
   static async update(req, res) {
     const party = models.findOne(req.params.id);
     if (!party) {
@@ -59,6 +68,29 @@ class PartyController {
     return res.status(200).json({
       status: res.statusCode,
       data: updatedParty,
+    });
+  }
+
+  /**
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @memberof PartyController
+   */
+  static async delete(req, res) {
+    const party = models.findOne(req.params.id);
+
+    if (!party) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'Party not found',
+      });
+    }
+
+    const deleteParty = models.delete(req.params.id);
+    return res.status(204).json({
+      status: res.statusCode,
+      message: 'Party successfully deleted',
     });
   }
 }

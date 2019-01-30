@@ -11,6 +11,7 @@ partyRoutes.post('/', partyValidation.createParty, validation, PartyController.c
 partyRoutes.get('/', PartyController.getAll);
 partyRoutes.get('/:id', PartyController.getParty);
 partyRoutes.patch('/:id/name', partyValidation.update, validation, PartyController.update);
+partyRoutes.delete('/:id', PartyController.delete);
 
 
 export default partyRoutes;
