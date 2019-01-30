@@ -67,6 +67,17 @@ class Party {
         this.parties[index].updatedAt = formatedDate;
         return this.parties[index];
     }
+    /**
+     * @param { uuid } id
+     * @memberof Party
+     */
+    delete(id) {
+        const party = this.findOne(id);
+        const index = this.parties.indexOf(party);
+        this.parties.splice(index, 1);
+
+        return {};
+    }
 }
 
 export default new Party();
