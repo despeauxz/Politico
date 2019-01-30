@@ -14,6 +14,7 @@ describe('Party\'s Route: Update parties name', () => {
             .end((err, res) => {
                 expect(res.statusCode).to.equal(200);
                 expect(res.body).to.be.a('object');
+                expect(res.body.data).to.include.keys('name');
 
             done(err);
             })
@@ -21,7 +22,7 @@ describe('Party\'s Route: Update parties name', () => {
 
     it('should output error for invalid party ID', (done) => {
         request(app)
-            .put(`/api/v1/parties/${invalidID}/name`)
+            .patch(`/api/v1/parties/${invalidID}/name`)
             .set('Accept', 'application/json')
             .send({ name: 'PDP' })
             .end((err, res) => {
