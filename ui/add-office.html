@@ -17,7 +17,6 @@
         }
     </style>
     <script src="./assets/js/jquery-3.3.1.min.js"></script>
-    <script src="./assets/js/glider.min.js"></script>
 </head>
 
 <body>
@@ -41,11 +40,9 @@
                     <i class="fa fa-search" aria-hidden="true" for="search"></i>
                     <input type="text" name="q" placeholder="Type here to Search" id="search">
                 </form>
+                <span></span>
             </div>
             <div class="user_area mv_right">
-                <span></span>
-                <a href="#"><i class="fa fa-plus"></i> Add</a>
-                </span>
                 <span>
                     <a href="#" class="noti">
                         <i class="fa fa-bell-o" aria-hidden="true"></i>
@@ -53,11 +50,21 @@
                     </a>
                 </span>
                 <span>
-                    <a href="#">
+                    <a href="#" class="dropdown">
                         <div class="user-img"></div>
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </a>
                 </span>
+                <div class="dropdown-menu">
+                    <div class="dropdown-body">
+                        <ul>
+                            <li><a href="./dashboard.html">Dashboard</a></li>
+                            <li><a href="./add-party.html">Parties</a></li>
+                            <li><a href="./add-office.html">Offices</a></li>
+                            <li><a href="./index.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </header>
 
