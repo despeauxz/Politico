@@ -9,5 +9,6 @@ const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
 
 officeRoutes.post('/', officeValidation.createOffice, validation, OfficeController.create);
 officeRoutes.get('/', OfficeController.getOffices);
+officeRoutes.get('/:id', OfficeController.getOfficeByID);
 
 export default officeRoutes;
