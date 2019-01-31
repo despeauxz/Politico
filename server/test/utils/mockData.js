@@ -23,4 +23,19 @@ export default {
             updatedAt: currentDay,
         }
     },
+    createOffice: {
+        createOfficeDetails: {
+            id: 'e048707e-58dd-4246-b09c-e7909f6de583',
+            type: 'Federal',
+            name: 'President',
+            createdAt: '2019-01-31T22:35:04.957',
+            updatedAt: '2019-01-31T22:35:04.957',
+        },
+        invalidOfficeDetails: {
+            id: '17e28f6f-51bb-46af-8a50-42f2f2f8a2d5',
+            type: 'Local',
+            createdAt: '2019-01-31T22:35:04.957',
+            updatedAt: '2019-01-31T22:35:04.957',
+        },
+    }
 }
