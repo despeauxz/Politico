@@ -35,6 +35,15 @@ class Offices {
         this.offices.push(newOffice);
         return newOffice;
     }
+
+    /**
+     * @returns
+     * @memberof Offices
+     * @returns { object } returns all offices
+     */
+    findAll() {
+        return this.offices;
+    }
 }
 
 export default new Offices();
