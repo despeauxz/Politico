@@ -8,5 +8,6 @@ const officeRoutes = express.Router();
 const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
 
 officeRoutes.post('/', officeValidation.createOffice, validation, OfficeController.create);
+officeRoutes.get('/', OfficeController.getOffices);
 
 export default officeRoutes;

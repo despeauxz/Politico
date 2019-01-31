@@ -23,6 +23,15 @@ class OfficeController {
             data: office,
         });
     }
+
+    static async getOffices(req, res) {
+        const offices = await models.findAll();
+        
+        return res.status(200).json({
+            status: res.statusCode,
+            data: offices,
+        });
+    }
 }
 
 export default OfficeController;
