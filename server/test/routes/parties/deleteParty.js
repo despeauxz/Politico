@@ -10,7 +10,7 @@ describe('delete party', () => {
         request(app)
             .delete(`/api/v1/parties/${validID}`)
             .end((err, res) => {
-                expect(res.statusCode).to.equal(204);
+                expect(res.statusCode).to.equal(200);
                 expect(res.body).to.be.a('object');
 
             done(err);
