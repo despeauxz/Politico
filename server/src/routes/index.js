@@ -1,5 +1,6 @@
 import express from 'express';
 import partyRoutes from './partyRoutes';
+import officeRoutes from './officeRoutes';
 
 const apiRoutes = express.Router();
 
@@ -18,6 +19,7 @@ apiRoutes.get('/v1', (req, res) => {
 });
 
 apiRoutes.use('/v1/parties', partyRoutes);
+apiRoutes.use('/v1/offices', officeRoutes);
 
 
 export default apiRoutes;
