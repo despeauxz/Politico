@@ -44,6 +44,15 @@ class Offices {
     findAll() {
         return this.offices;
     }
+
+    /**
+     * @param {uuid} id
+     * @returns { object } returns offfice details
+     * @memberof Offices
+     */
+    findOne(id) {
+        return this.offices.find(office => office.id === id);
+    }
 }
 
 export default new Offices();
