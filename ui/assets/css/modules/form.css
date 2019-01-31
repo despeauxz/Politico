@@ -11,12 +11,10 @@
 }
 
 .form-control {
-    display: block;
     width: 100%;
     border: 1px solid #DFE6E6;
     border-radius: 4px;
     margin: 0 0 10px 0;
-    width: 100%;
     box-sizing: border-box;
     padding: 14px;
     font-size: 14px;
@@ -28,6 +26,7 @@
 
 .form-group {
     margin: .3em 1em;
+    flex: 1;
 }
 
 input[type="radio"] {

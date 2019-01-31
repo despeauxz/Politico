@@ -4,11 +4,9 @@
 
 @import url('./modules/normalize.css');
 @import url('./modules/palette.css');
-@import url('./modules/animate.css');
 @import url('./modules/buttons.css');
 @import url('./modules/cards.css');
 @import url('./modules/dashboard.css');
-@import url('./modules/glider.min.css');
 @import url('./modules/modals.css');
 @import url('./modules/sidebar.css');
 @import url('./modules/table.css');
@@ -85,8 +83,9 @@ ul {
         margin-left: 0;
     }
 
-    .search_area {
+    .search_area form{
         visibility: hidden;
+        display: none;
     }
 }
 
@@ -378,9 +377,9 @@ ul.footer-links li a{
         padding: 0 .8em;
     }
 
-    .gray-container ul {
+    /* .gray-container ul {
         display: flex;
-    }
+    } */
 
     .home-landing nav ul {
         width: 40%;
@@ -519,6 +518,10 @@ ul.footer-links li a{
     height: 100vh;
     background: #fff;
     top: 0;
+    animation: pushUp 2s;
+    animation-fill-mode: forwards;
+    animation-delay: 1000ms;
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
 .overlay h1 {
@@ -529,13 +532,19 @@ ul.footer-links li a{
     font-size: 1.7em;
     font-weight: 400;
     letter-spacing: 5px;
+    animation: jumpDown 1000ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
-
-
-
-
-
+@keyframes pushUp {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: -100%;
+    }
+}
 
 
 
@@ -565,6 +574,10 @@ ul.footer-links li a{
 a {
     text-decoration: none;
     color: inherit;
+}
+
+blockquote {
+    font-size: 1.5em;
 }
 
 .link {
