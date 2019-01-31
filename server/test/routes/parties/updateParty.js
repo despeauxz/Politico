@@ -8,7 +8,7 @@ const invalidID = 'fb097bde-5959-45ff-8e21-51184fa60c';
 describe('Party\'s Route: Update parties name', () => {
     it('should change the name of given party', (done) => {
         request(app)
-            .put(`/api/v1/parties/${validID}/name`)
+            .patch(`/api/v1/parties/${validID}/name`)
             .set('Accept', 'application/json')
             .send({ name: 'PDP' })
             .end((err, res) => {
