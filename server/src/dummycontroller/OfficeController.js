@@ -32,6 +32,21 @@ class OfficeController {
             data: offices,
         });
     }
+
+    static async getOfficeByID(req, res) {
+        const office = models.findOne(req.params.id);
+        if (!office) {
+            return res.status(404).json({
+                status: res.statusCode,
+                error: 'Office not found',
+            });
+        }
+
+        return res.status(200).json({
+            status: res.statusCode,
+            data: office,
+        });
+    }
 }
 
 export default OfficeController;
