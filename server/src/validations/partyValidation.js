@@ -16,4 +16,8 @@ export default {
       .exists().withMessage('Logo URL must be specified')
       .custom(value => notEmpty(value, 'Logo URL field cannot be left blank')),
   ],
+  update: [
+    check('name')
+      .custom(value => notEmpty(value, 'Name field cannot be left blank')),
+  ],
 };

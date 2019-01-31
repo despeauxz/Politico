@@ -2,6 +2,8 @@ import moment from 'moment';
 import uuidv4 from 'uuid/v4';
 import partyData from '../../data/party';
 
+let formatedDate = moment().format('YYYY-MM-DDTHH:mm:ss.SSS');
+
 /**
  * @exports
  * @class Party
@@ -28,8 +30,8 @@ class Party {
             fullname: data.fullname,
             hqAddress: data.hqAddress,
             logoUrl: data.logoUrl,
-            createdAt: moment.now(),
-            updatedAt: moment.now(),
+            createdAt: formatedDate,
+            updatedAt: formatedDate,
         }
         
         this.parties.push(newParty);
@@ -52,6 +54,18 @@ class Party {
      */
     findOne(id) {
         return this.parties.find(party => party.id === id);
+    }
+    /**
+     * @param { uuid } id
+     * @param { object } data
+     * @memberof Party
+     */
+    update(id, data) {
+        const party = this.findOne(id);
+        const index = this.parties.indexOf(party);
+        this.parties[index].name = data["name"] || party.name;
+        this.parties[index].updatedAt = formatedDate;
+        return this.parties[index];
     }
 }
 

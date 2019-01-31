@@ -45,6 +45,22 @@ class PartyController {
       data: party,
     });
   }
+
+  static async update(req, res) {
+    const party = models.findOne(req.params.id);
+    if (!party) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'party not found',
+      });
+    }
+
+    const updatedParty = models.update(req.params.id, req.body);
+    return res.status(200).json({
+      status: res.statusCode,
+      data: updatedParty,
+    });
+  }
 }
 
 export default PartyController;
