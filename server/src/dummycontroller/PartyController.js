@@ -88,7 +88,7 @@ class PartyController {
     }
 
     const deleteParty = models.delete(req.params.id);
-    return res.status(204).json({
+    return res.status(200).json({
       status: res.statusCode,
       message: 'Party successfully deleted',
     });
