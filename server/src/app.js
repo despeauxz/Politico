@@ -6,7 +6,6 @@ import bodyParser from 'body-parser';
 import 'babel-polyfill';
 import apiRoutes from './routes';
 import ErrorHandler from './middlewares/ErrorHandler';
-import errors from '../lib/errors.json';
 
 config();
 
@@ -26,7 +25,7 @@ app.use('/api', apiRoutes);
 app.use('/api/*', (req, res) => {
   res.status(404).json({
     status: 404,
-    error: errors[404],
+    error: 'Page Not found',
   });
 });
 
