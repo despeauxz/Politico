@@ -25,8 +25,8 @@ Template is hosted at [https://despeauxz.github.io/Politico/ui/index.html](https
 
 ## Technologies
 ---
-- [NodeJs](https://https://nodejs.org)
-- [Express](https://expressjs.com)
+- [NodeJs](https://https://nodejs.org) - Runtime Environment
+- [Express](https://expressjs.com) - Web Application Framework
 
 ### Supporting Packages
 #### Linter
@@ -34,7 +34,7 @@ Template is hosted at [https://despeauxz.github.io/Politico/ui/index.html](https
 #### Compiler
 - [Babel](https://babeljs.io) - Compiler for Next Generation Javascript
 #### Test Tools
-- [Mocha](https://mochajs.org) - JavaScript Test Framework for API Tests
+- [Mocha](https://mochajs.org) - JavaScript Test Framework for+ API Tests
 - [Chai](https://chaijs.com) - TDD/BDD Assertion Library
 - [Supertest](https://github.com/visionmedia/supertest) - Super-agent driven library for testing node.js HTTP servers
 - [Istanbul](https://istanbul.js.org) - Code Coveerage Generator
@@ -82,7 +82,7 @@ You can run `npm run dev` in development with [Nodemon](https://nodemon.io)
 Nodemon watches for changes and restarts your server
 
 ##### Testing
-###### Pre-requisite
+##### Pre-requisite
 - [Postman](https://getpostman.com) - API Toolchain
 
 ##### Testing with Postman
