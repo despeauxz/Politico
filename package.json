@@ -4,9 +4,11 @@
   "description": "Politico is an application that enables users(voters) cast their votes for their respective candidate(politicians)",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon --exec babel-node -- ./server/src/app.js",
+    "start": "node ./server/dist/app.js",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node -- ./server/src/app.js",
     "build": "babel ./server/src -d ./server/dist",
-    "lint": "eslint server/**.js --fix",
+    "clean": "rm -rf server/dist",
+    "lint": "eslint **/*.js --fix",
     "test": "mocha ./server/test/ --require babel-register --recursive --timeout 50000 --exit",
     "coverage": "npm run nyc -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "nyc": "nyc --reporter=lcov --reporter=text mocha 'server/test/'  --compilers babel-register --recursive --timeout 50000 --exit"

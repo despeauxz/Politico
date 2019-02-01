@@ -1,5 +1,6 @@
 import express from 'express';
 import logger from 'morgan';
+import cors from 'cors';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import 'babel-polyfill';
@@ -11,7 +12,10 @@ config();
 
 const app = express();
 const port = process.env.PORT || 8000;
+
+app.use(cors());
 app.use(logger('dev'));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
