@@ -29,7 +29,7 @@ class Offices {
             type: data.type,
             name: data.name,
             createdAt: formatedDate,
-            updatedAt: formatedDate,
+            updatedAt: null,
         }
 
         this.offices.push(newOffice);
