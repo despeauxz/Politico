@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
-import messages from '../../lib/errors.json';
+
 
 /**
  * @exports
@@ -19,7 +19,7 @@ class ValidationHandler {
   static isEmptyReq(req, res, next) {
     if (!Object.values(req.body).length) {
       return res.status(400).json({
-        error: messages.empty,
+        error: 'Empty PUT Requests Are Not Allowed',
       });
     }
 
