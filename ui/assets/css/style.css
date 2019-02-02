@@ -518,9 +518,9 @@ ul.footer-links li a{
     height: 100vh;
     background: #fff;
     top: 0;
-    animation: pushUp 2s;
+    animation: pushUp 1000ms;
     animation-fill-mode: forwards;
-    animation-delay: 1000ms;
+    animation-delay: 500ms;
     animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
@@ -532,9 +532,6 @@ ul.footer-links li a{
     font-size: 1.7em;
     font-weight: 400;
     letter-spacing: 5px;
-    animation: jumpDown 1000ms;
-    animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
 @keyframes pushUp {
@@ -577,7 +574,15 @@ a {
 }
 
 blockquote {
-    font-size: 1.5em;
+    font-size: 1.2em;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 3em;
+    vertical-align: -0.1em;
 }
 
 .link {
@@ -595,7 +600,7 @@ blockquote {
 }
 
 .text-md {
-    font-size: 2em;
+    font-size: 1.4em;
     font-weight: 500;
 }
 

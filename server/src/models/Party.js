@@ -31,7 +31,7 @@ class Party {
             hqAddress: data.hqAddress,
             logoUrl: data.logoUrl,
             createdAt: formatedDate,
-            updatedAt: formatedDate,
+            updatedAt: null,
         }
         
         this.parties.push(newParty);

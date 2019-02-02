@@ -112,3 +112,7 @@
     border-radius: 50%;
     border: 5px solid #999;
 }
+
+.profile-card h4 {
+    text-transform: uppercase;
+}

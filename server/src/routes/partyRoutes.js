@@ -2,10 +2,11 @@ import express from 'express';
 import PartyController from '../dummycontroller/PartyController';
 import partyValidation from '../validations/partyValidation';
 import ValidationHandler from '../middlewares/ValidationHandler';
+import Trim from '../middlewares/Trim';
 
 
 const partyRoutes = express.Router();
-const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
+const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isEmptyReq];
 
 partyRoutes.post('/', partyValidation.createParty, validation, PartyController.create);
 partyRoutes.get('/', PartyController.getAll);
