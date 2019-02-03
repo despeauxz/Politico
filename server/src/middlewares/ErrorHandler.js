@@ -19,7 +19,7 @@ class ErrorHandler {
       return next(err);
     }
 
-    res.status(err.status || 500).json({
+    return res.status(err.status || 500).json({
       error: err.message,
     });
   }
