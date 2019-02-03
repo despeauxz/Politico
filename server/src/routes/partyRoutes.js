@@ -1,5 +1,5 @@
 import express from 'express';
-import PartyController from '../dummycontroller/PartyController';
+import PartyController from '../controllers/PartyController';
 import partyValidation from '../validations/partyValidation';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import Trim from '../middlewares/Trim';
