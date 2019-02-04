@@ -1,5 +1,5 @@
 import express from 'express';
-import OfficeController from '../dummycontroller/OfficeController';
+import OfficeController from '../controllers/OfficeController';
 import officeValidation from '../validations/officeValidation';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import Trim from '../middlewares/Trim';
