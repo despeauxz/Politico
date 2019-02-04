@@ -1,18 +1,10 @@
 import { Pool } from 'pg';
-import configAll from '../../config/database_config';
+import { config } from 'dotenv';
 
-const env = process.env.NODE_ENV || 'development';
-const config = configAll[env];
+config();
 
-const pool = new Pool(config);
-
-pool.on('connect', () => {
-    console.log('Connected to the database');
-});
-
-pool.on('remove', () => {
-    console.log('Client removed');
-    process.exit(0);
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
 });
 
 export default pool;
