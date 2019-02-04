@@ -7,9 +7,12 @@ const createVotesTable = () => {
             votes(
                 id SERIAL PRIMARY KEY,
                 createdOn TIMESTAMP,
-                FOREIGN KEY (createdBy) REFERENCES users (id) ON DELETE CASCADE,
-                FOREIGN KEY (office) REFERENCES offices (id) ON DELETE CASCADE,
-                FOREIGN KEY (candidate) REFERENCES candidates (id) ON DELETE CASCADE,
+                created_by UUID NOT NULL,
+                office_id UUID NOT NULL,
+                candidate_id INT NOT NULL,
+                FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE CASCADE,
+                FOREIGN KEY (office_id) REFERENCES offices (id) ON DELETE CASCADE,
+                FOREIGN KEY (candidate_id) REFERENCES candidates (id) ON DELETE CASCADE,
             )`;
 
     pool.query(queryText)

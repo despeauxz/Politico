@@ -7,6 +7,8 @@ const createPetitionTable = () => {
             petitions(
                 id SERIAL PRIMARY KEY,
                 createdOn TIMESTAMP,
+                created_by UUID NOT NULL,
+                office_id UUID NOT NULL,
                 FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE CASCADE,
                 FOREIGN KEY (office_id) REFERENCES offices (id) ON DELETE CASCADE
             )`;
