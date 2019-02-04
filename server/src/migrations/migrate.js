@@ -12,7 +12,7 @@ const queryText =
         othername VARCHAR(128) NOT NULL,
         email VARCHAR(128) UNIQUE NOT NULL,
         digit VARCHAR(128) NOT NULL,
-        avatar VARCHAR(128) NOT NULL,
+        avatar VARCHAR(128),
         is_admin BOOLEAN DEFAULT false,
         created_at TIMESTAMP,
         modified_at TIMESTAMP DEFAULT NULL
