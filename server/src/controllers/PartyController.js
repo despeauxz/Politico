@@ -1,5 +1,6 @@
-import uuid from 'uuid';
-import models from '../models/Party';
+import uuidv4 from 'uuid/v4';
+import moment from 'moment';
+import db from '../models';
 
 /**
  * @exports
@@ -16,12 +17,36 @@ class PartyController {
      * @returns {(function|object)} Function next() or JSON object
      */
   static async create(req, res) {
-    const party = await models.create(req.body);
-    return res.status(201).json({
-      status: res.statusCode,
-      message: 'Party added successfully',
-      data: party,
-    });
+    const text = `INSERT INTO
+      parties(id, name, hq_address, logo_url, created_at)
+      VALUES ($1, $2, $3, $4, $5) returning *`;
+
+    const values = [
+      uuidv4(),
+      req.body.name,
+      req.body.hq_address,
+      req.body.logo_url,
+      moment(new Date()),
+    ];
+    
+    try {
+      const { rows } = await db.query(text, values);
+      return res.status(201).json({
+        status: res.statusCode,
+        data: rows[0],
+      });
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return res.status(400).json({
+          status: res.statusCode,
+          message: 'Party already exists',
+        });
+      }
+      return res.status(400).json({
+        status: res.statusCode,
+        error,
+      });
+    }
   }
 
   static async getAll(req, res) {
