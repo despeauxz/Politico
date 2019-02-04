@@ -27,9 +27,8 @@ describe('Party Routes: create a new party', () => {
             .end((err, res) => {
                 expect(res.statusCode).to.equal(201);
                 expect(res.body.data).to.include.keys('name');
-                expect(res.body.data).to.include.keys('fullname');
-                expect(res.body.data).to.include.keys('hqAddress');
-                expect(res.body.data).to.include.keys('logoUrl');
+                expect(res.body.data).to.include.keys('hq_address');
+                expect(res.body.data).to.include.keys('logo_url');
             
                 done(err);
             })
