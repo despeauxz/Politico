@@ -33,6 +33,7 @@ class PartyController {
       const { rows } = await db.query(text, values);
       return res.status(201).json({
         status: res.statusCode,
+        message: 'Party added successfully',
         data: rows[0],
       });
     } catch (error) {
@@ -59,22 +60,33 @@ class PartyController {
         rowCount,
       });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(400).json({
+        status: res.statusCode,
+        error,
+      });
     }
   }
 
   static async getParty(req, res) {
-    const party = models.findOne(req.params.id);
-    if (!party) {
-      return res.status(404).json({
+    const text = 'SELECT * FROM parties WHERE id = $1';
+    try {
+      const { rows } = await db.query(text, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: res.statusCode,
+          message: 'Party Not Found',
+        });
+      }
+      return res.status(200).json({
         status: res.statusCode,
-        error: 'party not found',
+        data: rows[0],
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error,
       });
     }
-    return res.status(200).json({
-      status: res.statusCode,
-      data: party,
-    });
   }
 
   /**
