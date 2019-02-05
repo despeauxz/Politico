@@ -99,19 +99,41 @@ class PartyController {
    * @memberof PartyController
    */
   static async update(req, res) {
-    const party = models.findOne(req.params.id);
-    if (!party) {
-      return res.status(404).json({
+    const findOneQuery = 'SELECT * FROM parties WHERE id=$1';
+    const updateOneQuery = `UPDATE parties
+      SET name=$1, modified_at=$2 WHERE id=$3 returning *`;
+    try {
+      const { rows } = await db.query(findOneQuery, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'Party Not Found',
+        });
+      }
+      const values = [
+        req.body.name || rows[0].name,
+        moment(new Date()),
+        req.params.id,
+      ];
+
+      const response = await db.query(updateOneQuery, values);
+      return res.status(200).json({
         status: res.statusCode,
-        error: 'party not found',
+        message: 'Party details updated successfully',
+        data: response.rows[0],
+      });
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return res.status(400).json({
+          status: res.statusCode,
+          message: 'Party already exists',
+        });
+      }
+      return res.status(400).json({
+        status: res.statusCode,
+        error,
       });
     }
-
-    const updatedParty = models.update(req.params.id, req.body);
-    return res.status(200).json({
-      status: res.statusCode,
-      data: updatedParty,
-    });
   }
 
   /**
