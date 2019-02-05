@@ -19,7 +19,7 @@ const queryText =
     );
 
     CREATE TABLE IF NOT EXISTS parties(
-        id UUID PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         name VARCHAR(128) UNIQUE NOT NULL,
         hq_address TEXT NOT NULL,
         logo_url VARCHAR(128) NOT NULL,
@@ -28,7 +28,7 @@ const queryText =
     );
 
     CREATE TABLE IF NOT EXISTS offices(
-        id UUID PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         name VARCHAR(128) UNIQUE NOT NULL,
         type VARCHAR(128) NOT NULL,
         created_at TIMESTAMP,
@@ -38,7 +38,7 @@ const queryText =
     CREATE TABLE IF NOT EXISTS petitions(
         id SERIAL PRIMARY KEY,
         created_by UUID REFERENCES users(id),
-        office_id UUID REFERENCES offices(id),
+        office_id INTEGER REFERENCES offices(id),
         text TEXT NOT NULL,
         evidence VARCHAR(128),
         created_at TIMESTAMP
@@ -46,15 +46,15 @@ const queryText =
     
     CREATE TABLE IF NOT EXISTS candidates(
         id SERIAL,
-        office_id UUID REFERENCES offices(id),
-        party_id UUID REFERENCES parties(id),
+        office_id INTEGER REFERENCES offices(id),
+        party_id INTEGER REFERENCES parties(id),
         user_id UUID REFERENCES users(id),
         PRIMARY KEY (user_id, office_id) 
     );
 
     CREATE TABLE IF NOT EXISTS votes(
         id SERIAL,
-        office_id UUID REFERENCES offices(id),
+        office_id INTEGER REFERENCES offices(id),
         candidate_id INTEGER NOT NULL,
         voter_id UUID REFERENCES users(id),
         PRIMARY KEY (office_id, voter_id)
@@ -69,3 +69,9 @@ pool.query(queryText)
         console.log(err);
         pool.end();
     });
+
+(function () {
+ fetch('/parties', {
+     
+ })
+})

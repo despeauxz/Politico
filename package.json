@@ -4,7 +4,7 @@
   "description": "Politico is an application that enables users(voters) cast their votes for their respective candidate(politicians)",
   "main": "index.js",
   "scripts": {
-    "start": "node ./server/dist/src/app.js",
+    "start": "cross-env NODE_ENV=production node ./server/dist/src/app.js",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node -- ./server/src/app.js",
     "build": "npm run clean && babel ./server -d ./server/dist",
     "clean": "rm -rf server/dist",
@@ -12,7 +12,8 @@
     "heroku-postbuild": "npm run build",
     "migration": "babel-node server/src/migrations/migrate.js",
     "drop:migration": "babel-node server/src/migrations/dropTable",
-    "test": "mocha ./server/test/ --require babel-register --recursive --timeout 50000 --exit",
+    "drop:create": "npm-run-all drop:migration migration",
+    "test": "cross-env NODE_ENV=test npm run drop:create && cross-env NODE_ENV=test mocha ./server/test/ --require babel-register --recursive --timeout 50000 --exit",
     "coverage": "npm run nyc -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "nyc": "nyc --reporter=lcov --reporter=text mocha 'server/test/'  --compilers babel-register --recursive --timeout 50000 --exit"
   },

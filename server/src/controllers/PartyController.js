@@ -1,4 +1,3 @@
-import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import db from '../models';
 
@@ -18,11 +17,10 @@ class PartyController {
      */
   static async create(req, res) {
     const text = `INSERT INTO
-      parties(id, name, hq_address, logo_url, created_at)
-      VALUES ($1, $2, $3, $4, $5) returning *`;
+      parties(name, hq_address, logo_url, created_at)
+      VALUES ($1, $2, $3, $4) returning *`;
 
     const values = [
-      uuidv4(),
       req.body.name,
       req.body.hq_address,
       req.body.logo_url,
@@ -43,7 +41,7 @@ class PartyController {
           message: 'Party already exists',
         });
       }
-      return res.status(400).json({
+      return res.status(404).json({
         status: res.statusCode,
         error,
       });
@@ -124,7 +122,7 @@ class PartyController {
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        return res.status(400).json({
+        return res.status(404).json({
           status: res.statusCode,
           message: 'Party already exists',
         });
@@ -157,7 +155,7 @@ class PartyController {
         message: 'Party deleted successfully',
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: res.statusCode,
         error,
       });

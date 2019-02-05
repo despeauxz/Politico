@@ -2,8 +2,8 @@ import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../src/app';
 
-const validID = 'fb097bde-5959-45ff-8e21-51184fa60c25';
-const invalidID = 'fb097bde-5959-45ff-8e21-51184fa60c';
+const validID = 1;
+const invalidID = 30;
 
 describe('Parties route:', () => {
     it('should get all parties', (done) => {
@@ -34,8 +34,7 @@ describe('Parties route:', () => {
             .get(`/api/v1/parties/${invalidID}`)
             .end((err, res) => {
                 expect(res.statusCode).to.equal(404);
-                expect(res.body).to.include.keys('error');
-                expect(res.body.error).to.equal('party not found');
+                expect(res.body).to.be.a('object');
 
             done(err);
             });
