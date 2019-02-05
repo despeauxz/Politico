@@ -1,10 +1,14 @@
 import { Pool } from 'pg';
 import { config } from 'dotenv';
+import configAll from '../../config/database_config';
 
 config();
+const env = process.env.NODE_ENV;
+const connect = configAll[env];
+const connectionString = connect.connectionString;
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString,
 });
 
 export default pool;

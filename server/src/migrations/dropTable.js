@@ -1,13 +1,7 @@
 import pool from './index';
 
     const queryText =
-        `DROP TABLE IF EXISTS users;
-         DROP TABLE IF EXISTS parties;
-         DROP TABLE IF EXISTS offices;
-         DROP TABLE IF EXISTS petitions;
-         DROP TABLE IF EXISTS candidates;
-         DROP TABLE IF EXISTS votes;
-        `;
+        `DROP TABLE IF EXISTS users, parties, offices, petitions, candidates, votes CASCADE`;
 
 
 pool.query(queryText)
