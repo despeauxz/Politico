@@ -2,8 +2,8 @@ import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../src/app';
 
-const validID = 'fb097bde-5959-45ff-8e21-51184fa60c25';
-const invalidID = 'fb097bde-5959-45ff-8e21-51184fa60c';
+const validID = 1;
+const invalidID = 30;
 
 describe('delete party', () => {
     it('should delete an existing party', (done) => {

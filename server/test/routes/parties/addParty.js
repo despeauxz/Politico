@@ -19,21 +19,6 @@ describe('Party Routes: create a new party', () => {
             })
     })
 
-    it('should check for some required field', (done) => {
-        request(app)
-            .post('/api/v1/parties')
-            .set('Accept', 'application/json')
-            .send({ ...createPartyDetails })
-            .end((err, res) => {
-                expect(res.statusCode).to.equal(201);
-                expect(res.body.data).to.include.keys('name');
-                expect(res.body.data).to.include.keys('hq_address');
-                expect(res.body.data).to.include.keys('logo_url');
-            
-                done(err);
-            })
-    })
-
     it('should return errors for invalid fields', (done) => {
         request(app)
             .post('/api/v1/parties')
@@ -48,7 +33,7 @@ describe('Party Routes: create a new party', () => {
             });
     });
 
-    it('should return error of missing title field', (done) => {
+    it('should return error of missing name field', (done) => {
         request(app)
             .post('/api/v1/parties')
             .set('Accept', 'application/json')
@@ -56,7 +41,6 @@ describe('Party Routes: create a new party', () => {
             .end((err, res) => {
                 expect(res.statusCode).to.equal(400);
                 expect(res.body.errors).to.include.keys('name');
-                expect(res.body.errors).to.include.keys('hqAddress');
             done(err);
             });
     });
