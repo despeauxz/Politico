@@ -143,20 +143,26 @@ class PartyController {
    * @memberof PartyController
    */
   static async delete(req, res) {
-    const party = models.findOne(req.params.id);
-
-    if (!party) {
-      return res.status(404).json({
+    const deleteQuery = 'DELETE FROM parties WHERE id=$1 returning *';
+    try {
+      const { rows } = await db.query(deleteQuery, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'Party Not Found',
+        });
+      }
+      return res.status(200).json({
         status: res.statusCode,
-        error: 'Party not found',
+        message: 'Party deleted successfully',
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error,
       });
     }
 
-    const deleteParty = models.delete(req.params.id);
-    return res.status(200).json({
-      status: res.statusCode,
-      message: 'Party successfully deleted',
-    });
   }
 }
 
