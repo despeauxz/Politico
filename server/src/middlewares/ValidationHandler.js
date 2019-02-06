@@ -16,6 +16,7 @@ class ValidationHandler {
      * @param {function} next
      * @returns {(function|object)} Function next() or JSON object
      */
+  // eslint-disable-next-line consistent-return
   static isEmptyReq(req, res, next) {
     if (!Object.values(req.body).length) {
       return res.status(400).json({
