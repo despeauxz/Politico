@@ -55,6 +55,20 @@ export default {
       digit: 2378909,
       password: 'password',
       passwordConfirm: 'pass',
-    }
-  }
-}
+    },
+  },
+  login: {
+    validUserDetails: {
+      email: 'example@gmail.com',
+      password: 'password',
+    },
+    invalidUserDetails: {
+      email: 'allen@gmail.com',
+      password: 'malikberry',
+    },
+    emptyUserDetails: {
+      email: 'knjnjbn',
+      password: '',
+    },
+  },
+};
