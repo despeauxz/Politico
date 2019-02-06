@@ -1,5 +1,5 @@
-import uuid from 'uuid';
-import models from '../models/Offices';
+import moment from 'moment';
+import db from '../models';
 
 /**
  * @exports
@@ -16,12 +16,35 @@ class OfficeController {
      * @returns {(function|object)} Function next() or JSON object
      */
     static async create(req, res) {
-        const office = await models.create(req.body);
-        return res.status(201).json({
-            status: res.statusCode,
-            message: 'Office successfully added',
-            data: office,
-        });
+        const text = `INSERT INTO
+      offices(name, type, created_at)
+      VALUES ($1, $2, $3) returning *`;
+
+        const values = [
+            req.body.name,
+            req.body.type,
+            moment(new Date()),
+        ];
+
+        try {
+            const { rows } = await db.query(text, values);
+            return res.status(201).json({
+                status: res.statusCode,
+                message: 'Office added successfully',
+                data: rows[0],
+            });
+        } catch (error) {
+            if (error.routine === '_bt_check_unique') {
+                return res.status(400).json({
+                    status: res.statusCode,
+                    message: 'Office already exists',
+                });
+            }
+            return res.status(404).json({
+                status: res.statusCode,
+                error,
+            });
+        }
     }
 
     static async getOffices(req, res) {
