@@ -73,18 +73,25 @@ class OfficeController {
     }
 
     static async getOfficeByID(req, res) {
-        const office = models.findOne(req.params.id);
-        if (!office) {
-            return res.status(404).json({
+        const text = 'SELECT * FROM offices WHERE id = $1';
+        try {
+            const { rows } = await db.query(text, [req.params.id]);
+            if (!rows[0]) {
+                return res.status(404).json({
+                    status: res.statusCode,
+                    message: 'Office Not Found',
+                });
+            }
+            return res.status(200).json({
                 status: res.statusCode,
-                error: 'Office not found',
+                data: rows[0],
+            });
+        } catch (error) {
+            return res.status(400).json({
+                status: res.statusCode,
+                error,
             });
         }
-
-        return res.status(200).json({
-            status: res.statusCode,
-            data: office,
-        });
     }
 }
 
