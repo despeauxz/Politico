@@ -14,6 +14,7 @@ const queryText =
         digit VARCHAR(128) NOT NULL,
         avatar VARCHAR(128),
         is_admin BOOLEAN DEFAULT false,
+        password VARCHAR(124) NOT NULL,
         created_at TIMESTAMP,
         modified_at TIMESTAMP DEFAULT NULL
     );

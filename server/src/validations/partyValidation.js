@@ -1,4 +1,4 @@
-  import { check } from 'express-validator/check';
+import { check } from 'express-validator/check';
 import notEmpty from '../helpers/notEmpty';
 
 export default {
