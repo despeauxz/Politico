@@ -47,13 +47,29 @@ class OfficeController {
         }
     }
 
+    /**
+     * Get all offices
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @returns { Array } Returns an arra of Objects
+     * @memberof OfficeController
+     */
     static async getOffices(req, res) {
-        const offices = await models.findAll();
-        
-        return res.status(200).json({
-            status: res.statusCode,
-            data: offices,
-        });
+        const findAllQuery = 'SELECT * FROM offices';
+        try {
+            const { rows, rowCount } = await db.query(findAllQuery);
+            return res.status(200).json({
+                status: res.statusCode,
+                data: rows,
+                rowCount,
+            });
+        } catch (error) {
+            return res.status(400).json({
+                status: res.statusCode,
+                error,
+            });
+        }
     }
 
     static async getOfficeByID(req, res) {
