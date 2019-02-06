@@ -2,9 +2,10 @@ import { config } from 'dotenv';
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import bcrypt from 'bcrypt';
+import db from '../models';
+import Mailer from '../utils/Mailer';
 import hashPassword from '../helpers/hashPassword';
 import Authorization from '../middlewares/Authorization';
-import db from '../models';
 
 config();
 
@@ -107,6 +108,28 @@ class UserController {
    */
   static verifyPassword(password, hash) {
     return bcrypt.compareSync(password, hash);
+  }
+
+  static async forgotPassword(req, res) {
+    const { email } = req.body;
+    const text = 'SELECT * FROM users WHERE email = $1';
+    const { rows } = await db.query(text, [email]);
+
+    if (!rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        error: 'User could not be found, Please Signup instead',
+      });
+    }
+
+    const token = Authorization.generateToken(user);
+
+    await Mailer.forgotPasswordMail(token, email);
+
+    return res.status(200).json({
+      status: 200,
+      message: 'A reset token has been sent to your email address',
+    });
   }
 }
 
