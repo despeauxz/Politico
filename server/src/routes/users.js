@@ -9,5 +9,6 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
 
 userRoutes.post('/signup', UserValidation.signup, validation, UserController.signup);
 userRoutes.post('/login', UserValidation.login, validation, UserController.login);
+userRoutes.post('/forgot_password', UserValidation.forgotPassword, validation, UserController.forgotPassword);
 
 export default userRoutes;
