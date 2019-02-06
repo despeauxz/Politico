@@ -1,13 +1,12 @@
 import { config } from 'dotenv';
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
+import bcrypt from 'bcrypt';
 import hashPassword from '../helpers/hashPassword';
 import Authorization from '../middlewares/Authorization';
 import db from '../models';
 
 config();
-
-const { SALT_ROUNDS } = process.env;
 
 /**
  * Authentication
@@ -57,6 +56,57 @@ class UserController {
         error,
       });
     }
+  }
+
+  /**
+   * Logs in a user
+   * @method login
+   * @memberof UserController
+   * @param {object} req
+   * @param {object} res
+   * @returns {(function|object)} Function next() or JSON object
+   */
+  static async login(req, res) {
+    const { email, password } = req.body;
+
+    const query = 'SELECT * FROM users WHERE email = $1';
+    const { rows } = await db.query(query, [email]);
+    if (!rows[0]) {
+      return res.status(401).json({
+        status: 401,
+        error: 'Invalid Credentials',
+      });
+    }
+
+    const isPasswordValid = await UserController.verifyPassword(password, rows[0].password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        status: 401,
+        error: 'Invalid Credentials',
+      });
+    }
+    const token = Authorization.generateToken(rows[0]);
+
+    return res.status(200).json({
+      status: 200,
+      data: {
+        token,
+        user: rows[0],
+      },
+    });
+  }
+
+
+  /**
+   * @method verifyPassword
+   * @memberof UserController
+   * @param {string} password
+   * @param {string} hash
+   * @return {Promise} Promise of true or false
+   */
+  static verifyPassword(password, hash) {
+    return bcrypt.compareSync(password, hash);
   }
 }
 
