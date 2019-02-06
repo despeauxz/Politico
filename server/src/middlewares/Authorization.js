@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import db from "../models/index";
+import db from '../models';
 
 /**
  * @exports
@@ -56,13 +56,13 @@ class Authorization {
       const decoded = await jwt.verify(token, process.env.SECRET);
       const text = 'SELECT * FROM users WHERE id = $1';
       const { rows } = await db.query(text, [decoded.id]);
-      console.log(decoded);
       if (!rows[0]) {
         return res.status(400).json({
           status: 400,
-
+          message: 'Token is invalid',
         });
       }
+      req.user = { id: decoded.id };
       next();
     } catch (error) {
       if (error.name === 'TokenExpiredError') {
