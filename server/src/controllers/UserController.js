@@ -42,7 +42,7 @@ class UserController {
         message: 'User registered successfully',
         data: {
           token,
-          user: rows[0],
+          user: UserController.getUserobj(rows[0]),
         },
       });
     } catch (error) {
@@ -88,12 +88,11 @@ class UserController {
       });
     }
     const token = Authorization.generateToken(rows[0]);
-
     return res.status(200).json({
       status: 200,
       data: {
         token,
-        user: rows[0],
+        user: UserController.getUserobj(rows[0]),
       },
     });
   }
@@ -130,6 +129,21 @@ class UserController {
       status: 200,
       message: 'A reset token has been sent to your email address',
     });
+  }
+
+  static getUserobj(data) {
+    return {
+      id: data.id,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      othername: data.othername,
+      email: data.email,
+      digit: data.digit,
+      avatar: data.avatar,
+      is_admin: data.is_admin,
+      created_at: data.created_at,
+      modified_at: data.modified_at,
+    };
   }
 }
 
