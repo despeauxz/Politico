@@ -48,7 +48,7 @@ const queryText =
     CREATE TABLE IF NOT EXISTS candidates(
         id SERIAL,
         office_id INTEGER REFERENCES offices(id),
-        party_id INTEGER REFERENCES parties(id),
+        party_id INTEGER REFERENCES parties(id) NOT NULL,
         user_id UUID REFERENCES users(id),
         PRIMARY KEY (user_id, office_id) 
     );
@@ -70,9 +70,3 @@ pool.query(queryText)
         console.log(err);
         pool.end();
     });
-
-(function () {
- fetch('/parties', {
-     
- })
-})
