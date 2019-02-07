@@ -4,7 +4,6 @@ import db from '../models';
 /**
  * @exports
  * @class OfficeController
- * @extends Controller
  */
 class OfficeController {
   /**
@@ -90,39 +89,6 @@ class OfficeController {
       return res.status(400).json({
         status: res.statusCode,
         error,
-      });
-    }
-  }
-
-  static async candidates(req, res) {
-    const userId = req.params.id;
-    const { officeId, partyId } = req.body;
-    const searchText = 'SELECT * FROM users WHERE id=$1';
-    const { rows } = await db.query(searchText, [userId]);
-    if (!rows[0]) {
-        return res.status(401).json({
-            status: 401,
-            message: 'User not found',
-        });
-    }
-    const text = 'INSERT INTO candidates(office_id, party_id, user_id) VALUES ($1, $2, $3) RETURNING office_id, user_id, party_id';
-    try {
-      const { rows } = await db.query(text, [officeId, partyId, userId]);
-      return res.status(201).json({
-        status: 201,
-        message: 'You\'ve successfuly registered',
-        data: rows[0],
-      });
-    } catch (error) {
-      if (error.routine === '_bt_check_unique') {
-        return res.status(409).json({
-          status: 409,
-          message: 'You cannot run for multiple Offices',
-        });
-      }
-      return res.status(500).json({
-        status: 500,
-        message: 'Internal Server Error',
       });
     }
   }

@@ -14,6 +14,5 @@ officeRoutes.use(Authorization.authenticate);
 officeRoutes.post('/', officeValidation.createOffice, validation, Authorization.isAdmin, OfficeController.create);
 officeRoutes.get('/', OfficeController.getOffices);
 officeRoutes.get('/:id', OfficeController.getOfficeByID);
-officeRoutes.post('/:id/register', votesValidation.candidates, validation, OfficeController.candidates);
 
 export default officeRoutes;
