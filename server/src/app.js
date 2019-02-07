@@ -21,6 +21,9 @@ app.use(bodyParser.urlencoded({
   extended: false,
 }));
 
+
+app.use('/api/v1/docs', express.static('server/docs'));
+
 app.use('/api', apiRoutes);
 app.use('*', (req, res) => {
   res.status(404).json({
@@ -28,6 +31,7 @@ app.use('*', (req, res) => {
     error: 'Page Not found',
   });
 });
+
 
 app.use(ErrorHandler.sendError);
 
