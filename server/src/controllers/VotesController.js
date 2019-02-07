@@ -37,7 +37,7 @@ class VotesController {
       if (error.routine === '_bt_check_unique') {
         return res.status(409).json({
           status: 409,
-          message: 'You cannot vote multiple candidates',
+          message: 'You cannot vote multiple times',
         });
       }
       return res.status(500).json({
