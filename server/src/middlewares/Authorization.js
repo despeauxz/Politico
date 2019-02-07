@@ -50,19 +50,20 @@ class Authorization {
       const token = Authorization.getToken(req);
       if (!token) {
         return res.status(401).json({
+          status: 401,
           error: 'Unauthorized user',
         });
       }
       const decoded = await jwt.verify(token, process.env.SECRET);
       const text = 'SELECT * FROM users WHERE id = $1';
-      const { rows } = await db.query(text, [decoded.id]);
+      const { rows } = await db.query(text, [decoded.user.id]);
       if (!rows[0]) {
         return res.status(400).json({
           status: 400,
           message: 'Token is invalid',
         });
       }
-      req.user = { id: decoded.id };
+      req.user = decoded.user;
       next();
     } catch (error) {
       if (error.name === 'TokenExpiredError') {
@@ -71,6 +72,27 @@ class Authorization {
           error: 'Token Expired',
         });
       }
+    }
+  }
+
+  static async isAdmin(req, res, next) {
+    const { id, is_admin } = req.user;
+    const text = 'SELECT * FROM users WHERE id=$1 AND is_admin=true';
+    const values = [id];
+    try {
+      const { rows } = await db.query(text, values);
+      if (!rows[0]) {
+        return res.status(401).json({
+          status: 401,
+          message: 'Unauthorized Access! Admin only',
+        });
+      }
+      next();
+    } catch (error) {
+      res.status(500).json({
+        status: 500,
+        error,
+      });
     }
   }
 }
