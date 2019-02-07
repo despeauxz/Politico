@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/api', apiRoutes);
-app.use('/api/*', (req, res) => {
+app.use('*', (req, res) => {
   res.status(404).json({
     status: 404,
     error: 'Page Not found',
