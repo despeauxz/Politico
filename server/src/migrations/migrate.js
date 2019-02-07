@@ -58,6 +58,7 @@ const queryText =
         office_id INTEGER REFERENCES offices(id),
         candidate_id INTEGER NOT NULL,
         voter_id UUID REFERENCES users(id),
+        created_at TIMESTAMP,
         PRIMARY KEY (office_id, voter_id)
     );
     `;
