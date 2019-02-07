@@ -39,18 +39,9 @@ Template is hosted at [https://despeauxz.github.io/Politico/ui/index.html](https
 - [Supertest](https://github.com/visionmedia/supertest) - Super-agent driven library for testing node.js HTTP servers
 - [Istanbul](https://istanbul.js.org) - Code Coveerage Generator
 
-# API Endpoints
-| Verbs                  | Endpoint          | Functionality        |         Sample Data                               |
-| ---------------------: |:----------------: | -------------------: | ------------------------------------------------: |
-| POST                   | api/v1/parties    | Create Parties       |  Party `{ id: fb097bde-5959-45ff-8e21-51184fa60c25, name: AC, fullname: Action Congress, hqAddress: Abuja, logoUrl: https://placeholder.com/30, createdAt: 2019-01-31T14:34:90.000, updatedAt: 2019-01-31T14:34:90.000}`
-| GET                    | api/v1/parties    | Get all parties      |  Parties: `[Array of Party Collectibles]`
-| GET                    | api/v1/parties/:partyId | Get a specific party by ID | Party `{ id: fb097bde-5959-45ff-8e21-51184fa60c25, name: AC, fullname: Action Congress, hqAddress: Abuja, logoUrl: https://placeholder.com/30, createdAt: 2019-01-31T14:34:90.000, updatedAt: 2019-01-31T14:34:90.000}`
-| PATCH                  | api/v1/parties/:partyId/name | Modify a specific party's name | Parties: `{ id: fb097bde-5959-45ff-8e21-51184fa60c25, name: PDP}`
-| DELETE                 | api/v1/parties/:partyId | Delete an existing party | None
-| POST                   | api/v1/offices          | Add a new Office | Office: `{id: fe937aa7-a7c4-4184-9e3e-ba11277a4ebb, type: Federal, name: President, createdAt: 2019-02-01T07:18:28.094, updatedAt: 2019-02-01T07:18:28.094}`
-| GET                    | api/v1/offices          | Get all Offices | Offices: `[Array of Office Collectibles]`
-| GET                    | api/v1/offices          | Get a specific Office by ID | Office: `{id: fe937aa7-a7c4-4184-9e3e-ba11277a4ebb, type: Federal, name: President, createdAt: 2019-02-01T07:18:28.094, updatedAt: 2019-02-01T07:18:28.094}`
-
+## API Endpoints   
+#### Documentation
+Navigate to [https://cryptic-escarpment-28116.herokuapp.com/api/v1/docs](https://cryptic-escarpment-28116.herokuapp.com/api/v1/docs) to view Documentation
 ## Features
 ---
 ### Admin
