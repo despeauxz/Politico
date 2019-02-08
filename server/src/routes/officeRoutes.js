@@ -11,7 +11,7 @@ const officeRoutes = express.Router();
 const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isEmptyReq];
 officeRoutes.use(Authorization.authenticate);
 
-officeRoutes.post('/', officeValidation.createOffice, validation, Authorization.isAdmin, OfficeController.create);
+officeRoutes.post('/', Authorization.isAdmin, officeValidation.createOffice, validation, OfficeController.create);
 officeRoutes.get('/', OfficeController.getOffices);
 officeRoutes.get('/:id', OfficeController.getOfficeByID);
 
