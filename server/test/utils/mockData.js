@@ -44,6 +44,7 @@ export default {
       othername: 'Berry',
       email: 'example@gmail.com',
       digit: 123456789,
+      is_admin: true,
       password: 'password',
       passwordConfirm: 'password',
     },

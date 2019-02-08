@@ -11,6 +11,7 @@
     "lint": "eslint **/*.js --fix",
     "heroku-postbuild": "npm run build",
     "migration": "babel-node server/src/migrations/migrate.js",
+    "seed": "babel-node server/src/seed",
     "drop:migration": "babel-node server/src/migrations/dropTable",
     "drop:create": "npm-run-all drop:migration migration",
     "test": "cross-env NODE_ENV=test npm run drop:create && cross-env NODE_ENV=test nyc mocha ./server/test/ --require babel-register --recursive --timeout 50000 --exit",

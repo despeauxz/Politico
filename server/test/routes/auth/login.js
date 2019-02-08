@@ -42,7 +42,7 @@ describe('Auth routes: login', () => {
                 expect(res.body.data).to.include.keys('user');
                 expect(res.body.data.user).to.include.keys('email');
                 expect(res.body.data.user).to.include.keys('firstname');
-                expect(res.body.data.user).to.include.keys('password');
+                expect(res.body.data.user).to.include.keys('created_at');
 
             done(err);
           });
