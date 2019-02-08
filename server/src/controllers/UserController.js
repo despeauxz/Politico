@@ -24,16 +24,16 @@ class UserController {
    */
   static async signup(req, res) {
     const {
-      firstname, lastname, othername, email, digit, password, passwordCofirm,
+      firstname, lastname, othername, email, digit, isAdmin, password, passwordCofirm,
     } = req.body;
     const newPassword = hashPassword(password, 10);
     const user = [
-      uuidv4(), firstname, lastname, othername, email, digit, newPassword, moment(new Date()),
+      uuidv4(), firstname, lastname, othername, email, digit, isAdmin, newPassword, moment(new Date()),
     ];
 
     const text = `INSERT INTO
-      users(id, firstname, lastname, othername, email, digit, password, created_at)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
+      users(id, firstname, lastname, othername, email, digit, is_admin, password, created_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`;
     const token = Authorization.generateToken(user);
     try {
       const { rows } = await db.query(text, user);
