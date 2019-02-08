@@ -7,15 +7,11 @@ export default {
       .trim()
       .exists().withMessage('Name must be specified')
       .custom(value => notEmpty(value, 'Name field cannot be left blank')),
-    check('fullname')
-      .trim()
-      .exists().withMessage('fullname must be specified')
-      .custom(value => notEmpty(value, 'Fullname field cannot be left blank')),
-    check('hqAddress')
+    check('hq_address')
       .trim()
       .exists().withMessage('HQ Address must be specified')
       .custom(value => notEmpty(value, 'HQ Address field cannot be left blank')),
-    check('logoUrl')
+    check('logo_url')
       .trim()
       .exists().withMessage('Logo URL must be specified')
       .custom(value => notEmpty(value, 'Logo URL field cannot be left blank'))

@@ -2,15 +2,15 @@ import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../src/app';
 
-const validID = 'fb097bde-5959-45ff-8e21-51184fa60c25';
-const invalidID = 'fb097bde-5959-45ff-8e21-51184fa60c';
+const validID = 1;
+const invalidID = 30;
 
 describe('Party\'s Route: Update parties name', () => {
     it('should change the name of given party', (done) => {
         request(app)
             .patch(`/api/v1/parties/${validID}/name`)
             .set('Accept', 'application/json')
-            .send({ name: 'PDP' })
+            .send({ name: 'APC' })
             .end((err, res) => {
                 expect(res.statusCode).to.equal(200);
                 expect(res.body).to.be.a('object');

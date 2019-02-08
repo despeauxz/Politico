@@ -25,9 +25,8 @@ describe('Office Routes: create a new office', () => {
             .set('Accept', 'application/json')
             .send({ ...createOfficeDetails })
             .end((err, res) => {
-                expect(res.statusCode).to.equal(201);
-                expect(res.body.data).to.include.keys('type');
-                expect(res.body.data).to.include.keys('name');
+                expect(res.statusCode).to.equal(400);
+                expect(res.body).to.include.keys('message');
 
             done(err);
             });

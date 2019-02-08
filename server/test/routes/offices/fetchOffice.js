@@ -2,8 +2,8 @@ import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../src/app';
 
-const validID = '303e1797-3c0b-4dc4-8ad7-e926a165f67c';
-const invalidID = '303e1797-3c0b-4dc4-8ad7-e926a165f63se';
+const validID = 1;
+const invalidID = 30;
 
 
 describe('Offices route: Get Offices', () => {
@@ -36,8 +36,7 @@ describe('Offices route: Get Offices', () => {
                 .get(`/api/v1/offices/${invalidID}`)
                 .end((err, res) => {
                     expect(res.statusCode).to.equal(404);
-                    expect(res.body).to.include.keys('error');
-                    expect(res.body.error).to.equal('Office not found');
+                    expect(res.body.message).to.equal('Office Not Found');
 
                 done(err);
                 });
