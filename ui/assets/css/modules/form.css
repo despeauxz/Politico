@@ -33,6 +33,11 @@ input[type="radio"] {
     display: none;
 }
 
+.office .form-group {
+    text-align: left;
+    margin-left: 4em;
+}
+
 .office label {
     position: relative;
 }

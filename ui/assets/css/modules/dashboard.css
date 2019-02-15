@@ -3,11 +3,15 @@
     margin-left: 300px;
 }
 
+.logo {
+    font-weight: 600;
+}
+
 header.top-header {
     display: block;
     padding: 20px 30px;
     background: var(--white);
-    font-weight: bold;
+    font-weight: 500;
     height: 80px;
 }
 
@@ -80,6 +84,7 @@ header.top-header {
 
 /* Content Area */
 .content-container {
+    position: relative;
     padding: 1.5em 2em 0;
 }
 
@@ -89,10 +94,11 @@ header.top-header {
 
 /* Footer */
 .dashboard_footer {
+    display: block;
     margin-top: 4em;
 }
 .dashboard_footer p {
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .dropdown-menu {

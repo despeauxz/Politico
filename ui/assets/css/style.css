@@ -79,13 +79,13 @@ ul {
         display: none;
     }
 
-    .dashboard-wrapper {
-        margin-left: 0;
-    }
-
     .search_area form{
         visibility: hidden;
         display: none;
+    }
+
+    .user_area h4 {
+        font-size: .8em;
     }
 }
 
