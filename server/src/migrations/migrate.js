@@ -6,7 +6,7 @@ pool.on('connect', () => {
 
 const queryText = 
     `CREATE TABLE IF NOT EXISTS users(
-        id UUID PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         firstname VARCHAR(128) NOT NULL,
         lastname VARCHAR(128) NOT NULL,
         othername VARCHAR(128) NOT NULL,
@@ -38,7 +38,7 @@ const queryText =
 
     CREATE TABLE IF NOT EXISTS petitions(
         id SERIAL PRIMARY KEY,
-        created_by UUID REFERENCES users(id),
+        created_by INTEGER REFERENCES users(id),
         office_id INTEGER REFERENCES offices(id),
         text TEXT NOT NULL,
         evidence VARCHAR(128),
@@ -49,7 +49,7 @@ const queryText =
         id SERIAL,
         office_id INTEGER REFERENCES offices(id),
         party_id INTEGER REFERENCES parties(id) NOT NULL,
-        user_id UUID REFERENCES users(id),
+        user_id INTEGER REFERENCES users(id),
         PRIMARY KEY (user_id, office_id) 
     );
 
@@ -57,7 +57,7 @@ const queryText =
         id SERIAL,
         office_id INTEGER REFERENCES offices(id),
         candidate_id INTEGER NOT NULL,
-        voter_id UUID REFERENCES users(id),
+        voter_id INTEGER REFERENCES users(id),
         created_at TIMESTAMP,
         PRIMARY KEY (office_id, voter_id)
     );
