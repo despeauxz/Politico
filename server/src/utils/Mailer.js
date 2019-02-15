@@ -9,9 +9,12 @@ const url = process.env.BASE_URL;
 class Mailer {
   /**
    * Sends Mail
-   * @static
-   * @param { string } { to, subject, message }
+   * @method sendMail
+   * @param { string } to
+   * @param { string } subject
+   * @param { string } message
    * @memberof Mailer
+   * @returns {void}
    */
   static sendMail({ to, subject, message }) {
     const transporter = nodemailer.createTransport({

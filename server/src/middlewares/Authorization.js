@@ -75,6 +75,7 @@ class Authorization {
     }
   }
 
+  // eslint-disable-next-line consistent-return
   static async isAdmin(req, res, next) {
     const { id, is_admin } = req.user;
     const text = 'SELECT * FROM users WHERE id=$1 AND is_admin=true';
@@ -82,14 +83,14 @@ class Authorization {
     try {
       const { rows } = await db.query(text, values);
       if (!rows[0]) {
-        return res.status(401).json({
-          status: 401,
+        return res.status(403).json({
+          status: 403,
           message: 'Unauthorized Access! Admin only',
         });
       }
       next();
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         status: 500,
         error,
       });

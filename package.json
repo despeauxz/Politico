@@ -15,7 +15,7 @@
     "drop:migration": "babel-node server/src/migrations/dropTable",
     "drop:create": "npm-run-all drop:migration migration",
     "test": "cross-env NODE_ENV=test npm run drop:create && cross-env NODE_ENV=test nyc mocha ./server/test/ --require babel-register --recursive --timeout 50000 --exit",
-    "coverage": "npm run drop:create && npm run nyc -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "coverage": "cross-env NODE_ENV=test npm run drop:create && cross-env NODE_ENV=test npm run nyc -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "nyc": "nyc --reporter=lcov --reporter=text mocha 'server/test/'  --compilers babel-register --recursive --timeout 50000 --exit"
   },
   "repository": {
@@ -43,6 +43,7 @@
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
     "make-runnable": "^1.3.6",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
