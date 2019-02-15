@@ -1,5 +1,4 @@
 import { config } from 'dotenv';
-import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import bcrypt from 'bcrypt';
 import db from '../models';
@@ -24,16 +23,17 @@ class UserController {
    */
   static async signup(req, res) {
     const {
-      firstname, lastname, othername, email, digit, isAdmin, password, passwordCofirm,
+      firstname, lastname, othername, email, digit, password, passwordCofirm,
     } = req.body;
+    const { admin } = req.query;
     const newPassword = hashPassword(password, 10);
     const user = [
-      uuidv4(), firstname, lastname, othername, email, digit, isAdmin, newPassword, moment(new Date()),
+      firstname, lastname, othername, email.toLowerCase(), digit, admin, newPassword, moment(new Date()),
     ];
 
     const text = `INSERT INTO
-      users(id, firstname, lastname, othername, email, digit, is_admin, password, created_at)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`;
+      users(firstname, lastname, othername, email, digit, is_admin, password, created_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
     const token = Authorization.generateToken(user);
     try {
       const { rows } = await db.query(text, user);
@@ -121,7 +121,7 @@ class UserController {
       });
     }
 
-    const token = Authorization.generateToken(user);
+    const token = Authorization.generateToken(rows[0].email);
 
     await Mailer.forgotPasswordMail(token, email);
 
