@@ -1,9 +1,11 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/no-extraneous-dependencies */
 import request from 'supertest';
 import { expect } from 'chai';
 import mockData from '../../utils/mockData';
 import app from '../../../src/app';
 
-const { validUserDetails, invalidUserDetails } = mockData.signup;
+const { validUserDetails, adminUserDetails, invalidUserDetails } = mockData.signup;
 
 describe('Auth routes:', () => {
   it('should add a new user', (done) => {
@@ -19,6 +21,20 @@ describe('Auth routes:', () => {
       });
   });
 
+  it('should add a new Admin user', (done) => {
+    request(app)
+      .post('/api/v1/auth/signup?admin=true')
+      .set('Accept', 'application/json')
+      .send({ ...adminUserDetails })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body).to.be.a('object');
+        // expect(res.body.data.is_admin).to.equal(true);
+
+        done(err);
+      });
+  });
+
   it('should check if user already exists', (done) => {
     request(app)
       .post('/api/v1/auth/signup')
@@ -27,6 +43,7 @@ describe('Auth routes:', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.include.keys('message');
+        expect(res.body.message).to.equal('Email already taken');
 
         done(err);
       });
