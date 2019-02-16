@@ -14,8 +14,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(logger('dev'));
-
-
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false,
@@ -25,12 +24,10 @@ app.use(bodyParser.urlencoded({
 app.use('/api/v1/docs', express.static('server/docs'));
 
 app.use('/api', apiRoutes);
-app.use('*', (req, res) => {
-  return res.status(404).json({
-    status: 404,
-    error: 'Page Not Found',
-  });
-});
+app.use('*', (req, res) => res.status(404).json({
+  status: 404,
+  error: 'Page Not Found',
+}));
 
 
 app.use(ErrorHandler.sendError);
