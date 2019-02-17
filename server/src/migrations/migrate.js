@@ -1,11 +1,11 @@
+/* eslint-disable no-console */
 import pool from './index';
 
 pool.on('connect', () => {
-    console.log('Connected to the database');
+  console.log('Connected to the database');
 });
 
-const queryText = 
-    `CREATE TABLE IF NOT EXISTS users(
+const queryText = `CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY,
         firstname VARCHAR(128) NOT NULL,
         lastname VARCHAR(128) NOT NULL,
@@ -65,10 +65,10 @@ const queryText =
     `;
 
 pool.query(queryText)
-    .then((res) => {
-        console.log(res);
-        pool.end();
-    }).catch((err) => {
-        console.log(err);
-        pool.end();
-    });
+  .then((res) => {
+    console.log(res);
+    pool.end();
+  }).catch((err) => {
+    console.log(err);
+    pool.end();
+  });

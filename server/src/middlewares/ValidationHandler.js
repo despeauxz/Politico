@@ -39,6 +39,7 @@ class ValidationHandler {
      */
   static validate(req, res, next) {
     const errors = validationResult(req);
+    // eslint-disable-next-line no-param-reassign
     req = {
       ...req,
       ...matchedData(req),

@@ -1,5 +1,4 @@
-import moment from 'moment';
-import db from '../models';
+import models from '../models/party';
 
 /**
  * @exports
@@ -16,23 +15,12 @@ class PartyController {
      * @returns {(function|object)} Function next() or JSON object
      */
   static async create(req, res) {
-    const text = `INSERT INTO
-      parties(name, hq_address, logo_url, created_at)
-      VALUES ($1, $2, $3, $4) returning *`;
-
-    const values = [
-      req.body.name,
-      req.body.hq_address,
-      req.body.logo_url,
-      moment(new Date()),
-    ];
-    
     try {
-      const { rows } = await db.query(text, values);
+      const response = await models.create(req.body);
       return res.status(201).json({
         status: res.statusCode,
         message: 'Party added successfully',
-        data: rows[0],
+        data: response.rows[0],
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
@@ -49,10 +37,9 @@ class PartyController {
   }
 
   static async getAll(req, res) {
-    const findAllQuery = 'SELECT * FROM parties';
     try {
-      const { rows,rowCount } = await db.query(findAllQuery);
-      return res.status(200).json({ 
+      const { rows, rowCount } = await models.findAll();
+      return res.status(200).json({
         status: res.statusCode,
         data: rows,
         rowCount,
@@ -66,9 +53,8 @@ class PartyController {
   }
 
   static async getParty(req, res) {
-    const text = 'SELECT * FROM parties WHERE id = $1';
     try {
-      const { rows } = await db.query(text, [req.params.id]);
+      const { rows } = await models.findOne(req.params.id);
       if (!rows[0]) {
         return res.status(404).json({
           status: res.statusCode,
@@ -97,38 +83,29 @@ class PartyController {
    * @memberof PartyController
    */
   static async update(req, res) {
-    const findOneQuery = 'SELECT * FROM parties WHERE id=$1';
-    const updateOneQuery = `UPDATE parties
-      SET name=$1, modified_at=$2 WHERE id=$3 returning *`;
     try {
-      const { rows } = await db.query(findOneQuery, [req.params.id]);
+      const { rows } = await models.findOne(req.params.id);
       if (!rows[0]) {
         return res.status(404).json({
           status: res.statusCode,
           error: 'Party Not Found',
         });
       }
-      const values = [
-        req.body.name || rows[0].name,
-        moment(new Date()),
-        req.params.id,
-      ];
-
-      const response = await db.query(updateOneQuery, values);
+      const response = await models.update(req.params.id, req.body);
       return res.status(200).json({
-        status: res.statusCode,
+        status: 200,
         message: 'Party details updated successfully',
         data: response.rows[0],
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
         return res.status(404).json({
-          status: res.statusCode,
+          status: 404,
           message: 'Party already exists',
         });
       }
       return res.status(400).json({
-        status: res.statusCode,
+        status: 400,
         error,
       });
     }
@@ -141,17 +118,17 @@ class PartyController {
    * @memberof PartyController
    */
   static async delete(req, res) {
-    const deleteQuery = 'DELETE FROM parties WHERE id=$1 returning *';
     try {
-      const { rows } = await db.query(deleteQuery, [req.params.id]);
+      const { rows } = await models.findOne(req.params.id);
       if (!rows[0]) {
         return res.status(404).json({
           status: res.statusCode,
           error: 'Party Not Found',
         });
       }
+      await models.delete(req.params.id);
       return res.status(200).json({
-        status: res.statusCode,
+        status: 200,
         message: 'Party deleted successfully',
       });
     } catch (error) {
