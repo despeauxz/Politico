@@ -124,3 +124,53 @@ header.top-header {
 .dropdown-menu li a:hover {
     background: #9FB6C3;
 }
+
+/* Accordion */
+.box-white {
+    padding: 30px;
+    background: #fff;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+}
+
+section .accordion .title {
+    padding: 10px 20px;
+    background: #fff;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+}
+
+h5 {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.accordion .item {
+    margin-bottom: 30px;
+}
+
+section .accordion .title i {
+    position: absolute;
+    top: 17px;
+    right: 25px;
+    font-weight: 400;
+}
+
+.accordion .accordion-info {
+    display: none;
+    padding: 0px 15px;
+    margin-top: 30px;
+    border-left: 2px dotted #ccc;
+}
+
+.accordion .active {
+    display: block;
+}
+
+.accordion .active .title {
+    color: #fff;
+    background: gray;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+}
