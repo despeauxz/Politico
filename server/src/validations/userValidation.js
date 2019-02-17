@@ -54,7 +54,7 @@ export default {
     check('password')
       .trim()
       .exists().withMessage('Password must be specified')
-      .custom(value => notEmpty(value, 'Password field cannot be left blank'))
+      .custom(value => notEmpty(value, 'Password field cannot be left blank')),
   ],
   forgotPassword: [
     check('email')

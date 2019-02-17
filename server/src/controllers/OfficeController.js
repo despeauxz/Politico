@@ -1,5 +1,4 @@
-import moment from 'moment';
-import db from '../models';
+import models from '../models/office';
 
 /**
  * @exports
@@ -15,18 +14,8 @@ class OfficeController {
      * @returns {(function|object)} Function next() or JSON object
      */
   static async create(req, res) {
-    const text = `INSERT INTO
-      offices(name, type, created_at)
-      VALUES ($1, $2, $3) returning *`;
-
-    const values = [
-      req.body.name,
-      req.body.type,
-      moment(new Date()),
-    ];
-
     try {
-      const { rows } = await db.query(text, values);
+      const { rows } = await models.create(req.body);
       return res.status(201).json({
         status: res.statusCode,
         message: 'Office added successfully',
@@ -55,9 +44,8 @@ class OfficeController {
      * @memberof OfficeController
      */
   static async getOffices(req, res) {
-    const findAllQuery = 'SELECT * FROM offices';
     try {
-      const { rows, rowCount } = await db.query(findAllQuery);
+      const { rows, rowCount } = await models.findAll();
       return res.status(200).json({
         status: res.statusCode,
         data: rows,
@@ -72,9 +60,8 @@ class OfficeController {
   }
 
   static async getOfficeByID(req, res) {
-    const text = 'SELECT * FROM offices WHERE id = $1';
     try {
-      const { rows } = await db.query(text, [req.params.id]);
+      const { rows } = await models.findOne(req.params.id);
       if (!rows[0]) {
         return res.status(404).json({
           status: res.statusCode,

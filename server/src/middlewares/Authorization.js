@@ -77,7 +77,7 @@ class Authorization {
 
   // eslint-disable-next-line consistent-return
   static async isAdmin(req, res, next) {
-    const { id, is_admin } = req.user;
+    const { id } = req.user;
     const text = 'SELECT * FROM users WHERE id=$1 AND is_admin=true';
     const values = [id];
     try {

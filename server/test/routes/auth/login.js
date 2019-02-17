@@ -133,4 +133,32 @@ describe('Auth routes: login', () => {
   });
 });
 
+describe('Update User Details', () => {
+  describe('## Wrong input', () => {
+    it('should output error for empty user details', (done) => {
+      request(app)
+        .patch('/api/v1/auth/user')
+        .set('authorization', userToken)
+        .send({ })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.include.keys('error');
+
+          done(err);
+        });
+    });
+
+    it('should output error for unauthorized access', (done) => {
+      request(app)
+        .patch('/api/v1/auth/user')
+        .send({ })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+
+          done(err);
+        });
+    });
+  });
+});
+
 export default { userToken, adminToken };

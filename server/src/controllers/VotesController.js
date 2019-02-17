@@ -7,7 +7,13 @@ import db from '../models';
  * @extends Controller
  */
 class VotesController {
-    
+  /**
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns { Object }
+   * @memberof VotesController
+   */
   static async vote(req, res) {
     const { officeId, candidateId } = req.body;
     const voterId = req.user.id;
