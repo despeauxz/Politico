@@ -84,10 +84,10 @@ input[type="radio"]:checked + label span.radio::after {
 }
 
 [type="file"] + label {
-    background: #99c793;
-    border: none;
+    background: #fff;
+    border: 2px solid gray;
     border-radius: 50px;
-    color: #fff;
+    color: gray;
     cursor: pointer;
     display: inline-block;
     font-size: inherit;
@@ -101,7 +101,7 @@ input[type="radio"]:checked + label span.radio::after {
 }
 
 [type="file"] + label:hover {
-    background-color: #497f42;
+    background-color: rgba(0, 0, 0, 0.07);
 }
 
 .btn-white {

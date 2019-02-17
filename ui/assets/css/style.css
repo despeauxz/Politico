@@ -79,6 +79,10 @@ ul {
         display: none;
     }
 
+    .dashboard-wrapper {
+        margin-left: 0;
+    }
+
     .search_area form{
         visibility: hidden;
         display: none;
