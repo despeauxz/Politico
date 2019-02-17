@@ -87,6 +87,10 @@ ul {
         visibility: hidden;
         display: none;
     }
+
+    .user_area h4 {
+        font-size: .8em;
+    }
 }
 
 @media (max-width: 991px) {

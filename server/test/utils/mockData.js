@@ -5,7 +5,6 @@ const currentDay = moment().format('YYYY-MM-DD h:m:s');
 export default {
   createParty: {
     createPartyDetails: {
-      id: 1,
       name: 'PDP',
       hq_address: 'Abuja FCT, Nigeria',
       logo_url: 'https://via.placeholder.com/30',
@@ -13,7 +12,6 @@ export default {
       updatedAt: null,
     },
     invalidPartyDetails: {
-      id: 3,
       name: '',
       hq_address: 'Abuja, Nigeria',
       logo_url: 'https://via.placeholder.com/30',
@@ -23,14 +21,12 @@ export default {
   },
   createOffice: {
     createOfficeDetails: {
-      id: 1,
       type: 'Federal',
       name: 'President',
       createdAt: '2019-01-31T22:35:04.957',
       updatedAt: null,
     },
     invalidOfficeDetails: {
-      id: 23,
       type: 'Local',
       createdAt: '2019-01-31T22:35:04.957',
       updatedAt: null,
@@ -47,6 +43,15 @@ export default {
       password: 'password',
       passwordConfirm: 'password',
     },
+    adminUserDetails: {
+      firstname: 'John',
+      lastname: 'Doe',
+      othername: 'Berry',
+      email: 'admin@email.com',
+      digit: 123456789,
+      password: 'password',
+      passwordConfirm: 'password',
+    },
     invalidUserDetails: {
       firstname: '',
       lastname: 'Jane',
@@ -58,8 +63,12 @@ export default {
     },
   },
   login: {
-    validUserDetails: {
+    nominalUserDetails: {
       email: 'example@gmail.com',
+      password: 'password',
+    },
+    adminUserDetails: {
+      email: 'admin@email.com',
       password: 'password',
     },
     invalidUserDetails: {
@@ -71,4 +80,24 @@ export default {
       password: '',
     },
   },
+  candidates: {
+    validDetails: {
+      officeId: 1,
+      partyId: 2,
+    },
+    emptyDetails: {
+      officeId: '',
+      partyId: '',
+    },
+  },
+  votes: {
+    validDetails: {
+      officeId: 1,
+      candidateId: 1,
+    },
+    invalidDetails: {
+      officeId: 20,
+      candidateId: 20,
+    }
+  }
 };

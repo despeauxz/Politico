@@ -1,5 +1,4 @@
 import { config } from 'dotenv';
-import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import bcrypt from 'bcrypt';
 import db from '../models';
@@ -26,13 +25,14 @@ class UserController {
     const {
       firstname, lastname, othername, email, digit, password, passwordCofirm,
     } = req.body;
+    const { admin } = req.query;
     const newPassword = hashPassword(password, 10);
     const user = [
-      uuidv4(), firstname, lastname, othername, email, digit, newPassword, moment(new Date()),
+      firstname, lastname, othername, email.toLowerCase(), digit, admin, newPassword, moment(new Date()),
     ];
 
     const text = `INSERT INTO
-      users(id, firstname, lastname, othername, email, digit, password, created_at)
+      users(firstname, lastname, othername, email, digit, is_admin, password, created_at)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
     const token = Authorization.generateToken(user);
     try {
@@ -109,6 +109,33 @@ class UserController {
     return bcrypt.compareSync(password, hash);
   }
 
+  static async user(req, res) {
+    const { email } = req.user;
+    const { firstname, lastname } = req.body;
+    const updateQuery = `UPDATE users
+      SET firstname=$1, lastname=$2, avatar=$3, modified_at=$4 WHERE email=$5 returning *`;
+    const value = [
+      firstname || req.user.firstname,
+      lastname || req.user.lastname,
+      req.file.path,
+      moment(new Date()),
+      email,
+    ];
+    try {
+      const { rows } = await db.query(updateQuery, value);
+      return res.status(200).json({
+        status: 200,
+        message: 'User details updated successfully',
+        data: rows[0],
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error,
+      });
+    }
+    
+  }
+
   static async forgotPassword(req, res) {
     const { email } = req.body;
     const text = 'SELECT * FROM users WHERE email = $1';
@@ -121,7 +148,7 @@ class UserController {
       });
     }
 
-    const token = Authorization.generateToken(user);
+    const token = Authorization.generateToken(rows[0].email);
 
     await Mailer.forgotPasswordMail(token, email);
 

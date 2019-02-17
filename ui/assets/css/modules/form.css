@@ -33,6 +33,11 @@ input[type="radio"] {
     display: none;
 }
 
+.office .form-group {
+    text-align: left;
+    margin-left: 4em;
+}
+
 .office label {
     position: relative;
 }
@@ -70,4 +75,43 @@ input[type="radio"] {
 input[type="radio"]:checked + label span.radio::after {
     left: -27px;
     background-color: var(--teal);
+}
+
+[type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+
+[type="file"] + label {
+    background: #fff;
+    border: 2px solid gray;
+    border-radius: 50px;
+    color: gray;
+    cursor: pointer;
+    display: inline-block;
+    font-size: inherit;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    outline: none;
+    padding: 1rem 50px;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+}
+
+[type="file"] + label:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+}
+
+.btn-white {
+    background: #fff;
+    border: 2px solid grey;
+    color: gray;
+    transition: all 0.5s ease;
+}
+
+.btn-white:hover {
+    background: grey;
+    color: #fff;
 }
