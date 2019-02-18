@@ -4,6 +4,7 @@ import officeRoutes from './officeRoutes';
 import votesRoutes from './votes';
 import userRoutes from './users';
 import electionRoutes from './election';
+import petition from './petition';
 
 const apiRoutes = express.Router();
 
@@ -22,6 +23,7 @@ apiRoutes.use('/v1/offices', officeRoutes);
 apiRoutes.use('/v1/auth', userRoutes);
 apiRoutes.use('/v1/', votesRoutes);
 apiRoutes.use('/v1/office', electionRoutes);
+apiRoutes.use('/v1/petition', petition);
 
 
 export default apiRoutes;

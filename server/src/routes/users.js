@@ -9,12 +9,8 @@ import Trim from '../middlewares/Trim';
 const userRoutes = express.Router();
 const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isEmptyReq];
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${req.user.firstname}-${Date.now()}.jpg`);
-  },
+  destination: (req, file, cb) => cb(null, 'uploads/'),
+  filename: (req, file, cb) => cb(null, `${req.user.firstname}-${Date.now()}.jpg`),
 });
 
 const fileFilter = (req, file, cb) => {
