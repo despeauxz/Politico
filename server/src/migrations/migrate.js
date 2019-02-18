@@ -41,6 +41,7 @@ const queryText = `CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY,
         created_by INTEGER REFERENCES users(id),
         office_id INTEGER REFERENCES offices(id),
+        title VARCHAR(128) NOT NULL,
         text TEXT NOT NULL,
         evidence VARCHAR(128),
         created_at TIMESTAMP
