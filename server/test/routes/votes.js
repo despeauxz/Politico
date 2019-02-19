@@ -41,18 +41,4 @@ describe('Votes', () => {
         });
     });
   });
-
-  describe('404', () => {
-    it('should return error for page not found', (done) => {
-      request(app)
-        .get('/api/ffffrmf')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
-          expect(res.body).to.include.keys('error');
-          expect(res.body.error).to.equal('Page Not Found');
-
-          done(err);
-        });
-    });
-  });
 });

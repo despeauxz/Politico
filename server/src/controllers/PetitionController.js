@@ -29,6 +29,22 @@ class PetitionController {
       });
     }
   }
+
+  static async getAll(req, res) {
+    try {
+      const { rows, rowCount } = await models.findAll();
+      return res.status(200).json({
+        status: res.statusCode,
+        data: rows,
+        rowCount,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error,
+      });
+    }
+  }
 }
 
 export default PetitionController;
