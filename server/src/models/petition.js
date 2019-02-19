@@ -20,6 +20,12 @@ class Petition {
     const response = db.query(text, value);
     return response;
   }
+
+  findAll() {
+    const findAllQuery = 'SELECT * FROM petitions';
+    const response = db.query(findAllQuery);
+    return response;
+  }
 }
 
 export default new Petition();
