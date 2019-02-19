@@ -10,5 +10,6 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
 petition.use(Authorization.authenticate);
 
 petition.post('/', petitionValidation.create, validation, PetitionController.create);
+petition.get('/', Authorization.isAdmin, PetitionController.getAll);
 
 export default petition;
