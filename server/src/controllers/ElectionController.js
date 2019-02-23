@@ -39,6 +39,14 @@ class ElectionController {
     }
   }
 
+  /**
+   * Confirm and update candidate status
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof ElectionController
+   */
   static async confirm(req, res) {
     try {
       const query = 'SELECT * FROM candidates WHERE id=$1';
@@ -59,6 +67,43 @@ class ElectionController {
     } catch (error) {
       return res.status(400).json({
         status: 400,
+        error,
+      });
+    }
+  }
+
+  /**
+   * Get all confirmed candidates per office
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof ElectionController
+   */
+  static async getConfirmedCandidates(req, res) {
+    try {
+      const officeQuery = 'SELECT * FROM offices WHERE id=$1';
+      const response = await db.query(officeQuery, [req.params.id]);
+      if (!response.rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          message: 'Office does not exist',
+        });
+      }
+      const query = `SELECT candidates.id, candidates.confirm, users.firstname as firstname,
+        users.lastname as lastname, parties.name as partyname FROM candidates 
+        LEFT JOIN users ON users.id = candidates.user_id 
+        LEFT JOIN parties ON parties.id = candidates.party_id 
+        WHERE candidates.office_id=$1 AND candidates.confirm=true`;
+      const { rows, rowCount } = await db.query(query, [req.params.id]);
+      return res.status(200).json({
+        status: 200,
+        data: rows,
+        rowCount,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
         error,
       });
     }
