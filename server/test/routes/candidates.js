@@ -36,7 +36,6 @@ describe('Register Candidate', () => {
         .set('Accept', 'application/json')
         .set('authorization', adminToken)
         .end((err, res) => {
-          console.log(res.body);
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.include.keys('message');
           expect(res.body.message).to.equal('Candidate does not exist');
@@ -115,5 +114,45 @@ describe('Register Candidate', () => {
           done(err);
         });
     });
+  });
+});
+
+describe('## Get candidates', () => {
+  it('should return an array of confirmed candidates', (done) => {
+    request(app)
+      .get(`/api/v1/office/${validId}/candidates`)
+      .set('authorization', userToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.include.keys('data');
+        expect(res.body.data).to.be.a('array');
+
+        done(err);
+      });
+  });
+
+  it('should return an error for invalid office', (done) => {
+    request(app)
+      .get(`/api/v1/office/${invalidId}/candidates`)
+      .set('authorization', userToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body).to.include.keys('message');
+        expect(res.body.message).to.equal('Office does not exist');
+
+        done(err);
+      });
+  });
+
+  it('should return an error for unauthorized user', (done) => {
+    request(app)
+      .get(`/api/v1/office/${invalidId}/candidates`)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body).to.include.keys('error');
+        expect(res.body.error).to.equal('Unauthorized user');
+
+        done(err);
+      });
   });
 });
