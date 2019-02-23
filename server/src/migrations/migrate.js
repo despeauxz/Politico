@@ -49,6 +49,7 @@ const queryText = `CREATE TABLE IF NOT EXISTS users(
     
     CREATE TABLE IF NOT EXISTS candidates(
         id SERIAL,
+        confirm BOOLEAN DEFAULT false,
         office_id INTEGER REFERENCES offices(id),
         party_id INTEGER REFERENCES parties(id) NOT NULL,
         user_id INTEGER REFERENCES users(id),
