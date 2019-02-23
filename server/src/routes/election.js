@@ -12,5 +12,6 @@ electionRoutes.use(Authorization.authenticate);
 
 electionRoutes.post('/:id/register', Authorization.isAdmin, votesValidation.candidates, validation, ElectionController.candidates);
 electionRoutes.get('/:id/result', ElectionController.getResults);
+electionRoutes.patch('/candidate/:id', Authorization.isAdmin, ElectionController.confirm);
 
 export default electionRoutes;

@@ -39,6 +39,31 @@ class ElectionController {
     }
   }
 
+  static async confirm(req, res) {
+    try {
+      const query = 'SELECT * FROM candidates WHERE id=$1';
+      const response = await db.query(query, [req.params.id]);
+      if (!response.rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          message: 'Candidate does not exist',
+        });
+      }
+      const updateQuery = 'UPDATE candidates SET confirm=$1 WHERE id=$2 returning *';
+      const result = await db.query(updateQuery, [true, req.params.id]);
+      return res.status(200).json({
+        status: 200,
+        message: 'Candidate has been confirmed',
+        data: result.rows[0],
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error,
+      });
+    }
+  }
+
   /**
      * Gets the Election results
      * @static

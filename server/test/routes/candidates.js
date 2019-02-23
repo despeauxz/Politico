@@ -30,6 +30,48 @@ describe('Register Candidate', () => {
         });
     });
 
+    it('should return error for invalid candidate', (done) => {
+      request(app)
+        .patch(`/api/v1/office/candidate/${invalidId}`)
+        .set('Accept', 'application/json')
+        .set('authorization', adminToken)
+        .end((err, res) => {
+          console.log(res.body);
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.include.keys('message');
+          expect(res.body.message).to.equal('Candidate does not exist');
+
+          done(err);
+        });
+    });
+
+    it('should return error for forbidden access', (done) => {
+      request(app)
+        .patch(`/api/v1/office/candidate/${invalidId}`)
+        .set('Accept', 'application/json')
+        .set('authorization', userToken)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(403);
+          expect(res.body).to.include.keys('message');
+
+          done(err);
+        });
+    });
+
+    it('should return error for unauthorized access', (done) => {
+      request(app)
+        .patch(`/api/v1/office/candidate/${invalidId}`)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          console.log(res.body);
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.include.keys('error');
+          expect(res.body.error).to.equal('Unauthorized user');
+
+          done(err);
+        });
+    });
+
     it('should return error for forbidden access', (done) => {
       request(app)
         .post(`/api/v1/office/${validId}/register`)
