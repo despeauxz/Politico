@@ -103,17 +103,5 @@ describe('Petition', () => {
           done(err);
         });
     });
-
-    it('should output error for unauthorized access', (done) => {
-      request(app)
-        .get('/api/v1/petition')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(401);
-          expect(res.body).to.include.keys('error');
-          expect(res.body.error).to.equal('Unauthorized user');
-
-          done(err);
-        });
-    });
   });
 });
