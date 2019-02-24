@@ -52,6 +52,29 @@ class VotesController {
       });
     }
   }
+
+  static async history(req, res) {
+    try {
+      const userId = req.user.id;
+      const query = `SELECT votes.id, votes.created_at, users.firstname as firstname, users.lastname as lastname,
+        offices.name as officename, parties.name as partyname, parties.logo_url as partylogo FROM votes
+        JOIN users ON users.id = votes.candidate_id
+        JOIN parties ON parties.id = votes.candidate_id
+        JOIN offices ON offices.id = votes.office_id
+        WHERE voter_id=$1 ORDER BY votes.id DESC`;
+      const { rows, rowCount } = await db.query(query, [userId]);
+      return res.status(200).json({
+        status: 200,
+        data: rows,
+        rowCount,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error,
+      });
+    }
+  }
 }
 
 export default VotesController;

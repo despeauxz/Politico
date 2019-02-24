@@ -42,3 +42,31 @@ describe('Votes', () => {
     });
   });
 });
+
+describe('## Voting history', () => {
+  it('should return user voting history', (done) => {
+    request(app)
+      .get('/api/v1/votes/history')
+      .set('authorization', userToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.include.keys('data');
+        expect(res.body).to.include.keys('rowCount');
+        expect(res.body.data).to.be.a('array');
+
+        done(err);
+      });
+  });
+
+  it('should return an error for unauthorized user', (done) => {
+    request(app)
+      .get('/api/v1/votes/history')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body).to.include.keys('error');
+        expect(res.body.error).to.equal('Unauthorized user');
+
+        done(err);
+      });
+  });
+});
