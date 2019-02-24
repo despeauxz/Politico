@@ -21,7 +21,7 @@ apiRoutes.get('/v1', (req, res) => res.json({
 apiRoutes.use('/v1/parties', partyRoutes);
 apiRoutes.use('/v1/offices', officeRoutes);
 apiRoutes.use('/v1/auth', userRoutes);
-apiRoutes.use('/v1/', votesRoutes);
+apiRoutes.use('/v1/votes', votesRoutes);
 apiRoutes.use('/v1/office', electionRoutes);
 apiRoutes.use('/v1/petition', petition);
 
