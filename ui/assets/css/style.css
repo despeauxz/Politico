@@ -558,10 +558,12 @@ ul.footer-links li a{
 }
 
 .auth-wrapper {
+    display: block;
     margin-top: 1em;
 }
 
 .auth {
+    margin: 0 auto;
     padding: 10px 30px;
     background: #f5f5f5;
     border-radius: 5px;
@@ -619,4 +621,92 @@ blockquote:before {
 
 .mg-b-10 {
     margin-bottom: 20px; 
+}
+
+.loader {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1eded;
+    z-index: 20;
+}
+
+.spinner {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #dcdcdc;
+}
+
+.spinner:before,
+.spinner:after {
+    content: "";
+    position: absolute;
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    border: 2px solid transparent;
+    border-top-color: tomato;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: spin .9s ease-in-out infinite;
+}
+
+.spinner:before {
+    border-top-color: transparent;
+    border-bottom-color: tomato;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    65% {
+        transform: rotate(60deg) scale(1.2);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.alert {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    margin-bottom: 5px;
+    padding: 15px 20px;
+    background: #888 !important;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.errors {
+    display: none;
+    position: relative;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #fff;
+    background: crimson;
+    margin-bottom: 10px;
+}
+
+
+.errors ul li {
+    background: url('../img//error.svg') no-repeat left center;
+    padding-left: 30px;
+    margin-bottom: .5em;
+    font-size: 14px;
 }

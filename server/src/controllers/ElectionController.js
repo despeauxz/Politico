@@ -109,6 +109,28 @@ class ElectionController {
     }
   }
 
+  static async getAllCandidates(req, res) {
+    try {
+      const query = `SELECT candidates.id, candidates.confirm, users.firstname as firstname,
+        users.lastname as lastname, parties.name as partyname, offices.name as officename FROM candidates 
+        LEFT JOIN users ON users.id = candidates.user_id 
+        LEFT JOIN parties ON parties.id = candidates.party_id
+        LEFT JOIN offices ON offices.id = candidates.office_id
+        ORDER BY candidates.office_id`;
+      const { rows, rowCount } = await db.query(query);
+      return res.status(200).json({
+        status: 200,
+        data: rows,
+        rowCount,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error,
+      });
+    }
+  }
+
   /**
      * Gets the Election results
      * @static
