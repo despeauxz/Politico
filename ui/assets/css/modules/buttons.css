@@ -27,3 +27,16 @@
 .btn-primary:hover {
     background: #38a89d;
 }
+
+.btn-xs {
+    position: relative;
+    margin: .8em auto;
+    padding: 8px 15px;
+    font-weight: 500;
+    color: #fff;
+    outline: none;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    transition: .5s;
+}
