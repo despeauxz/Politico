@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +18,7 @@
     </style>
     <script src="./assets/js/jquery-3.3.1.min.js"></script>
 </head>
+
 <body>
     <div class="sidebar">
         <div>
@@ -24,11 +26,11 @@
         </div>
         <nav class="sidebar_nav">
             <ul>
-                <li><a href="./dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="./dashboard.html">Dashboard</a></li>
                 <li><a href="./add-party.html">Parties</a></li>
                 <li><a href="./add-office.html">Offices</a></li>
                 <li><a href="./petition.html">Petition Board</a></li>
-                <li><a href="./candidates-list.html">Candidates List</a></li>
+                <li><a href="./candidates-list.html" class="active">Candidates List</a></li>
             </ul>
         </nav>
     </div>
@@ -69,40 +71,71 @@
         </header>
 
         <div class="content-container">
-            <h2 style="font-weight: 500;margin-bottom: 10px;">Dashboard</h2>
-            <div class="d-flex-lg d-md">
-                <div class="cards text-right">
-                    <h2 class="card_title text-big">Users</h2>
-                    <div class="card_body text-lg">
-                        101
-                    </div>
-                </div>
-                <div class="cards text-right">
-                    <h2 class="card_title">Offices</h2>
-                    <div class="card_body text-lg">
-                        20
-                    </div>
-                </div>
-                <div class="cards text-right">
-                    <h2 class="card_title">Parties</h2>
-                    <div class="card_body text-lg">
-                        50
-                    </div>
-                </div>
-            </div>
-
+            <h2 style="font-weight: 500;margin-bottom: 10px;">Candidate list</h2>
+            
             <div class="datatable">
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>S/N</th>
                             <th>Name</th>
                             <th>Party</th>
                             <th>Office</th>
-                            <th>Votes</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody id="data">
-
+                    <tbody id="candidates">
+                        <tr>
+                            <td>
+                                <p>1</p>
+                            </td>
+                            <td>
+                                <p>Atiku Abubakar</p>
+                            </td>
+                            <td>
+                                <p>PDP</p>
+                            </td>
+                            <td>
+                                <p>President</p>
+                            </td>
+                            <td>
+                                <button class="btn-xs btn-primary" id="confirm-button">Confirm</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>2</p>
+                            </td>
+                            <td>
+                                <p>Mommadu Buhari</p>
+                            </td>
+                            <td>
+                                <p>APC</p>
+                            </td>
+                            <td>
+                                <p>President</p>
+                            </td>
+                            <td>
+                                <button class="btn-xs btn-primary" id="confirm-button">Confirm</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>3</p>
+                            </td>
+                            <td>
+                                <p>Olusola San-wolu</p>
+                            </td>
+                            <td>
+                                <p>ANP</p>
+                            </td>
+                            <td>
+                                <p>Governor</p>
+                            </td>
+                            <td>
+                                <button class="btn-xs btn-primary" id="confirm-button">Confirm</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -113,7 +146,7 @@
         </div>
     </div>
 
-    <script src="./assets/js/main.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
+
 </html>
