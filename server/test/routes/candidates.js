@@ -155,4 +155,30 @@ describe('## Get candidates', () => {
         done(err);
       });
   });
+
+  it('should return all candidates', (done) => {
+    request(app)
+      .get('/api/v1/office/candidates')
+      .set('authorization', adminToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.include.keys('data');
+        expect(res.body.data).to.be.a('array');
+
+        done(err);
+      });
+  });
+
+  it('should return unauthorized access error', (done) => {
+    request(app)
+      .get('/api/v1/office/candidates')
+      .set('authorization', userToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(403);
+        expect(res.body).to.include.keys('message');
+        expect(res.body.message).to.equal('Unauthorized Access! Admin only');
+
+        done(err);
+      });
+  });
 });

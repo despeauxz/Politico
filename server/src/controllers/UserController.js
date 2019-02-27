@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { config } from 'dotenv';
-import moment from 'moment';
 import bcrypt from 'bcrypt';
-import db from '../models';
 import Mailer from '../utils/Mailer';
 import models from '../models/users';
 import Authorization from '../middlewares/Authorization';
@@ -24,8 +22,8 @@ class UserController {
    */
   static async signup(req, res) {
     try {
-      const { rows } = await models.create(req, req.body);      
-      const token = Authorization.generateToken(rows[0]);
+      const { rows } = await models.create(req, req.body);
+      const token = Authorization.generateToken(UserController.getTokenObj(rows[0]));
       return res.status(201).json({
         status: res.statusCode,
         message: 'User registered successfully',
@@ -72,7 +70,7 @@ class UserController {
         error: 'Invalid Credentials',
       });
     }
-    const token = Authorization.generateToken(rows[0]);
+    const token = Authorization.generateToken(UserController.getTokenObj(rows[0]));
     return res.status(200).json({
       status: 200,
       data: {
@@ -150,6 +148,19 @@ class UserController {
       is_admin: data.is_admin,
       created_at: data.created_at,
       modified_at: data.modified_at,
+    };
+  }
+
+  static getTokenObj(data) {
+    return {
+      id: data.id,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      othername: data.othername,
+      email: data.email,
+      digit: data.digit,
+      is_admin: data.is_admin,
+      password: data.password,
     };
   }
 }
