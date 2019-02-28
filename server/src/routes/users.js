@@ -34,5 +34,6 @@ userRoutes.post('/signup', UserValidation.signup, validation, UserController.sig
 userRoutes.post('/login', UserValidation.login, validation, UserController.login);
 userRoutes.post('/forgot_password', UserValidation.forgotPassword, validation, UserController.forgotPassword);
 userRoutes.patch('/user', Authorization.authenticate, upload.single('avatar'), UserController.user);
+userRoutes.get('/details', Authorization.authenticate, Authorization.isAdmin, UserController.details);
 
 export default userRoutes;
