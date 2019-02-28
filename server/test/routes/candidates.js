@@ -108,8 +108,7 @@ describe('Register Candidate', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.include.keys('errors');
-          expect(res.body.errors).to.include.keys('officeId');
-          expect(res.body.errors).to.include.keys('partyId');
+          expect(res.body.errors[0].param).to.equal('officeId');
 
           done(err);
         });

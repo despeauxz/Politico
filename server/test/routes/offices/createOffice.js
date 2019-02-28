@@ -59,15 +59,15 @@ describe('Office Routes: create a new office', () => {
       .post('/api/v1/offices')
       .set('Accept', 'application/json')
       .set('authorization', adminToken)
-      .send({ ...invalidOfficeDetails })
+      .send({ ...createOfficeDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors).to.include.keys('name');
-        expect(res.body.errors.name.msg).to.equal('Name must be specified');
+        expect(res.body).to.include.keys('message');
+        expect(res.body.message).to.equal('Office already exists');
 
         done(err);
       });
-  })
+  });
 
   it('should return error of forbiden access', (done) => {
     request(app)
