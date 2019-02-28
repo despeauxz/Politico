@@ -107,12 +107,12 @@ describe('Auth routes: login', () => {
 
   it('should return error of missing password field', (done) => {
     request(app)
-      .post('/api/v1/auth/signup')
+      .post('/api/v1/auth/login')
       .set('Accept', 'application/json')
       .send({ ...emptyUserDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors).to.include.keys('password');
+        expect(res.body.errors[0].param).to.equal('email');
 
         done(err);
       });
@@ -126,7 +126,6 @@ describe('Auth routes: login', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.include.keys('errors');
-        expect(res.body.errors.email.msg).to.equal('Please input a valid email address');
 
         done(err);
       });
