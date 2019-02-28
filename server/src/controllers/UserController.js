@@ -3,6 +3,7 @@ import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
 import Mailer from '../utils/Mailer';
 import models from '../models/users';
+import db from '../models/index';
 import Authorization from '../middlewares/Authorization';
 
 config();
@@ -162,6 +163,24 @@ class UserController {
       is_admin: data.is_admin,
       password: data.password,
     };
+  }
+
+  static async details(req, res) {
+    try {
+      const query = `SELECT(SELECT COUNT(*) FROM users) as users,
+        (SELECT COUNT(*) FROM offices) as offices,
+        (SELECT COUNT(*) FROM parties) as parties`;
+      const { rows } = await db.query(query);
+      return res.status(200).json({
+        status: 200,
+        data: rows[0],
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error,
+      });
+    }
   }
 }
 

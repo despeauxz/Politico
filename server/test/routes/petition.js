@@ -105,3 +105,43 @@ describe('Petition', () => {
     });
   });
 });
+
+describe('## Table details', () => {
+  it('should return count of tables', (done) => {
+    request(app)
+      .get('/api/v1/auth/details')
+      .set('authorization', adminToken)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body).to.include.keys('data');
+        expect(res.body.data).to.include.keys('users');
+        expect(res.body.data).to.include.keys('offices');
+        expect(res.body.data).to.include.keys('parties');
+
+        done(err);
+      });
+  });
+
+  it('should return error for forbidden access', (done) => {
+    request(app)
+      .get('/api/v1/auth/details')
+      .set('authorization', userToken)
+      .end((err, res) => {
+        expect(res.status).to.equal(403);
+        expect(res.body).to.include.keys('message');
+
+        done(err);
+      });
+  });
+
+  it('should return error for unauthorized access', (done) => {
+    request(app)
+      .get('/api/v1/auth/details')
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body).to.include.keys('error');
+
+        done(err);
+      });
+  });
+});
