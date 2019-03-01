@@ -37,7 +37,7 @@ class UserController {
       if (error.routine === '_bt_check_unique') {
         return res.status(400).json({
           status: res.statusCode,
-          message: 'Email already taken',
+          error: 'Email already taken',
         });
       }
       return res.status(404).json({

@@ -629,7 +629,6 @@ blockquote:before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     background: #f1eded;
     z-index: 20;
 }
@@ -691,6 +690,7 @@ blockquote:before {
     border-radius: 3px;
     color: #fff;
     font-size: 14px;
+    animation: show 5000ms ease-in-out forwards;
 }
 
 .errors {
@@ -701,6 +701,21 @@ blockquote:before {
     color: #fff;
     background: crimson;
     margin-bottom: 10px;
+    animation: show 5000ms ease-in-out forwards;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 1;
+        display: block;
+    }
+    100% {
+        opacity: 0;
+        display: none !important;
+    }
 }
 
 
