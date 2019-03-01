@@ -43,11 +43,14 @@ signup.addEventListener('submit', (e) => {
     .then(res => res.json())
     .then((response) => {
         if (response.error) {
-             errorCont.style.display = 'block';
-             errorContainer.innerHTML = response.error;
-             setTimeout(() => {
-                 errorCont.style.display = 'none';
-             }, 6000);
+            errorCont.style.display = 'block';
+            let li = createNode('li');
+            li.innerHTML = `${response.error}`;
+            append(errorContainer, li);
+            setTimeout(() => {
+                errorCont.style.display = 'none';
+                errorContainer.innerHTML = '';
+            }, 5000);
         }else if (response.status === 400) {
             const errorBag = response.errors;
             errorBag.map((error) => {
@@ -57,11 +60,12 @@ signup.addEventListener('submit', (e) => {
                 append(errorContainer, li);
                 setTimeout(() => {
                     errorCont.style.display = 'none';
-                }, 6000);
+                    errorContainer.innerHTML = '';
+                }, 5000);
             })
         }else if (response.status === 201) {
             loader.style.display = 'block';
-            loader.style.height = '250%';
+            loader.style.height = '180%';
             setTimeout(() => {
                 if (response.data.user.is_admin === true) {
                     window.location = './dashboard.html'
@@ -82,6 +86,7 @@ signup.addEventListener('submit', (e) => {
         append(errorContainer, msg);
         setTimeout(() => {
             errorCont.style.display = 'none';
-        }, 6000);
+            errorContainer.innerHTML = '';
+        }, 5000);
     });
 });
