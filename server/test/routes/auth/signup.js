@@ -42,8 +42,8 @@ describe('Auth routes:', () => {
       .send({ ...validUserDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body).to.include.keys('message');
-        expect(res.body.message).to.equal('Email already taken');
+        expect(res.body).to.include.keys('error');
+        expect(res.body.error).to.equal('Email already taken');
 
         done(err);
       });
