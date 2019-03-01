@@ -70,7 +70,7 @@ signup.addEventListener('submit', (e) => {
                 if (response.data.user.is_admin === true) {
                     window.location = './dashboard.html'
                 } else {
-                    window.location = './user-auth.html'
+                    window.location = './profile.html'
                 }
             }, 5000);
             localStorage.setItem('token', response.data.token);
