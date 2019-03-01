@@ -17,7 +17,7 @@ export default {
       logo_url: 'https://via.placeholder.com/30',
       created_at: currentDay,
       updated_at: null,
-    }
+    },
   },
   createOffice: {
     createOfficeDetails: {
