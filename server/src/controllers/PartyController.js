@@ -26,7 +26,7 @@ class PartyController {
       if (error.routine === '_bt_check_unique') {
         return res.status(400).json({
           status: res.statusCode,
-          message: 'Party already exists',
+          error: 'Party already exists',
         });
       }
       return res.status(404).json({
