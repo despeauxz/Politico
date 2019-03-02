@@ -1,5 +1,5 @@
 const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/auth/details';
-const token = localStorage.getItem('token');
+// const token = localStorage.getItem('token');
 const alert = document.querySelector('.alert');
 const user = document.querySelector('.user-detail');
 const party = document.querySelector('.party-detail');
@@ -12,13 +12,6 @@ const options = {
     })
 };
 
-if (localStorage.getItem('loggedIn')) {
-    if (localStorage.getItem('admin') === 'null') {
-        window.location = './profile.html';
-    }
-} else {
-    window.location = './login.html';
-}
 
 (() => {
     fetch(url, options)

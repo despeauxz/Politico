@@ -13,14 +13,6 @@ const errorCont = document.querySelector('.errors');
 const loader = document.querySelector('.loader');
 const alert = document.querySelector('.alert');
 
-const createNode = (element) => {
-    return document.createElement(element);
-}
-
-const append = (parent, el) => {
-    return parent.appendChild(el);
-}
-
 
 signup.addEventListener('submit', (e) => {
     e.preventDefault();
