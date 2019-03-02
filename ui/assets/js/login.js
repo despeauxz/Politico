@@ -7,13 +7,6 @@ const errorContainer = document.querySelector('.errors ul');
 const errorCont = document.querySelector('.errors');
 const loader = document.querySelector('.loader');
 
-const createNode = (element) => {
-    return document.createElement(element);
-}
-
-const append = (parent, el) => {
-    return parent.appendChild(el);
-}
 
 login.addEventListener('submit', (e) => {
     e.preventDefault();
