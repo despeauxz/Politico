@@ -98,15 +98,22 @@ addParty.addEventListener('submit', (e) => {
                                 <h2>Edit Party</h2>
                             </div>
                             <div class="modal_body">
-                                <form role="form" method="POST">
+                                <div class="errors form-group edit-error">
+                                    <ul></ul>
+                                </div>
+                                <form role="form" method="POST" id="edit-party" index="${party.id}">
                                     <div class="d-flex-col">
                                         <div class="form-group">
                                             <label for="" class="control-label"> Name </label>
-                                            <input type="text" name="name" class="form-control" value="PDP">
+                                            <input id="edit-name" type="text" name="name" class="form-control" value="${party.name}">
                                         </div>
                                         <div class="form-group">
                                             <label for="" class="control-label"> HQ Address </label>
-                                            <input type="text" name="hq-addr" class="form-control" value="Abuja FCT, Nigeria">
+                                            <input disabled type="text" name="hq-addr" class="form-control" value="${party.hq_address}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" class="control-label"> Logo URL </label>
+                                            <input disabled type="text" name="logo_url" class="form-control" value="${party.logo_url}">
                                         </div>
                                         <button class="btn btn-primary" type="submit">Edit</button>
                                     </div>
@@ -130,3 +137,68 @@ addParty.addEventListener('submit', (e) => {
         })
     })
 })();
+
+setTimeout(() => {
+    const editParty = document.getElementById('edit-party');
+    const editName = document.getElementById('edit-name');
+    const errorContainer = document.querySelector('.edit-error ul');
+    const errorCont = document.querySelector('.edit-error');
+    const alert = document.querySelector('.alert');
+
+    const createNode = (element) => {
+        return document.createElement(element);
+    }
+
+    const append = (parent, el) => {
+        return parent.appendChild(el);
+    }
+
+    editParty.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const event = e.target;        
+        const id = event.getAttribute('index');
+        fetch(`${url}/${id}/name`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                name: editName.value
+            }),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            })
+        })
+        .then(res => res.json())
+        .then((response) => {
+            if (response.error) {
+                errorCont.style.display = 'block';
+                let li = createNode('li');
+                li.innerHTML = `${response.error}`;
+                append(errorContainer, li);
+                setTimeout(() => {
+                    errorCont.style.display = 'none';
+                    DOMContentLoaded
+                    errorContainer.innerHTML = '';
+                }, 5000);
+            } else if (response.status === 400) {
+                const errorBag = response.errors;
+                errorBag.map((error) => {
+                    let li = createNode('li');
+                    li.innerHTML = `${error.msg}`;
+                    errorCont.style.display = 'block';
+                    append(errorContainer, li);
+                    setTimeout(() => {
+                        errorCont.style.display = 'none';
+                        errorContainer.innerHTML = '';
+                    }, 5000);
+                })
+            } else if (response.status === 200) {
+                alert.style.display = 'block';
+                alert.innerHTML = response.message;
+                setTimeout(() => {
+                    window.location.reload();
+                }, 5000);
+            }
+        })
+    });
+}, 5000);
