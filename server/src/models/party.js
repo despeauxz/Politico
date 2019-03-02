@@ -33,7 +33,7 @@ class Party {
   }
 
   findAll() {
-    const findAllQuery = 'SELECT * FROM parties';
+    const findAllQuery = 'SELECT * FROM parties ORDER BY id ASC';
     const response = db.query(findAllQuery);
     return response;
   }
