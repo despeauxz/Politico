@@ -51,6 +51,7 @@ addParty.addEventListener('submit', (e) => {
         } else if (response.status === 201) {
             alert.style.display = 'block';
             alert.innerHTML = response.message;
+            addBtn.disabled = true;
             setTimeout(() => {
                 window.location.reload();
             }, 5000);
@@ -151,10 +152,8 @@ addParty.addEventListener('submit', (e) => {
 setTimeout(() => {
     const editParty = document.querySelectorAll('#edit-party');
     const deleteParty = document.querySelectorAll('#delete-btn');
-    const errorContainer = document.querySelector('.edit-error ul');
-    const errorCont = document.querySelector('.edit-error');
     const alert = document.querySelector('.alert');
-
+   
 
     // Edit Party
     for(i in editParty) {
@@ -163,6 +162,9 @@ setTimeout(() => {
                 e.preventDefault();
                 const id = e.target.getAttribute('index');
                 const editValue = e.target.querySelector('#edit-name').value;
+                const editErrorContainer = e.target.querySelector('.edit-error ul');
+                const editErrorCont = e.target.querySelector('.edit-error');
+                const editBtn = e.target.querySelector('#edit-btn');
                 
                 fetch(`${url}/${id}/name`, {
                     method: 'PATCH',
@@ -178,13 +180,13 @@ setTimeout(() => {
                 .then(res => res.json())
                 .then((response) => {
                     if (response.error) {
-                        errorCont.style.display = 'block';
+                        editErrorCont.style.display = 'block';
                         let li = createNode('li');
                         li.innerHTML = `${response.error}`;
-                        append(errorContainer, li);
+                        append(editErrorContainer, li);
                         setTimeout(() => {
-                            errorCont.style.display = 'none';
-                            errorContainer.innerHTML = '';
+                            editErrorCont.style.display = 'none';
+                            editErrorContainer.innerHTML = '';
                         }, 5000);
                     } else if (response.status === 400) {
                         const errorBag = response.errors;
@@ -192,15 +194,16 @@ setTimeout(() => {
                             let li = createNode('li');
                             li.innerHTML = `${error.msg}`;
                             errorCont.style.display = 'block';
-                            append(errorContainer, li);
+                            append(editErrorContainer, li);
                             setTimeout(() => {
-                                errorCont.style.display = 'none';
-                                errorContainer.innerHTML = '';
+                                editErrorCont.style.display = 'none';
+                                editErrorContainer.innerHTML = '';
                             }, 5000);
                         })
                     } else if (response.status === 200) {
                         alert.style.display = 'block';
                         alert.innerHTML = response.message;
+                        editBtn.disabled = true;
                         setTimeout(() => {
                             window.location.reload();
                         }, 3000);
