@@ -78,7 +78,7 @@ addParty.addEventListener('submit', (e) => {
     .then(res => res.json())
     .then((data) => {
         const parties = data.data;
-        if (parties.length === 0) {
+        if (!parties.length) {
             partyBody.innerHTML = '<p class="text-center text-md">No party at this moment</p>';
         }else {
             parties.forEach(party => {
