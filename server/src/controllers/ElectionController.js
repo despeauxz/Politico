@@ -116,7 +116,7 @@ class ElectionController {
         LEFT JOIN users ON users.id = candidates.user_id 
         LEFT JOIN parties ON parties.id = candidates.party_id
         LEFT JOIN offices ON offices.id = candidates.office_id
-        ORDER BY candidates.office_id`;
+        ORDER BY candidates.office_id ASC`;
       const { rows, rowCount } = await db.query(query);
       return res.status(200).json({
         status: 200,
