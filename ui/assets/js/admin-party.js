@@ -1,4 +1,4 @@
-const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/parties';
+const url = 'http://localhost:8000/api/v1/parties';
 const addParty = document.getElementById('add-party');
 const partyBody = document.getElementById('party');
 const name = document.getElementById('name');
@@ -11,6 +11,7 @@ const alert = document.querySelector('.alert');
 
 addParty.addEventListener('submit', (e) => {
     e.preventDefault();
+    const addBtn = e.target.querySelector('#add-btn');
 
     fetch(url, {
         method: 'POST',
@@ -33,10 +34,9 @@ addParty.addEventListener('submit', (e) => {
             append(errorContainer, li);
             setTimeout(() => {
                 errorCont.style.display = 'none';
-                DOMContentLoaded
                 errorContainer.innerHTML = '';
             }, 5000);
-        }else if (response.status === 400) {
+        } else if (response.status === 400) {
             const errorBag = response.errors;
             errorBag.map((error) => {
                 let li = createNode('li');
@@ -48,7 +48,7 @@ addParty.addEventListener('submit', (e) => {
                     errorContainer.innerHTML = '';
                 }, 5000);
             })
-        }else if (response.status === 201) {
+        } else if (response.status === 201) {
             alert.style.display = 'block';
             alert.innerHTML = response.message;
             setTimeout(() => {
@@ -57,13 +57,11 @@ addParty.addEventListener('submit', (e) => {
         }
     })
     .catch((error) => {
-        errorCont.style.display = 'block';
-        let msg = createNode('li');
-        msg.innerHTML = 'Error in connecting, Please check your internet connection and try again';
-        append(errorContainer, msg);
+        alert.style.display = 'block';
+        alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
         setTimeout(() => {
-            errorCont.style.display = 'none';
-            errorContainer.innerHTML = '';
+            alert.style.display = 'none';
+            alert.innerHTML = '';
         }, 5000);
     })
 });
@@ -78,9 +76,12 @@ addParty.addEventListener('submit', (e) => {
     })
     .then(res => res.json())
     .then((data) => {
-        const parties = data.data;        
-        parties.map((party) => {
-            partyBody.innerHTML += `
+        const parties = data.data;
+        if (parties.length === 0) {
+            partyBody.innerHTML = '<p class="text-center text-md">No party at this moment</p>';
+        }else {
+            parties.forEach(party => {
+                partyBody.innerHTML += `
                 <div class="cards card-wrap">
                     <h2 class="card_title">${party.name}</h2>
                     <p class="card_body">${party.hq_address}</p>
@@ -88,10 +89,9 @@ addParty.addEventListener('submit', (e) => {
                         <span class="ion-android-more-horizontal"></span>
                         <ul>
                             <li><a href="#" data-modal="#edit-${party.id}">Edit</a></li>
-                            <li><a href="#" data-modal="#delete">Delete</a></li>
+                            <li><a href="#" data-modal="#delete-${party.id}">Delete</a></li>
                         </ul>
                     </div>
-
                     <div class="modal" id="edit-${party.id}">
                         <div class="modal-container">
                             <div class="modal_title text-center">
@@ -115,90 +115,145 @@ addParty.addEventListener('submit', (e) => {
                                             <label for="" class="control-label"> Logo URL </label>
                                             <input disabled type="text" name="logo_url" class="form-control" value="${party.logo_url}">
                                         </div>
-                                        <button class="btn btn-primary" type="submit">Edit</button>
+                                        <button class="btn btn-primary" type="submit" id="edit-btn">Edit</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="modal" id="delete">
+                    <div class="modal" id="delete-${party.id}">
                         <div class="modal-container">
                             <div class="modal_title text-sm text-center">
                                 <h2 class="text-sm">Are you sure you want delete this Party?</h2>
                             </div>
                             <div class="modal_body text-center">
-                                <button class="btn btn-danger">Yes</button>
-                                <button class="btn btn-primary">No</button>
+                                <button class="btn btn-danger" index="${party.id}" id="delete-btn">Yes</button>
+                                <button class="btn btn-primary" id="">No</button>
                             </div>
                         </div>
                     </div>
                 </div>
             `
-        })
+            })
+        }
+    })
+    .catch(() => {
+        alert.style.display = 'block';
+        alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
+        setTimeout(() => {
+            alert.style.display = 'none';
+            alert.innerHTML = '';
+        }, 5000);
     })
 })();
 
+
 setTimeout(() => {
-    const editParty = document.getElementById('edit-party');
-    const editName = document.getElementById('edit-name');
+    const editParty = document.querySelectorAll('#edit-party');
+    const deleteParty = document.querySelectorAll('#delete-btn');
     const errorContainer = document.querySelector('.edit-error ul');
     const errorCont = document.querySelector('.edit-error');
     const alert = document.querySelector('.alert');
 
-    const createNode = (element) => {
-        return document.createElement(element);
-    }
 
-    const append = (parent, el) => {
-        return parent.appendChild(el);
-    }
-
-    editParty.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const event = e.target;        
-        const id = event.getAttribute('index');
-        fetch(`${url}/${id}/name`, {
-            method: 'PATCH',
-            body: JSON.stringify({
-                name: editName.value
-            }),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            })
-        })
-        .then(res => res.json())
-        .then((response) => {
-            if (response.error) {
-                errorCont.style.display = 'block';
-                let li = createNode('li');
-                li.innerHTML = `${response.error}`;
-                append(errorContainer, li);
-                setTimeout(() => {
-                    errorCont.style.display = 'none';
-                    DOMContentLoaded
-                    errorContainer.innerHTML = '';
-                }, 5000);
-            } else if (response.status === 400) {
-                const errorBag = response.errors;
-                errorBag.map((error) => {
-                    let li = createNode('li');
-                    li.innerHTML = `${error.msg}`;
-                    errorCont.style.display = 'block';
-                    append(errorContainer, li);
+    // Edit Party
+    for(i in editParty) {
+        if (editParty.hasOwnProperty(i)) {
+            editParty[i].addEventListener('submit', (e) => {
+                e.preventDefault();
+                const id = e.target.getAttribute('index');
+                const editValue = e.target.querySelector('#edit-name').value;
+                
+                fetch(`${url}/${id}/name`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        name: editValue
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    })
+                })
+                .then(res => res.json())
+                .then((response) => {
+                    if (response.error) {
+                        errorCont.style.display = 'block';
+                        let li = createNode('li');
+                        li.innerHTML = `${response.error}`;
+                        append(errorContainer, li);
+                        setTimeout(() => {
+                            errorCont.style.display = 'none';
+                            errorContainer.innerHTML = '';
+                        }, 5000);
+                    } else if (response.status === 400) {
+                        const errorBag = response.errors;
+                        errorBag.map((error) => {
+                            let li = createNode('li');
+                            li.innerHTML = `${error.msg}`;
+                            errorCont.style.display = 'block';
+                            append(errorContainer, li);
+                            setTimeout(() => {
+                                errorCont.style.display = 'none';
+                                errorContainer.innerHTML = '';
+                            }, 5000);
+                        })
+                    } else if (response.status === 200) {
+                        alert.style.display = 'block';
+                        alert.innerHTML = response.message;
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
+                    }
+                })
+                .catch((error) => {
+                    alert.style.display = 'block';
+                    alert.innerHTML = error;
                     setTimeout(() => {
-                        errorCont.style.display = 'none';
-                        errorContainer.innerHTML = '';
+                        alert.style.display = 'none';
+                        alert.innerHTML = '';
                     }, 5000);
                 })
-            } else if (response.status === 200) {
-                alert.style.display = 'block';
-                alert.innerHTML = response.message;
-                setTimeout(() => {
-                    window.location.reload();
-                }, 5000);
-            }
-        })
-    });
+            });
+        }
+    }
+
+    // Delete Party
+    for (j in deleteParty) {
+        if (deleteParty.hasOwnProperty(j)) {
+            deleteParty[j].addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = e.target.getAttribute('index');
+
+                fetch(`${url}/${id}`, {
+                    method: 'DELETE',
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    })
+                })
+                .then(res => res.json())
+                .then((response) => {
+                    if (response.status === 200) {
+                        alert.style.display = 'block';
+                        alert.innerHTML = response.message;
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
+                    }
+                })
+                .catch((error) => {
+                    alert.style.display = 'block';
+                    alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                        alert.innerHTML = '';
+                    }, 5000);
+                })
+                
+            })
+        }
+    }
+
 }, 5000);
