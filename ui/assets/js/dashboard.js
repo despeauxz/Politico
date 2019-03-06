@@ -1,5 +1,4 @@
-const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/auth/details';
-// const token = localStorage.getItem('token');
+const url = 'http://localhost:8000/api/v1/auth/details';
 const alert = document.querySelector('.alert');
 const user = document.querySelector('.user-detail');
 const party = document.querySelector('.party-detail');
@@ -23,7 +22,7 @@ const options = {
     })
     .catch((error) => {
         alert.style.display = 'block';
-        alert.innerHTML = error;
+        alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
         setTimeout(() => {
             alert.style.display = 'none';
             alert.innerHTML = '';

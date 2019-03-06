@@ -2,8 +2,8 @@ const token = localStorage.getItem('token');
 
 if (localStorage.getItem('loggedIn')) {
     if (localStorage.getItem('admin') === 'null') {
-        window.location = './profile.html';
+        window.location.href = './profile.html';
     }
 } else {
-    window.location = './login.html';
+    window.location.href = './login.html';
 }

@@ -1,4 +1,4 @@
-const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/auth/login';
+const url = 'http://localhost:8000/api/v1/auth/login';
 const login = document.getElementById('login');
 
 const email = document.getElementById('login-email');
