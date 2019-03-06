@@ -32,7 +32,7 @@ describe('Office Routes: create a new office', () => {
       .send({ ...createOfficeDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body).to.include.keys('message');
+        expect(res.body).to.include.keys('error');
 
         done();
       });
@@ -62,8 +62,8 @@ describe('Office Routes: create a new office', () => {
       .send({ ...createOfficeDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body).to.include.keys('message');
-        expect(res.body.message).to.equal('Office already exists');
+        expect(res.body).to.include.keys('error');
+        expect(res.body.error).to.equal('Office already exists');
 
         done(err);
       });
