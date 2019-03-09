@@ -57,7 +57,7 @@ addParty.addEventListener('submit', (e) => {
             }, 5000);
         }
     })
-    .catch((error) => {
+    .catch(() => {
         alert.style.display = 'block';
         alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
         setTimeout(() => {

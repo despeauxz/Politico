@@ -112,7 +112,7 @@ class UserController {
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error: 'Empty user fields',
+        error,
       });
     }
   }

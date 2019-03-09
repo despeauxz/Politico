@@ -133,15 +133,17 @@ describe('Auth routes: login', () => {
 });
 
 describe('Update User Details', () => {
-  describe('## Wrong input', () => {
+  describe('## Inputs', () => {
     it('should output error for empty user details', (done) => {
       request(app)
         .patch('/api/v1/auth/user')
         .set('authorization', userToken)
         .send({ })
         .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body).to.include.keys('error');
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.include.keys('message');
+          expect(res.body).to.include.keys('data');
+          expect(res.body.data).to.be.a('object');
 
           done(err);
         });

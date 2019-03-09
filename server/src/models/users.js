@@ -30,11 +30,10 @@ class User {
 
   update(req, data) {
     const updateQuery = `UPDATE users
-      SET firstname=$1, lastname=$2, avatar=$3, modified_at=$4 WHERE email=$5 returning *`;
+      SET firstname=$1, lastname=$2, modified_at=$3 WHERE email=$4 returning *`;
     const value = [
       data.firstname || req.user.firstname,
       data.lastname || req.user.lastname,
-      req.file.path,
       moment(new Date()),
       req.user.email,
     ];
