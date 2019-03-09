@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    <div class="alert"></div>
     <div class="dashboard-wrappers">
         <header class="top-header">
             <h2 class="logo inline"><a style="display: inline-block" href="./index.html">Politico</a></h2>
@@ -44,9 +45,8 @@
                     </a>
                 </span>
                 <span>
-                    <a href="#" style="margin-top: -15px;" class="dropdown">
-                        <h4 class="inline">Malik Godwin</h4>
-                        <div class="user-img"></div>
+                    <a href="#" class="dropdown">
+                        <h4 class="inline" id="user-name">Malik Godwin</h4>
                     </a>
                 </span>
                 <div class="dropdown-menu">
@@ -64,8 +64,8 @@
 
         <div class="content-container d-flex-lg">
             <div class="profile-card cards text-center" style="max-width: 300px">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/mlane/128.jpg" alt="">
-                <h4>Malik Godwin Onimisi</h4>
+                <img src="" alt="" id="user-img" width="140px" height="140px">
+                <h4 id="fullname"></h4>
                 <button class="btn btn-white modal_trigger" type="button" data-modal="#edit-user">Edit</button>
                 <div class="modal" id="edit-user">
                     <div class="modal-container">
@@ -73,25 +73,21 @@
                             <h2>Edit Details</h2>
                         </div>
                         <div class="modal_body">
-                            <form role="form" method="POST" enctype="multipart/form-data">
+                            <form role="form" method="POST" enctype="multipart/form-data" id="update-user">
                                 <div class="d-flex-col">
                                     <div class="form-group">
                                         <label for="firstname" class="control-label">First Name</label>
-                                        <input type="text" name="firstname" class="form-control">
+                                        <input id="firstname" type="text" name="firstname" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="lastname" class="control-label">Last Name</label>
-                                        <input type="text" name="lastname" class="form-control">
+                                        <input id="lastname" type="text" name="lastname" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="control-label">Email Address</label>
-                                        <input type="text" name="email" class="form-control" value="despeauxz@gmail.com" disabled>
+                                        <input id="email" type="text" name="email" class="form-control" value="despeauxz@gmail.com" disabled>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="file" id="file" name="avatar"/>
-                                        <label for="file">Upload Image</label>
-                                    </div>
-                                    <button class="btn btn-primary" type="submit">Edit Details</button>
+                                    <button class="btn btn-primary" type="submit" id="edit-user">Edit Details</button>
                                 </div>
                             </form>
                         </div>
@@ -100,54 +96,35 @@
             </div>
             <div class="datatable">
                 <h2 class="text-center">Vote History</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Party</th>
-                            <th>Office</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="v-align-middle"><p>16/02/2019</p></td>
-                            <td class="v-align-middle"><p>Fela Durotoye</p></td>
-                            <td class="v-align-middle"><p>ADP</p></td>
-                            <td class="v-align-middle"><p>President</p></td>
-                        </tr>
-                        <tr>
-                            <td class="v-align-middle"><p>16/02/2019</p></td>
-                            <td class="v-align-middle"><p>Fela Durotoye</p></td>
-                            <td class="v-align-middle"><p>ADP</p></td>
-                            <td class="v-align-middle"><p>President</p></td>
-                        </tr>
-                        <tr>
-                            <td class="v-align-middle"><p>16/02/2019</p></td>
-                            <td class="v-align-middle"><p>Fela Durotoye</p></td>
-                            <td class="v-align-middle"><p>ADP</p></td>
-                            <td class="v-align-middle"><p>President</p></td>
-                        </tr>
+                <div id="history">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td class="v-align-middle"><p>16/02/2019</p></td>
-                                <td class="v-align-middle"><p>Fela Durotoye</p></td>
-                                <td class="v-align-middle"><p>ADP</p></td>
-                                <td class="v-align-middle"><p>President</p></td>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Party</th>
+                                <th>Office</th>
                             </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
+        <footer class="dashboard_footer text-center">
+            <p>@ 2019 - Designed by Malik Godwin Onimisi</p>
+        </footer>
     </div>
 
-    <footer class="dashboard_footer text-center">
-        <p>@ 2019 - Designed by Malik Godwin Onimisi</p>
-    </footer>
-
     
+    <script src="./assets/js/nominalUser.js"></script>
     <script src="./assets/js/logout.js"></script>
+    <script src="./assets/js/helpers.js"></script>
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/profile.js"></script>
 </body>
 
 </html>
