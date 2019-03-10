@@ -1,5 +1,4 @@
-const url = 'http://localhost:8000/api/v1/auth/user';
-const token = localStorage.getItem('token');
+const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/auth/user';
 const data = JSON.parse(localStorage.getItem('userDetails'));
 
 const updateUser = document.getElementById('update-user');
@@ -61,7 +60,7 @@ updateUser.addEventListener('submit', (e) => {
 });
 
 (() => {
-    fetch('http://localhost:8000/api/v1/votes/history', {
+    fetch('https://cryptic-escarpment-28116.herokuapp.com/api/v1/votes/history', {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json',
@@ -85,7 +84,12 @@ updateUser.addEventListener('submit', (e) => {
             })
         }
     })
-    .catch((error) => {
-        console.log(error);
+    .catch(() => {
+        alert.style.display = 'block';
+        alert.innerHTML = 'Error in connection, Please check your internet connection and try again';
+        setTimeout(() => {
+            alert.style.display = 'none';
+            alert.innerHTML = '';
+        }, 5000);
     })
 })();

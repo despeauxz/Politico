@@ -1,4 +1,4 @@
-const url = 'http://localhost:8000/api/v1/parties';
+const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/parties';
 const addParty = document.getElementById('add-party');
 const partyBody = document.getElementById('party');
 const name = document.getElementById('name');
@@ -209,9 +209,9 @@ setTimeout(() => {
                         }, 3000);
                     }
                 })
-                .catch((error) => {
+                .catch(() => {
                     alert.style.display = 'block';
-                    alert.innerHTML = error;
+                    alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
                     setTimeout(() => {
                         alert.style.display = 'none';
                         alert.innerHTML = '';
@@ -246,7 +246,7 @@ setTimeout(() => {
                         }, 3000);
                     }
                 })
-                .catch((error) => {
+                .catch(() => {
                     alert.style.display = 'block';
                     alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
                     setTimeout(() => {

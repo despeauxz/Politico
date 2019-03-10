@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    <div class="alert"></div>
     <div class="dashboard-wrappers">
         <header class="top-header">
             <h2 class="logo inline"><a style="display: inline-block" href="./index.html">Politico</a></h2>
@@ -43,9 +44,8 @@
                     </a>
                 </span>
                 <span>
-                    <a href="#" style="margin-top: -15px;" class="dropdown">
-                        <h4 class="inline">Malik Godwin</h4>
-                        <div class="user-img"></div>
+                    <a href="#" class="dropdown">
+                        <h4 class="inline" id="user-name"></h4>
                     </a>
                 </span>
                 <div class="dropdown-menu">
@@ -63,318 +63,8 @@
 
         <div class="content-container">
             <h2 class="text-center">Offices</h2>
-            <div class="card-group">
-                <div class="cards card-wrap">
-                    <h2 class="card_title">President</h2>
-                    <p class="card_body">Federal</p>
-                    <p class="card_body">Validity: 26th Fbuary, 2019</p>
-                    <div class="more">
-                        <span class="ion-android-more-horizontal"></span>
-                        <ul>
-                            <li><a href="#" data-modal="#vote">Vote</a></li>
-                            <li><a href="#" data-modal="#aspire">Aspire</a></li>
-                            <li><a href="#" data-modal="#petition">Petition</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="modal" id="vote">
-                        <div class="modal-container">
-                            <div class="modal_body">
-                                <form role="form" method="POST">
-                                    <div class="d-flex-col office text-center">
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="1" name="candidate" value="">
-                                            <label for="1">
-                                                <span class="radio">Fela Durotoye - ADP</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="2" name="candidate" value="">
-                                            <label for="2">
-                                                <span class="radio">Muhammed Buhari - APC</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="3" name="candidate" value="">
-                                            <label for="3">
-                                                <span class="radio">Atiku Abubakar - PDP</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="4" name="candidate" value="">
-                                            <label for="4">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="5" name="candidate" value="">
-                                            <label for="5">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="6" name="candidate" value="">
-                                            <label for="6">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <button class="btn btn-primary" type="submit">Vote</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal" id="aspire">
-                        <div class="modal-container">
-                            <div class="modal_title text-sm text-center">
-                                <h2 class="text-sm">Are you sure you want to aspire for this office?</h2>
-                            </div>
-                            <div class="modal_body text-center">
-                                <button class="btn btn-danger">Yes</button>
-                                <button class="btn btn-primary">No</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal" id="petition">
-                        <div class="modal-container">
-                            <div class="modal_title text-center">
-                                <h2>Petition</h2>
-                            </div>
-                            <div class="modal_body">
-                                <form role="form" method="POST" enctype="multipart/form-data">
-                                    <div class="d-flex-col">
-                                        <div class="form-group">
-                                            <label for="title" class="control-label">Title</label>
-                                            <input type="text" name="title" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="body" class="control-label">Reason?</label>
-                                            <textarea name="body" class="form-control" rows="5"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="file" id="file" name="evidence" />
-                                            <label for="file">Upload Evidence</label>
-                                        </div>
-                                        <button class="btn btn-primary" type="submit">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">Senate</h2>
-                    <p class="card_body">Federal</p>
-                    <p class="card_body">Validity: 26th Fbuary, 2019</p>
-                    <div class="more">
-                        <span class="ion-android-more-horizontal"></span>
-                        <ul>
-                            <li><a href="#" data-modal="#vote">Vote</a></li>
-                            <li><a href="#" data-modal="#aspire">Aspire</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="modal" id="vote">
-                        <div class="modal-container">
-                            <div class="modal_body">
-                                <form role="form" method="POST">
-                                    <div class="d-flex-col office text-center">
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="1" name="candidate" value="">
-                                            <label for="1">
-                                                <span class="radio">Fela Durotoye - ADP</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="2" name="candidate" value="">
-                                            <label for="2">
-                                                <span class="radio">Muhammed Buhari - APC</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="3" name="candidate" value="">
-                                            <label for="3">
-                                                <span class="radio">Atiku Abubakar - PDP</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="4" name="candidate" value="">
-                                            <label for="4">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="5" name="candidate" value="">
-                                            <label for="5">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="6" name="candidate" value="">
-                                            <label for="6">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <button class="btn btn-primary" type="submit">Vote</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal" id="aspire">
-                        <div class="modal-container">
-                            <div class="modal_title text-sm text-center">
-                                <h2 class="text-sm">Are you sure you want to aspire for this office?</h2>
-                            </div>
-                            <div class="modal_body text-center">
-                                <button class="btn btn-danger">Yes</button>
-                                <button class="btn btn-primary">No</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">Governor</h2>
-                    <p class="card_body">State</p>
-                    <p class="card_body">Validity: 26th Fbuary, 2019</p>
-                    <div class="more">
-                        <span class="ion-android-more-horizontal"></span>
-                        <ul>
-                            <li><a href="#" data-modal="#vote">Vote</a></li>
-                            <li><a href="#" data-modal="#aspire">Aspire</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="modal" id="vote">
-                        <div class="modal-container">
-                            <div class="modal_body">
-                                <form role="form" method="POST">
-                                    <div class="d-flex-col office text-center">
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="1" name="candidate" value="">
-                                            <label for="1">
-                                                <span class="radio">Fela Durotoye - ADP</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="2" name="candidate" value="">
-                                            <label for="2">
-                                                <span class="radio">Muhammed Buhari - APC</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="3" name="candidate" value="">
-                                            <label for="3">
-                                                <span class="radio">Atiku Abubakar - PDP</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="4" name="candidate" value="">
-                                            <label for="4">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="5" name="candidate" value="">
-                                            <label for="5">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="6" name="candidate" value="">
-                                            <label for="6">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <button class="btn btn-primary" type="submit">Vote</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal" id="aspire">
-                        <div class="modal-container">
-                            <div class="modal_title text-sm text-center">
-                                <h2 class="text-sm">Are you sure you want to aspire for this office?</h2>
-                            </div>
-                            <div class="modal_body text-center">
-                                <button class="btn btn-danger">Yes</button>
-                                <button class="btn btn-primary">No</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">Chairman</h2>
-                    <p class="card_body">Local Government</p>
-                    <p class="card_body">Validity: 26th Fbuary, 2019</p>
-                    <div class="more">
-                        <span class="ion-android-more-horizontal"></span>
-                        <ul>
-                            <li><a href="#" data-modal="#vote">Vote</a></li>
-                            <li><a href="#" data-modal="#aspire">Aspire</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="modal" id="vote">
-                        <div class="modal-container">
-                            <div class="modal_body">
-                                <form role="form" method="POST">
-                                    <div class="d-flex-col office text-center">
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="1" name="candidate" value="">
-                                            <label for="1">
-                                                <span class="radio">Fela Durotoye - ADP</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="2" name="candidate" value="">
-                                            <label for="2">
-                                                <span class="radio">Muhammed Buhari - APC</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="3" name="candidate" value="">
-                                            <label for="3">
-                                                <span class="radio">Atiku Abubakar - PDP</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="4" name="candidate" value="">
-                                            <label for="4">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="5" name="candidate" value="">
-                                            <label for="5">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-group mg-b-10">
-                                            <input type="radio" id="6" name="candidate" value="">
-                                            <label for="6">
-                                                <span class="radio">Fela Durotoye</span>
-                                            </label>
-                                        </div>
-                                        <button class="btn btn-primary" type="submit">Vote</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal" id="aspire">
-                        <div class="modal-container">
-                            <div class="modal_title text-sm text-center">
-                                <h2 class="text-sm">Are you sure you want to aspire for this office?</h2>
-                            </div>
-                            <div class="modal_body text-center">
-                                <button class="btn btn-danger">Yes</button>
-                                <button class="btn btn-primary">No</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-group" id="user-office">
+                
             </div>
         </div>
 
@@ -383,9 +73,10 @@
     </footer>
 
 
+    <script src="./assets/js/nominalUser.js"></script>
+    <script src="./assets/js/office.js"></script>
     <script src="./assets/js/logout.js"></script>
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>
