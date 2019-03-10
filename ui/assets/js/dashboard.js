@@ -1,4 +1,4 @@
-const url = 'http://localhost:8000/api/v1/auth/details';
+const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/auth/details';
 const alert = document.querySelector('.alert');
 const user = document.querySelector('.user-detail');
 const party = document.querySelector('.party-detail');

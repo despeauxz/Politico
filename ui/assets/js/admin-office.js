@@ -1,4 +1,4 @@
-const url = 'http://localhost:8000/api/v1/offices';
+const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/offices';
 const addOffice = document.getElementById('add-office');
 const officeBody = document.getElementById('office');
 const name = document.getElementById('name');
@@ -6,7 +6,7 @@ const type = document.getElementById('office-type');
 const errorContainer = document.querySelector('.errors ul');
 const errorCont = document.querySelector('.errors');
 const alert = document.querySelector('.alert');
-
+const addBtn = document.getElementById('office-btn');
 
 
 addOffice.addEventListener('submit', (e) => {
@@ -58,13 +58,15 @@ addOffice.addEventListener('submit', (e) => {
             }, 5000);
         }
     })
-    .catch(() => {
-        alert.style.display = 'block';
-        alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
-        setTimeout(() => {
-            alert.style.display = 'none';
-            alert.innerHTML = '';
-        }, 5000);
+    .catch((error) => {
+        // alert.style.display = 'block';
+        // alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
+        // setTimeout(() => {
+        //     alert.style.display = 'none';
+        //     alert.innerHTML = '';
+        // }, 5000);
+        console.log(error);
+        
     })
 });
 
