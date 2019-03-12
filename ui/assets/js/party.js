@@ -1,11 +1,6 @@
 const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/parties';
-const userName = document.getElementById('user-name');
 const partyContainer = document.getElementById('parties');
 const alert = document.querySelector('.alert');
-const user = JSON.parse(localStorage.getItem('userDetails'));
-const fullname = `${user.firstname} ${user.lastname}`;
-userName.textContent = fullname;
-
 const options = {
     method: 'GET',
     headers: new Headers({

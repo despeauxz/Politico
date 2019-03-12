@@ -1,11 +1,6 @@
 const alert = document.querySelector('.alert');
-const userName = document.getElementById('user-name');
 const officeContainer = document.getElementById('user-office');
 const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1';
-const user = JSON.parse(localStorage.getItem('userDetails'));
-const fullname = `${user.firstname} ${user.lastname}`;
-
-userName.textContent = fullname;
 const options = {
     method: 'GET',
     headers: new Headers({
@@ -67,21 +62,20 @@ const options = {
                                 <h2>Petition</h2>
                             </div>
                             <div class="modal_body">
-                                <form role="form" method="POST" enctype="multipart/form-data">
+                                <form role="form" method="POST"  index="${office.id}" id="petition">
+                                    <div class="errors form-group petition-error">
+                                        <ul></ul>
+                                    </div>
                                     <div class="d-flex-col">
                                         <div class="form-group">
                                             <label for="title" class="control-label">Title</label>
-                                            <input type="text" name="title" class="form-control">
+                                            <input type="text" style="text-transform: uppercase;" name="title" class="form-control" id="petition-title">
                                         </div>
                                         <div class="form-group">
                                             <label for="body" class="control-label">Reason?</label>
-                                            <textarea name="body" class="form-control" rows="5"></textarea>
+                                            <textarea name="body" class="form-control" rows="5" id="petition-body"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="file" id="file" name="evidence" />
-                                            <label for="file">Upload Evidence</label>
-                                        </div>
-                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                        <button class="btn btn-primary" type="submit" id="petition-btn">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -102,5 +96,66 @@ const options = {
 })();
 
 setTimeout(() => {
-    
-}, 5000);
+    const createPetition = document.querySelectorAll('#petition');
+
+    for (i in createPetition) {
+        if (createPetition.hasOwnProperty(i)) {
+            createPetition[i].addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const id = e.target.getAttribute('index');
+                const title = e.target.querySelector('#petition-title');
+                const text = e.target.querySelector('#petition-body');
+                const petitionErrorContainer = e.target.querySelector('.petition-error ul');
+                const petitionErrorCont = e.target.querySelector('.petition-error');
+                const petitionBtn = e.target.querySelector('#petition-btn');
+                
+
+                fetch(`${url}/petition`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        title: title.value,
+                        text: text.value,
+                        office_id: id
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    })
+                })
+                .then(res => res.json())
+                .then((data) => {
+                    if (data.status === 404) {
+                        petitionErrorCont.style.display = 'block';
+                        let li = createNode('li');
+                        li.innerHTML = `${data.error}`;
+                        append(editErrorContainer, li);
+                        setTimeout(() => {
+                            petitionErrorCont.style.display = 'none';
+                            petitionErrorContainer.innerHTML = '';
+                        }, 5000);
+                    } else if (data.status === 400) {
+                        const errorBag = data.errors;
+                        errorBag.map((error) => {
+                            let li = createNode('li');
+                            li.innerHTML = `${error.msg}`;
+                            petitionErrorCont.style.display = 'block';
+                            append(petitionErrorContainer, li);
+                            setTimeout(() => {
+                                petitionErrorCont.style.display = 'none';
+                                petitionErrorContainer.innerHTML = '';
+                            }, 5000);
+                        })
+                    } else if (data.status === 201) {
+                        alert.style.display = 'block';
+                        alert.innerHTML = data.message;
+                        petitionBtn.disabled = true;
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
+                    }
+                })
+            })
+        }
+    }
+}, 4000);

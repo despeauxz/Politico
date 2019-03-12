@@ -11,9 +11,6 @@ const addBtn = document.getElementById('office-btn');
 
 addOffice.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    console.log(name.value);
-    console.log(type.value);
     
     fetch(url, {
         method: 'POST',
@@ -58,15 +55,13 @@ addOffice.addEventListener('submit', (e) => {
             }, 5000);
         }
     })
-    .catch((error) => {
-        // alert.style.display = 'block';
-        // alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
-        // setTimeout(() => {
-        //     alert.style.display = 'none';
-        //     alert.innerHTML = '';
-        // }, 5000);
-        console.log(error);
-        
+    .catch(() => {
+        alert.style.display = 'block';
+        alert.innerHTML = 'Error in connection, Please check your internet connection and try again';
+        setTimeout(() => {
+            alert.style.display = 'none';
+            alert.innerHTML = '';
+        }, 5000);
     })
 });
 
@@ -88,7 +83,7 @@ addOffice.addEventListener('submit', (e) => {
             offices.map((office) => {
                 officeBody.innerHTML += `
                     <div class="cards card-wrap text-center">
-                        <h2 class="card_title">${office.name}</h2>
+                        <h2 class="card_title" style="text-transform: capitalize;font-size: 15px;">${office.name}</h2>
                         <p class="card_body">${office.type}</p>
                     </div>
                 `
