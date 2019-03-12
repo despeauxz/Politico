@@ -18,6 +18,7 @@
     <script src="./assets/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
+    <div class="alert"></div>
     <div class="sidebar">
         <div>
             <h2 class="logo"><a href="./index.html">Politico</a></h2>
@@ -69,37 +70,11 @@
         </header>
 
         <section class="content-container">
-            <h2 style="font-weight: 500;margin-bottom: 10px;">Petitions</h2>
+            <h2 style="font-weight: 500;margin-bottom: 1em;" class="text-center">Petitions</h2>
             
             <div class="box-white">
-                <div class="accordion">
-                    <div class="item active">
-                        <div class="title">
-                            <h5>The fraudulent misappropriation of ballot box</h5>
-                            <i class="fa fa-plus"></i>
-                        </div>
-                        <div class="accordion-info active">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ullam voluptatibus nobis. Aspernatur, ducimus? Similique vero, nesciunt commodi itaque hic ratione, vel ipsa officiis, atque sed repudiandae quam velit. Doloremque?</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="title">
-                            <h5>The fraudulent misappropriation of ballot box</h5>
-                            <i class="fa fa-plus"></i>
-                        </div>
-                        <div class="accordion-info">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ullam voluptatibus nobis. Aspernatur, ducimus? Similique vero, nesciunt commodi itaque hic ratione, vel ipsa officiis, atque sed repudiandae quam velit. Doloremque?</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="title">
-                            <h5>The fraudulent misappropriation of ballot box</h5>
-                            <i class="fa fa-plus"></i>
-                        </div>
-                        <div class="accordion-info">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ullam voluptatibus nobis. Aspernatur, ducimus? Similique vero, nesciunt commodi itaque hic ratione, vel ipsa officiis, atque sed repudiandae quam velit. Doloremque?</p>
-                        </div>
-                    </div>
+                <div class="accordion" id="petition-body">
+                    
                 </div>
             </sectin>
         </div>
@@ -109,7 +84,8 @@
     </div>
 
     <script src="./assets/js/logout.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/isAdmin.js"></script>
+    <script src="./assets/js/admin-petitions.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
 

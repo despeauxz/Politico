@@ -22,7 +22,10 @@ class Petition {
   }
 
   findAll() {
-    const findAllQuery = 'SELECT * FROM petitions';
+    const findAllQuery = `SELECT petitions.id, petitions.title, petitions.text, petitions.evidence, petitions.created_at, 
+      users.firstname as firstname, users.lastname as lastname, offices.name as officename FROM petitions 
+      LEFT JOIN users ON users.id = petitions.created_by 
+      LEFT JOIN offices ON offices.id = petitions.office_id`;
     const response = db.query(findAllQuery);
     return response;
   }
