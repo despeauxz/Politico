@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 import request from 'supertest';
 import { expect } from 'chai';
@@ -5,11 +6,11 @@ import mockData from '../../utils/mockData';
 import app from '../../../src/app';
 import tokens from '../auth/login';
 
-const { createPartyDetails, invalidPartyDetails } = mockData.createParty;
+const { createPartyDetails } = mockData.createParty;
 const { userToken, adminToken } = tokens;
 
 
-describe('Party Routes: create a new party', () => {
+describe('Join Party', () => {
   it('should add a new party', (done) => {
     request(app)
       .post('/api/v1/parties')
@@ -17,6 +18,7 @@ describe('Party Routes: create a new party', () => {
       .set('authorization', adminToken)
       .send({ ...createPartyDetails })
       .end((err, res) => {
+        console.log(res.body);
         expect(res.statusCode).to.equal(201);
         expect(res.body).to.be.a('object');
 
@@ -24,16 +26,16 @@ describe('Party Routes: create a new party', () => {
       });
   });
 
-  it('should return error for forbidden access', (done) => {
+  it('should return error for party not found', (done) => {
     request(app)
-      .post('/api/v1/parties')
+      .patch('/api/v1/auth/join-party')
       .set('Accept', 'application/json')
       .set('authorization', userToken)
-      .send({ ...createPartyDetails })
+      .send({ party_id: 20 })
       .end((err, res) => {
-        expect(res.statusCode).to.equal(403);
-        expect(res.body).to.include.keys('message');
-        expect(res.body.message).to.equal('Unauthorized Access! Admin only');
+        expect(res.statusCode).to.equal(404);
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.include.keys('error');
 
         done(err);
       })
@@ -41,42 +43,30 @@ describe('Party Routes: create a new party', () => {
 
   it('should return error for unauthorized user', (done) => {
     request(app)
-      .post('/api/v1/parties')
+      .patch('/api/v1/auth/join-party')
       .set('Accept', 'application/json')
-      .send({ ...createPartyDetails })
+      .send({ party_id: 2 })
       .end((err, res) => {
         expect(res.statusCode).to.equal(401);
         expect(res.body).to.include.keys('error');
         expect(res.body.error).to.equal('Unauthorized user');
 
         done(err);
-      })
-  });
-
-  it('should return errors for invalid fields', (done) => {
-    request(app)
-      .post('/api/v1/parties')
-      .set('Accept', 'application/json')
-      .set('authorization', adminToken)
-      .send({ ...invalidPartyDetails })
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body).to.be.a('object');
-        expect(res.body.errors).to.be.a('array');
-
-        done(err);
       });
   });
 
-  it('should return error of missing name field', (done) => {
+  it('should return chosen party & user details with new party ID', (done) => {
     request(app)
-      .post('/api/v1/parties')
+      .patch('/api/v1/auth/join-party')
       .set('Accept', 'application/json')
-      .set('authorization', adminToken)
-      .send({ ...invalidPartyDetails })
+      .set('authorization', userToken)
+      .send({ party_id: 2 })
       .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body.errors[0].param).to.equal('name');
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.include.keys('message');
+        expect(res.body).to.include.keys('data');
+
         done(err);
       });
   });
