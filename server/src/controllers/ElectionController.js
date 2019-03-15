@@ -5,7 +5,6 @@ import db from '../models';
  * @class ElectionController
  */
 class ElectionController {
-
   static async candidates(req, res) {
     const userId = req.params.id;
     const { officeId, partyId } = req.body;
@@ -19,11 +18,11 @@ class ElectionController {
     }
     const text = 'INSERT INTO candidates(office_id, party_id, user_id) VALUES ($1, $2, $3) RETURNING office_id, user_id, party_id';
     try {
-      const { rows } = await db.query(text, [officeId, partyId, userId]);
+      const response = await db.query(text, [officeId, partyId, userId]);
       return res.status(201).json({
         status: 201,
         message: 'You\'ve successfuly registered',
-        data: rows[0],
+        data: response.rows[0],
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {

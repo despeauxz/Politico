@@ -2,6 +2,7 @@
 import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
 import Mailer from '../utils/Mailer';
+import partyModel from '../models/party';
 import models from '../models/users';
 import db from '../models/index';
 import Authorization from '../middlewares/Authorization';
@@ -147,6 +148,7 @@ class UserController {
       digit: data.digit,
       avatar: data.avatar,
       is_admin: data.is_admin,
+      party_id: data.party_id,
       created_at: data.created_at,
       modified_at: data.modified_at,
     };
@@ -174,6 +176,29 @@ class UserController {
       return res.status(200).json({
         status: 200,
         data: rows[0],
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error,
+      });
+    }
+  }
+
+  static async updateUserParty(req, res) {
+    try {
+      const { rows } = await partyModel.findOne(req.body.party_id);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'Party Not Found',
+        });
+      }
+      const response = await models.updateParty(req, req.body);
+      return res.status(200).json({
+        status: 200,
+        message: 'You\'ve successfully joined this party',
+        data: UserController.getUserobj(response.rows[0]),
       });
     } catch (error) {
       return res.status(500).json({

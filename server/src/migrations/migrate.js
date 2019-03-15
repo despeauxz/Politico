@@ -13,10 +13,10 @@ const queryText = `CREATE TABLE IF NOT EXISTS users(
         email VARCHAR(128) UNIQUE NOT NULL,
         digit VARCHAR(128) NOT NULL,
         avatar VARCHAR(128) DEFAULT 'https://www.tannerfinancial.ca/wp-content/uploads/2019/01/person-placeholder-male-5-1-300x300-250x250.jpg',
+        party_id INTEGER DEFAULT NULL,
         is_admin BOOLEAN DEFAULT false,
         password VARCHAR(124) NOT NULL,
         created_at TIMESTAMP,
-
         modified_at TIMESTAMP DEFAULT NULL
     );
 
