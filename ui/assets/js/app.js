@@ -58,7 +58,9 @@ $(document).ready(function () {
         }
     });
 
-
+    $('.fa-search').on('click', () => {
+        $('#search').focus();
+    });
 });
 
 setTimeout(() => {

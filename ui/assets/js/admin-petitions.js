@@ -24,8 +24,8 @@ const options = {
                         <i class="fa fa-plus"></i>
                     </div>
                     <div class="accordion-info ${index === 0 ? 'active' : ''}">
-                        <span style="font-weight: 600;">Petition By: Bryam Adams</span>
-                        <span style="float: right;font-weight: 600;">Office: Governor</span>
+                        <span style="font-weight: 600;">Petition By: ${petition.firstname} ${petition.lastname}</span>
+                        <span style="float: right;font-weight: 600;">Office: ${petition.officename}</span>
                         <p>${petition.text}</p>
                     </div>
                 </div>
