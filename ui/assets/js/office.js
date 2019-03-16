@@ -34,8 +34,8 @@ const options = {
                                 <form role="form" method="POST">
                                     <div class="d-flex-col office text-center">
                                         <div class="form-group mg-b-10">
-                                            <input type="radio" id="1" name="candidate" value="">
-                                            <label for="1">
+                                            <input type="radio" id="${office.id}" name="candidate" value="">
+                                            <label for="${office.id}">
                                                 <span class="radio">Fela Durotoye - ADP</span>
                                             </label>
                                         </div>
@@ -51,7 +51,7 @@ const options = {
                                 <h2 class="text-sm">Are you sure you want to aspire for this office?</h2>
                             </div>
                             <div class="modal_body text-center">
-                                <button class="btn btn-danger">Yes</button>
+                                <button class="btn btn-danger" id="aspire-btn" index="${office.id}">Yes</button>
                                 <button class="btn btn-primary">No</button>
                             </div>
                         </div>
@@ -87,7 +87,7 @@ const options = {
     })
     .catch(() => {
         alert.style.display = 'block';
-        alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
+        alert.innerHTML = 'Error in connection, Please check your internet connection and try again';
         setTimeout(() => {
             alert.style.display = 'none';
             alert.innerHTML = '';
@@ -97,6 +97,7 @@ const options = {
 
 setTimeout(() => {
     const createPetition = document.querySelectorAll('#petition');
+    const aspire = document.querySelectorAll('#aspire-btn');
 
     for (i in createPetition) {
         if (createPetition.hasOwnProperty(i)) {
@@ -155,6 +156,71 @@ setTimeout(() => {
                         }, 3000);
                     }
                 })
+                .catch(() => {
+                    alert.style.display = 'block';
+                    alert.innerHTML = 'Error in connection, Please check your internet connection and try again';
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                        alert.innerHTML = '';
+                    }, 5000);
+                })
+            })
+        }
+    }
+
+    for (j in aspire) {
+        if (aspire.hasOwnProperty(j)) {
+            aspire[j].addEventListener('click', (e) => {
+                const officeId = e.target.getAttribute('index');
+                const userId = JSON.parse(localStorage.getItem('userDetails')).id;
+                const partyId = JSON.parse(localStorage.getItem('userDetails')).party_id;
+                
+                if (partyId === undefined | 'null') {
+                    alert.style.display = 'block';
+                    alert.innerHTML = 'Please Join a Party';
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                        alert.innerHTML = '';
+                    }, 5000);
+                } else {
+                    fetch(`${url}/office/${userId}/register`, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            officeId: officeId,
+                            partyId: partyId
+                        }),
+                        headers: new Headers({
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        })
+                    })
+                    .then(res => res.json())
+                    .then((response) => {
+                        if (response.status === 409) {
+                            alert.style.display = 'block';
+                            alert.innerHTML = response.message;
+                            setTimeout(() => {
+                                alert.style.display = 'none';
+                                alert.innerHTML = '';
+                            }, 5000);
+                        } else {
+                            alert.style.display = 'block';
+                            alert.innerHTML = `${response.message}, Please wait for a confirmation mail by Electoral body`;
+                            setTimeout(() => {
+                                alert.style.display = 'none';
+                                alert.innerHTML = '';
+                            }, 5000);
+                        }
+                    })
+                    .catch(() => {
+                        alert.style.display = 'block';
+                        alert.innerHTML = 'Error in connection, Please check your internet connection and try again';
+                        setTimeout(() => {
+                            alert.style.display = 'none';
+                            alert.innerHTML = '';
+                        }, 5000);
+                    })
+                }
             })
         }
     }

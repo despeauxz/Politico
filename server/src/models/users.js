@@ -40,6 +40,18 @@ class User {
     const response = db.query(updateQuery, value);
     return response;
   }
+
+  updateParty(req, data) {
+    const updateQuery = `UPDATE users
+      SET party_id=$1, modified_at=$2 WHERE email=$3 returning *`;
+    const value = [
+      data.party_id,
+      moment(new Date()),
+      req.user.email,
+    ];
+    const response = db.query(updateQuery, value);
+    return response;
+  }
 }
 
 export default new User();

@@ -14,12 +14,27 @@ const { validDetails, emptyDetails } = mockData.candidates;
 const { userToken, adminToken } = tokens;
 
 describe('Register Candidate', () => {
+  describe('## Right Input', () => {
+    it('should register a new candidate', (done) => {
+      request(app)
+        .post(`/api/v1/office/${newId}/register`)
+        .set('Accept', 'application/json')
+        .set('authorization', userToken)
+        .send({ ...validDetails })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+
+          done(err);
+        });
+    });
+  });
+
   describe('## Wrong Input', () => {
     it('should return error for invalid user ID', (done) => {
       request(app)
         .post(`/api/v1/office/${invalidId}/register`)
         .set('Accept', 'application/json')
-        .set('authorization', adminToken)
+        .set('authorization', userToken)
         .send({ ...validDetails })
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
@@ -62,24 +77,9 @@ describe('Register Candidate', () => {
         .patch(`/api/v1/office/candidate/${invalidId}`)
         .set('Accept', 'application/json')
         .end((err, res) => {
-          console.log(res.body);
           expect(res.statusCode).to.equal(401);
           expect(res.body).to.include.keys('error');
           expect(res.body.error).to.equal('Unauthorized user');
-
-          done(err);
-        });
-    });
-
-    it('should return error for forbidden access', (done) => {
-      request(app)
-        .post(`/api/v1/office/${validId}/register`)
-        .set('Accept', 'application/json')
-        .set('authorization', userToken)
-        .send({ ...validDetails })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(403);
-          expect(res.body).to.include.keys('message');
 
           done(err);
         });

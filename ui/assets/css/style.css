@@ -726,3 +726,7 @@ blockquote:before {
     margin-bottom: .5em;
     font-size: 14px;
 }
+
+.fa-search {
+    cursor: pointer;
+}

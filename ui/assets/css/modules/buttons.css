@@ -29,14 +29,17 @@
 }
 
 .btn-xs {
-    position: relative;
-    margin: .8em auto;
-    padding: 8px 15px;
+    padding: 8px 10px;
     font-weight: 500;
+    font-size: .8em;
     color: #fff;
     outline: none;
     overflow: hidden;
     cursor: pointer;
     border: none;
     transition: .5s;
+}
+
+.btn-disabled {
+    background: #444;
 }

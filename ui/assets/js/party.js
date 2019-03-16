@@ -1,4 +1,4 @@
-const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/parties';
+const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1';
 const partyContainer = document.getElementById('parties');
 const alert = document.querySelector('.alert');
 const options = {
@@ -10,12 +10,15 @@ const options = {
 }
 
 window.onload = () => {
-    fetch(url, options)
+    fetch(`${url}/parties`, options)
     .then(res => res.json())
     .then((response) => {
         response.data.map((party) => {
             partyContainer.innerHTML += `
                 <div class="cards card-wrap">
+                    <div>
+                        <button index="${party.id}" class="btn-xs btn-primary" id="join-party">Join</button>
+                    </div>
                     <h2 class="card_title text-small text-center">${party.name}</h2>
                     <p class="card_body">${party.hq_address}</p>
                     <p class="card_body"></p>
@@ -32,3 +35,46 @@ window.onload = () => {
         }, 5000);
     })
 }
+
+setTimeout(() => {
+    const alert = document.querySelector('.alert');
+    const join = document.querySelectorAll('#join-party');    
+
+    for (j in join) {
+        if (join.hasOwnProperty(j)) {
+            join[j].addEventListener('click', (e) => {
+                const id = e.target.getAttribute('index');
+                
+                fetch(`${url}/auth/join-party`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        party_id: id
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    })
+                })
+                .then(res => res.json())
+                .then((response) => {
+                    alert.style.display = 'block';
+                    alert.innerHTML = response.message;
+                    this.disabled = true;
+                    localStorage.setItem('userDetails', response.data);
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                        alert.innerHTML = '';
+                    }, 5000);
+                })
+                .catch(() => {
+                    alert.style.display = 'block';
+                    alert.innerHTML = 'Error in connection, Please check your internet connection and try again';
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                        alert.innerHTML = '';
+                    }, 5000);
+                })
+            })
+        }
+    }
+}, 4000);
