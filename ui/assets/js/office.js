@@ -209,6 +209,7 @@ setTimeout(() => {
                             setTimeout(() => {
                                 alert.style.display = 'none';
                                 alert.innerHTML = '';
+                                window.location.reload();
                             }, 5000);
                         }
                     })

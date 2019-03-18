@@ -10,6 +10,8 @@ const options = {
 }
 
 window.onload = () => {
+    const partyId = JSON.parse(localStorage.getItem('userDetails')).party_id;
+
     fetch(`${url}/parties`, options)
     .then(res => res.json())
     .then((response) => {
@@ -17,7 +19,8 @@ window.onload = () => {
             partyContainer.innerHTML += `
                 <div class="cards card-wrap">
                     <div>
-                        <button index="${party.id}" class="btn-xs btn-primary" id="join-party">Join</button>
+                        <p style="display: ${party.id === partyId ? 'block': 'none'};color: #4dc0b5;">Member</p>
+                        <button style="display: ${party.id != partyId ? 'block': 'none'}" index="${party.id}" class="btn-xs btn-primary" id="join-party">Join</button>
                     </div>
                     <h2 class="card_title text-small text-center">${party.name}</h2>
                     <p class="card_body">${party.hq_address}</p>
@@ -60,10 +63,11 @@ setTimeout(() => {
                     alert.style.display = 'block';
                     alert.innerHTML = response.message;
                     this.disabled = true;
-                    localStorage.setItem('userDetails', response.data);
+                    localStorage.setItem('userDetails', JSON.stringify(response.data));
                     setTimeout(() => {
                         alert.style.display = 'none';
                         alert.innerHTML = '';
+                        window.location.reload();
                     }, 5000);
                 })
                 .catch(() => {
