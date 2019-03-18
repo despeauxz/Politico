@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    <div class="alert"></div>
     <div class="sidebar">
         <div>
             <h2 class="logo"><a href="./index.html">Politico</a></h2>
@@ -73,7 +74,7 @@
         <div class="content-container">
             <h2 style="font-weight: 500;margin-bottom: 10px;">Candidate list</h2>
             
-            <div class="datatable">
+            <div class="datatable" id="candidate-container">
                 <table class="table">
                     <thead>
                         <tr>
@@ -85,57 +86,7 @@
                         </tr>
                     </thead>
                     <tbody id="candidates">
-                        <tr>
-                            <td>
-                                <p>1</p>
-                            </td>
-                            <td>
-                                <p>Atiku Abubakar</p>
-                            </td>
-                            <td>
-                                <p>PDP</p>
-                            </td>
-                            <td>
-                                <p>President</p>
-                            </td>
-                            <td>
-                                <button class="btn-xs btn-primary" id="confirm-button">Confirm</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>2</p>
-                            </td>
-                            <td>
-                                <p>Mommadu Buhari</p>
-                            </td>
-                            <td>
-                                <p>APC</p>
-                            </td>
-                            <td>
-                                <p>President</p>
-                            </td>
-                            <td>
-                                <button class="btn-xs btn-primary" id="confirm-button">Confirm</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>3</p>
-                            </td>
-                            <td>
-                                <p>Olusola San-wolu</p>
-                            </td>
-                            <td>
-                                <p>ANP</p>
-                            </td>
-                            <td>
-                                <p>Governor</p>
-                            </td>
-                            <td>
-                                <button class="btn-xs btn-primary" id="confirm-button">Confirm</button>
-                            </td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
@@ -146,6 +97,9 @@
         </div>
     </div>
 
+    <script src="./assets/js/isAdmin.js"></script>
+    <script src="./assets/js/helpers.js"></script>
+    <script src="./assets/js/candidates.js"></script>
     <script src="./assets/js/logout.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
