@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { config } from 'dotenv';
-import moment from 'moment';
 import bcrypt from 'bcrypt';
-import db from '../models';
 import Mailer from '../utils/Mailer';
-import hashPassword from '../helpers/hashPassword';
+import partyModel from '../models/party';
+import models from '../models/users';
+import db from '../models/index';
 import Authorization from '../middlewares/Authorization';
 
 config();
@@ -22,21 +23,9 @@ class UserController {
    * @memberof UserController
    */
   static async signup(req, res) {
-    const {
-      firstname, lastname, othername, email, digit, password, passwordCofirm,
-    } = req.body;
-    const { admin } = req.query;
-    const newPassword = hashPassword(password, 10);
-    const user = [
-      firstname, lastname, othername, email.toLowerCase(), digit, admin, newPassword, moment(new Date()),
-    ];
-
-    const text = `INSERT INTO
-      users(firstname, lastname, othername, email, digit, is_admin, password, created_at)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
-    const token = Authorization.generateToken(user);
     try {
-      const { rows } = await db.query(text, user);
+      const { rows } = await models.create(req, req.body);
+      const token = Authorization.generateToken(UserController.getTokenObj(rows[0]));
       return res.status(201).json({
         status: res.statusCode,
         message: 'User registered successfully',
@@ -49,7 +38,7 @@ class UserController {
       if (error.routine === '_bt_check_unique') {
         return res.status(400).json({
           status: res.statusCode,
-          message: 'Email already taken',
+          error: 'Email already taken',
         });
       }
       return res.status(404).json({
@@ -69,25 +58,21 @@ class UserController {
    */
   static async login(req, res) {
     const { email, password } = req.body;
-
-    const query = 'SELECT * FROM users WHERE email = $1';
-    const { rows } = await db.query(query, [email]);
+    const { rows } = await models.find(email);
     if (!rows[0]) {
       return res.status(401).json({
         status: 401,
         error: 'Invalid Credentials',
       });
     }
-
     const isPasswordValid = await UserController.verifyPassword(password, rows[0].password);
-
     if (!isPasswordValid) {
       return res.status(401).json({
         status: 401,
         error: 'Invalid Credentials',
       });
     }
-    const token = Authorization.generateToken(rows[0]);
+    const token = Authorization.generateToken(UserController.getTokenObj(rows[0]));
     return res.status(200).json({
       status: 200,
       data: {
@@ -109,37 +94,33 @@ class UserController {
     return bcrypt.compareSync(password, hash);
   }
 
+  /**
+   * Updates user details
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns { Object }
+   * @memberof UserController
+   */
   static async user(req, res) {
-    const { email } = req.user;
-    const { firstname, lastname } = req.body;
-    const updateQuery = `UPDATE users
-      SET firstname=$1, lastname=$2, avatar=$3, modified_at=$4 WHERE email=$5 returning *`;
-    const value = [
-      firstname || req.user.firstname,
-      lastname || req.user.lastname,
-      req.file.path,
-      moment(new Date()),
-      email,
-    ];
     try {
-      const { rows } = await db.query(updateQuery, value);
+      const { rows } = await models.update(req, req.body);
       return res.status(200).json({
         status: 200,
         message: 'User details updated successfully',
-        data: rows[0],
+        data: UserController.getUserobj(rows[0]),
       });
     } catch (error) {
       return res.status(400).json({
+        status: 400,
         error,
       });
     }
-    
   }
 
   static async forgotPassword(req, res) {
     const { email } = req.body;
-    const text = 'SELECT * FROM users WHERE email = $1';
-    const { rows } = await db.query(text, [email]);
+    const { rows } = await models.find(email);
 
     if (!rows[0]) {
       return res.status(404).json({
@@ -149,7 +130,6 @@ class UserController {
     }
 
     const token = Authorization.generateToken(rows[0].email);
-
     await Mailer.forgotPasswordMail(token, email);
 
     return res.status(200).json({
@@ -168,9 +148,64 @@ class UserController {
       digit: data.digit,
       avatar: data.avatar,
       is_admin: data.is_admin,
+      party_id: data.party_id,
       created_at: data.created_at,
       modified_at: data.modified_at,
     };
+  }
+
+  static getTokenObj(data) {
+    return {
+      id: data.id,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      othername: data.othername,
+      email: data.email,
+      digit: data.digit,
+      is_admin: data.is_admin,
+      password: data.password,
+    };
+  }
+
+  static async details(req, res) {
+    try {
+      const query = `SELECT(SELECT COUNT(*) FROM users) as users,
+        (SELECT COUNT(*) FROM offices) as offices,
+        (SELECT COUNT(*) FROM parties) as parties`;
+      const { rows } = await db.query(query);
+      return res.status(200).json({
+        status: 200,
+        data: rows[0],
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error,
+      });
+    }
+  }
+
+  static async updateUserParty(req, res) {
+    try {
+      const { rows } = await partyModel.findOne(req.body.party_id);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'Party Not Found',
+        });
+      }
+      const response = await models.updateParty(req, req.body);
+      return res.status(200).json({
+        status: 200,
+        message: 'You\'ve successfully joined this party',
+        data: UserController.getUserobj(response.rows[0]),
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error,
+      });
+    }
   }
 }
 

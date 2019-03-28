@@ -21,7 +21,7 @@ describe('Party Routes: create a new party', () => {
         expect(res.body).to.be.a('object');
 
         done(err);
-      })
+      });
   });
 
   it('should return error for forbidden access', (done) => {
@@ -62,7 +62,7 @@ describe('Party Routes: create a new party', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.a('object');
-        expect(res.body).to.include.keys('errors');
+        expect(res.body.errors).to.be.a('array');
 
         done(err);
       });
@@ -76,7 +76,7 @@ describe('Party Routes: create a new party', () => {
       .send({ ...invalidPartyDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors).to.include.keys('name');
+        expect(res.body.errors[0].param).to.equal('name');
         done(err);
       });
   });

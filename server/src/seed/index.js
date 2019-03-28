@@ -1,4 +1,3 @@
-import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import db from '../models';
 import hashPassword from '../helpers/hashPassword';

@@ -17,7 +17,7 @@ export default {
       logo_url: 'https://via.placeholder.com/30',
       created_at: currentDay,
       updated_at: null,
-    }
+    },
   },
   createOffice: {
     createOfficeDetails: {
@@ -98,6 +98,23 @@ export default {
     invalidDetails: {
       officeId: 20,
       candidateId: 20,
-    }
-  }
+    },
+  },
+  petition: {
+    validDetails: {
+      office_id: 1,
+      title: 'Gang related',
+      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis tempora beatae sequi provident, earum velit quidem blanditiis deleniti, maiores sint odio pariatur voluptas praesentium necessitatibus?',
+    },
+    invalidDetails: {
+      office_id: 12,
+      title: 'Gang related',
+      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis tempora beatae sequi provident, earum velit quidem blanditiis deleniti, maiores sint odio pariatur voluptas praesentium necessitatibus?',
+    },
+    emptyDetails: {
+      office_id: 1,
+      title: '',
+      text: '',
+    },
+  },
 };

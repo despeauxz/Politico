@@ -10,6 +10,8 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
 
 votesRoutes.use(Authorization.authenticate);
 
-votesRoutes.post('/votes', VotesValidation.votes, validation, VotesController.vote);
+votesRoutes.post('/', VotesValidation.votes, validation, VotesController.vote);
+votesRoutes.get('/history', VotesController.history);
+
 
 export default votesRoutes;

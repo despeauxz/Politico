@@ -29,7 +29,7 @@ describe('Auth routes:', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body).to.be.a('object');
-        // expect(res.body.data.is_admin).to.equal(true);
+        expect(res.body.data.user.is_admin).to.equal(true);
 
         done(err);
       });
@@ -42,8 +42,8 @@ describe('Auth routes:', () => {
       .send({ ...validUserDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body).to.include.keys('message');
-        expect(res.body.message).to.equal('Email already taken');
+        expect(res.body).to.include.keys('error');
+        expect(res.body.error).to.equal('Email already taken');
 
         done(err);
       });
@@ -70,7 +70,7 @@ describe('Auth routes:', () => {
       .send({ ...invalidUserDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors).to.include.keys('firstname');
+        expect(res.body.errors[0].param).to.equal('firstname');
 
         done(err);
       });
@@ -84,7 +84,6 @@ describe('Auth routes:', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.include.keys('errors');
-        expect(res.body.errors.passwordConfirm.msg).to.equal('Passwords don\'t match');
 
         done(err);
       });

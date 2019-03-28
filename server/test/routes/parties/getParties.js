@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 import request from 'supertest';
 import { expect } from 'chai';
@@ -6,7 +7,7 @@ import tokens from '../auth/login';
 
 const validID = 1;
 const invalidID = 30;
-const { userToken, adminToken } = tokens;
+const { userToken } = tokens;
 
 describe('Parties route:', () => {
   it('should get all parties', (done) => {

@@ -1,11 +1,11 @@
+/* eslint-disable no-console */
 import pool from './index';
 
 pool.on('connect', () => {
-    console.log('Connected to the database');
+  console.log('Connected to the database');
 });
 
-const queryText = 
-    `CREATE TABLE IF NOT EXISTS users(
+const queryText = `CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY,
         firstname VARCHAR(128) NOT NULL,
         lastname VARCHAR(128) NOT NULL,
@@ -13,10 +13,10 @@ const queryText =
         email VARCHAR(128) UNIQUE NOT NULL,
         digit VARCHAR(128) NOT NULL,
         avatar VARCHAR(128) DEFAULT 'https://www.tannerfinancial.ca/wp-content/uploads/2019/01/person-placeholder-male-5-1-300x300-250x250.jpg',
+        party_id INTEGER DEFAULT NULL,
         is_admin BOOLEAN DEFAULT false,
         password VARCHAR(124) NOT NULL,
         created_at TIMESTAMP,
-
         modified_at TIMESTAMP DEFAULT NULL
     );
 
@@ -41,6 +41,7 @@ const queryText =
         id SERIAL PRIMARY KEY,
         created_by INTEGER REFERENCES users(id),
         office_id INTEGER REFERENCES offices(id),
+        title VARCHAR(128) NOT NULL,
         text TEXT NOT NULL,
         evidence VARCHAR(128),
         created_at TIMESTAMP
@@ -48,6 +49,7 @@ const queryText =
     
     CREATE TABLE IF NOT EXISTS candidates(
         id SERIAL,
+        confirm BOOLEAN DEFAULT false,
         office_id INTEGER REFERENCES offices(id),
         party_id INTEGER REFERENCES parties(id) NOT NULL,
         user_id INTEGER REFERENCES users(id),
@@ -65,10 +67,10 @@ const queryText =
     `;
 
 pool.query(queryText)
-    .then((res) => {
-        console.log(res);
-        pool.end();
-    }).catch((err) => {
-        console.log(err);
-        pool.end();
-    });
+  .then((res) => {
+    console.log(res);
+    pool.end();
+  }).catch((err) => {
+    console.log(err);
+    pool.end();
+  });

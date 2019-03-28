@@ -67,21 +67,6 @@ header.top-header {
     left: 5px;
 }
 
-.user_area .user-img {
-    background: url("https://s3.amazonaws.com/uifaces/faces/twitter/mlane/128.jpg") no-repeat center center;
-    -webkit-background-size: cover;
-    background-size: cover;
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    border-radius: 50%;
-    margin-left: .5em;
-    position: relative;
-}
-
-
-
-
 /* Content Area */
 .content-container {
     position: relative;

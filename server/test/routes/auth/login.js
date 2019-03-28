@@ -9,8 +9,8 @@ const {
   nominalUserDetails, adminUserDetails, invalidUserDetails, emptyUserDetails,
 } = mockData.login;
 
-let userToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOiJCZXJyeSIsImVtYWlsIjoiZXhhbXBsZUBnbWFpbC5jb20iLCJkaWdpdCI6IjEyMzQ1Njc4OSIsImF2YXRhciI6Imh0dHBzOi8vd3d3LnRhbm5lcmZpbmFuY2lhbC5jYS93cC1jb250ZW50L3VwbG9hZHMvMjAxOS8wMS9wZXJzb24tcGxhY2Vob2xkZXItbWFsZS01LTEtMzAweDMwMC0yNTB4MjUwLmpwZyIsImlzX2FkbWluIjpudWxsLCJwYXNzd29yZCI6IiQyYiQxMCREUmVJa0ZTQlloUGh0a3k4aTN0V2guMHZaTVhrdkZQMzlyRFFhblFzYnZLWFNrNU9SaWRxMiIsImNyZWF0ZWRfYXQiOiIyMDE5LTAyLTE2VDEyOjU2OjI1LjI3MloiLCJtb2RpZmllZF9hdCI6bnVsbH0sImlhdCI6MTU1MDMyNTM4NiwiZXhwIjoxNTUwNDk4MTg2fQ.pzerpAk39jVbp0IWbxZPNG6uCxEMqua9TeNsRggBMEo';
-let adminToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOiJCZXJyeSIsImVtYWlsIjoiYWRtaW5AZW1haWwuY29tIiwiZGlnaXQiOiIxMjM0NTY3ODkiLCJhdmF0YXIiOiJodHRwczovL3d3dy50YW5uZXJmaW5hbmNpYWwuY2Evd3AtY29udGVudC91cGxvYWRzLzIwMTkvMDEvcGVyc29uLXBsYWNlaG9sZGVyLW1hbGUtNS0xLTMwMHgzMDAtMjUweDI1MC5qcGciLCJpc19hZG1pbiI6dHJ1ZSwicGFzc3dvcmQiOiIkMmIkMTAkTTFlMjg1eDRFN2s1Mno2Nmh6N0ZELmFPRnBxVldnVTk5N3BXMzFMU3h1Z0RQSk1lTzBCOUMiLCJjcmVhdGVkX2F0IjoiMjAxOS0wMi0xNlQxMjo1NjoyNi4yODlaIiwibW9kaWZpZWRfYXQiOm51bGx9LCJpYXQiOjE1NTAzMjUzODYsImV4cCI6MTU1MDQ5ODE4Nn0.ZNct618p_oPToA9TvQZk3WjoSPTd7TwrHlhhKv38RR4';
+let userToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOiJCZXJyeSIsImVtYWlsIjoiZXhhbXBsZUBnbWFpbC5jb20iLCJkaWdpdCI6IjEyMzQ1Njc4OSIsImlzX2FkbWluIjpudWxsLCJwYXNzd29yZCI6IiQyYiQxMCRFaThLdjh4RC5lZW5LdkJHQ2dYS1EudjloMUJsS2tzRDIyN24ucnE0Um5wMS5uRU1rUG04dSJ9LCJpYXQiOjE1NTEyNzQ3ODJ9.Q4nCfPi5yqy5uKVvgJTWebzFRJf4w1vEsVwIV_7kJp4';
+let adminToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOiJCZXJyeSIsImVtYWlsIjoiYWRtaW5AZW1haWwuY29tIiwiZGlnaXQiOiIxMjM0NTY3ODkiLCJpc19hZG1pbiI6dHJ1ZSwicGFzc3dvcmQiOiIkMmIkMTAkRWg0anY2Q0lscGJJZmNORjZEVmZ3LkMzc0F3cnYzbkxva1RocnVWOVFPeW9wUjJMODhLNUcifSwiaWF0IjoxNTUxMjc0NzgyfQ.SabqtjrqIxcTU7LA1rZoeVyrqmAQX-Kf7Uqj-t1TozQ';
 
 describe('Auth routes: login', () => {
   it('should login a valid nominal user', (done) => {
@@ -107,12 +107,12 @@ describe('Auth routes: login', () => {
 
   it('should return error of missing password field', (done) => {
     request(app)
-      .post('/api/v1/auth/signup')
+      .post('/api/v1/auth/login')
       .set('Accept', 'application/json')
       .send({ ...emptyUserDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors).to.include.keys('password');
+        expect(res.body.errors[0].param).to.equal('email');
 
         done(err);
       });
@@ -126,10 +126,39 @@ describe('Auth routes: login', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.include.keys('errors');
-        expect(res.body.errors.email.msg).to.equal('Please input a valid email address');
 
         done(err);
       });
+  });
+});
+
+describe('Update User Details', () => {
+  describe('## Inputs', () => {
+    it('should output error for empty user details', (done) => {
+      request(app)
+        .patch('/api/v1/auth/user')
+        .set('authorization', userToken)
+        .send({ })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.include.keys('message');
+          expect(res.body).to.include.keys('data');
+          expect(res.body.data).to.be.a('object');
+
+          done(err);
+        });
+    });
+
+    it('should output error for unauthorized access', (done) => {
+      request(app)
+        .patch('/api/v1/auth/user')
+        .send({ })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+
+          done(err);
+        });
+    });
   });
 });
 

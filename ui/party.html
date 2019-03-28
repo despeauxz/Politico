@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    <div class="alert"></div>
     <div class="dashboard-wrappers">
         <header class="top-header">
             <h2 class="logo inline"><a style="display: inline-block" href="./index.html">Politico</a></h2>
@@ -44,9 +45,8 @@
                     </a>
                 </span>
                 <span>
-                    <a href="#" style="margin-top: -15px;" class="dropdown">
-                        <h4 class="inline">Malik Godwin</h4>
-                        <div class="user-img"></div>
+                    <a href="#" class="dropdown">
+                        <h4 class="inline" id="user-name"></h4>
                     </a>
                 </span>
                 <div class="dropdown-menu animated">
@@ -55,7 +55,7 @@
                             <li><a href="./profile.html">Profile</a></li>
                             <li><a href="./party.html">Party</a></li>
                             <li><a href="./offices.html">Offices</a></li>
-                            <li><a href="./index.html">Logout</a></li>
+                            <li><a href="#" id="logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -63,43 +63,9 @@
         </header>
 
         <div class="content-container">
-            <h2>All Parties</h2>
-            <div class="card-group">
-                <div class="cards card-wrap">
-                    <h2 class="card_title">PDP</h2>
-                    <p class="card_body">People's Democracy Party</p>
-                    <p class="card_body">Abuja FCT, Nigeria</p>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">PDP</h2>
-                    <p class="card_body">People's Democracy Party</p>
-                    <p class="card_body">Abuja FCT, Nigeria</p>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">PDP</h2>
-                    <p class="card_body">People's Democracy Party</p>
-                    <p class="card_body">Abuja FCT, Nigeria</p>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">PDP</h2>
-                    <p class="card_body">People's Democracy Party</p>
-                    <p class="card_body">Abuja FCT, Nigeria</p>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">PDP</h2>
-                    <p class="card_body">People's Democracy Party</p>
-                    <p class="card_body">Abuja FCT, Nigeria</p>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">PDP</h2>
-                    <p class="card_body">People's Democracy Party</p>
-                    <p class="card_body">Abuja FCT, Nigeria</p>
-                </div>
-                <div class="cards card-wrap">
-                    <h2 class="card_title">PDP</h2>
-                    <p class="card_body">People's Democracy Party</p>
-                    <p class="card_body">Abuja FCT, Nigeria</p>
-                </div>
+            <h2 class="text-center">All Parties</h2>
+            <div class="card-group" id="parties">
+                
             </div>
         </div>
     </div>
@@ -108,8 +74,11 @@
         <p>@ 2019 - Designed by Malik Godwin Onimisi</p>
     </footer>
 
+
+    <script src="./assets/js/nominalUser.js"></script>
+    <script src="./assets/js/party.js"></script>
+    <script src="./assets/js/logout.js"></script>
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>
