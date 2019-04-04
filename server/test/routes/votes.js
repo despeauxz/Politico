@@ -11,6 +11,23 @@ const { userToken } = tokens;
 
 
 describe('Votes', () => {
+  describe('## Right Input', () => {
+    it('should vote for a specific candidate', (done) => {
+      request(app)
+        .post('/api/v1/votes')
+        .set('Accept', 'application/json')
+        .set('authorization', userToken)
+        .send({ officeId: 1, candidateId: 1 })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body).to.include.keys('message');
+          expect(res.body.message).to.equal('Your vote has been successfuly casted');
+
+          done(err);
+        });
+    })
+  });
+
   describe('## Wrong Input', () => {
     it('should output error if candidate does not exist', (done) => {
       request(app)
@@ -20,8 +37,8 @@ describe('Votes', () => {
         .send({ ...invalidDetails })
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
-          expect(res.body).to.include.keys('message');
-          expect(res.body.message).to.equal('Candidate does not exists');
+          expect(res.body).to.include.keys('error');
+          expect(res.body.error).to.equal('Candidate does not exists');
 
           done(err);
         });
