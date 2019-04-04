@@ -53,7 +53,7 @@ class ElectionController {
       if (!response.rows[0]) {
         return res.status(404).json({
           status: 404,
-          message: 'Candidate does not exist',
+          error: 'Candidate does not exist',
         });
       }
       const updateQuery = 'UPDATE candidates SET confirm=$1 WHERE id=$2 returning *';

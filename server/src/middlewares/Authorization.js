@@ -29,7 +29,7 @@ class Authorization {
   static generateToken({ ...user }) {
     const token = jwt.sign({ user },
       process.env.SECRET, {
-        expiresIn: 172800,
+        expiresIn: 86400,
       });
 
     return token;

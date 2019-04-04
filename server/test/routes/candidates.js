@@ -52,8 +52,8 @@ describe('Register Candidate', () => {
         .set('authorization', adminToken)
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
-          expect(res.body).to.include.keys('message');
-          expect(res.body.message).to.equal('Candidate does not exist');
+          expect(res.body).to.include.keys('error');
+          expect(res.body.error).to.equal('Candidate does not exist');
 
           done(err);
         });
@@ -168,14 +168,77 @@ describe('## Get candidates', () => {
       });
   });
 
-  it('should return unauthorized access error', (done) => {
+  it('should confirm registered candidate', (done) => {
     request(app)
-      .get('/api/v1/office/candidates')
+      .patch('/api/v1/office/candidate/1')
+      .set('authorization', adminToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.include.keys('message');
+        expect(res.body.message).to.equal('Candidate has been confirmed');
+
+        done(err);
+      });
+  });
+  it('should confirm registered candidate', (done) => {
+    request(app)
+      .patch('/api/v1/office/candidate/1')
+      .set('authorization', adminToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.include.keys('message');
+        expect(res.body.message).to.equal('Candidate has been confirmed');
+
+        done(err);
+      });
+  });
+
+  it('should return error for invalid candidate', (done) => {
+    request(app)
+      .patch('/api/v1/office/candidate/10')
+      .set('authorization', adminToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body).to.include.keys('error');
+        expect(res.body.error).to.equal('Candidate does not exist');
+
+        done(err);
+      });
+  });
+
+  it('should return error for forbidden access', (done) => {
+    request(app)
+      .patch('/api/v1/office/candidate/10')
       .set('authorization', userToken)
       .end((err, res) => {
         expect(res.statusCode).to.equal(403);
         expect(res.body).to.include.keys('message');
         expect(res.body.message).to.equal('Unauthorized Access! Admin only');
+
+        done(err);
+      });
+  });
+
+  it('should return error for forbidden access', (done) => {
+    request(app)
+      .patch('/api/v1/office/candidate/10')
+      .set('authorization', userToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(403);
+        expect(res.body).to.include.keys('message');
+        expect(res.body.message).to.equal('Unauthorized Access! Admin only');
+
+        done(err);
+      });
+  });
+
+  it('should return unauthorized access error', (done) => {
+    request(app)
+      .get('/api/v1/office/candidates')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body).to.include.keys('error');
+        expect(res.body.error).to.equal('Unauthorized user');
 
         done(err);
       });

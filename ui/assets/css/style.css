@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
-@import url("https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css");
+@import url("https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css");
 
 @import url('./modules/normalize.css');
 @import url('./modules/palette.css');
@@ -729,4 +729,10 @@ blockquote:before {
 
 .fa-search {
     cursor: pointer;
+}
+
+.bold {
+    margin: 1em 0;
+    font-size: 1.1em;
+    font-weight: 700;
 }

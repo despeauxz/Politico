@@ -21,6 +21,7 @@ const options = {
         party.innerHTML = response.data.parties;
     })
     .catch((error) => {
+        tokenExpiredRedirect(error);
         alert.style.display = 'block';
         alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
         setTimeout(() => {

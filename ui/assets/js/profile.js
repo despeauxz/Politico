@@ -3,7 +3,7 @@ const data = JSON.parse(localStorage.getItem('userDetails'));
 
 const updateUser = document.getElementById('update-user');
 const history = document.getElementById('history');
-const historyRow = document.getElementsByName('tbody');
+const historyRow = document.getElementById('history-body');
 const fullname = document.getElementById('fullname');
 const firstname = document.getElementById('firstname');
 const lastname = document.getElementById('lastname');
@@ -59,7 +59,7 @@ updateUser.addEventListener('submit', (e) => {
    
 });
 
-(() => {
+window.onload = () => {
     fetch('https://cryptic-escarpment-28116.herokuapp.com/api/v1/votes/history', {
         method: 'GET',
         headers: new Headers({
@@ -75,7 +75,7 @@ updateUser.addEventListener('submit', (e) => {
             response.data.map((data) => {
                 historyRow.innerHTML += `
                     <tr>
-                        <td class="v-align-middle"><p></p></td>
+                        <td class="v-align-middle"><p>${data.created_at}</p></td>
                         <td class="v-align-middle"><p>${data.firstname} ${data.lastname}</p></td>
                         <td class="v-align-middle"><p>${data.partyname}</p></td>
                         <td class="v-align-middle"><p>${data.officename}</p></td>
@@ -92,4 +92,5 @@ updateUser.addEventListener('submit', (e) => {
             alert.innerHTML = '';
         }, 5000);
     })
-})();
+}
+

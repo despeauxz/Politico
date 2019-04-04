@@ -40,7 +40,11 @@ window.onload = () => {
             })
         }
     })
-    .catch(() => {
+    .then(() => {
+        confirmCandidate();
+    })
+    .catch((error) => {
+        tokenExpiredRedirect(error);
         alert.style.display = 'block';
         alert.innerHTML = 'Error in connection, Please check your internet connection and try again';
         setTimeout(() => {
@@ -51,7 +55,7 @@ window.onload = () => {
 }
 
 
-setTimeout(() => {
+const confirmCandidate = () => {
     const confirmBtn = document.querySelectorAll('#confirm-button');
     
     for(i in confirmBtn) {
@@ -87,4 +91,4 @@ setTimeout(() => {
             });
         }
     }
-}, 4000);
+}

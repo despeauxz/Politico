@@ -1,6 +1,7 @@
 const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/offices';
 const addOffice = document.getElementById('add-office');
 const officeBody = document.getElementById('office');
+const officeDetails = document.getElementById('office-details');
 const name = document.getElementById('name');
 const type = document.getElementById('office-type');
 const errorContainer = document.querySelector('.errors ul');
@@ -52,7 +53,7 @@ addOffice.addEventListener('submit', (e) => {
             addBtn.disabled = true;
             setTimeout(() => {
                 window.location.reload();
-            }, 5000);
+            }, 3000);
         }
     })
     .catch(() => {
@@ -66,7 +67,7 @@ addOffice.addEventListener('submit', (e) => {
 });
 
 
-(() => {
+window.onload = () => {
     fetch(url, {
         method: 'GET',
         headers: new Headers({
@@ -78,7 +79,7 @@ addOffice.addEventListener('submit', (e) => {
     .then((data) => {
         const offices = data.data;
         if (!offices.length) {
-            officeBody.innerHTML = '<p class="text-center">No Office at this moment</p>';
+            officeBody.innerHTML = '<p class="text-center text-md">No Office at this moment</p>';
         } else {
             offices.map((office) => {
                 officeBody.innerHTML += `
@@ -89,8 +90,10 @@ addOffice.addEventListener('submit', (e) => {
                 `
             })
         }
+        officeDetails.textContent = `Offices (${data.data.length})`;
     })
-    .catch(() => {
+    .catch((error) => {
+        tokenExpiredRedirect(error);
         alert.style.display = 'block';
         alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
         setTimeout(() => {
@@ -98,4 +101,4 @@ addOffice.addEventListener('submit', (e) => {
             alert.innerHTML = '';
         }, 5000);
     })
-})();
+}

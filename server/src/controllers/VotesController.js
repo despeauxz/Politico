@@ -22,16 +22,16 @@ class VotesController {
     if (!rows[0]) {
       return res.status(404).json({
         status: 404,
-        message: 'Candidate does not exists',
+        error: 'Candidate does not exists',
       });
     }
     const text = 'INSERT INTO votes(office_id, candidate_id, voter_id, created_at) VALUES ($1, $2, $3, $4) RETURNING office_id, candidate_id, voter_id';
     try {
-      const { rows } = await db.query(text, [officeId, candidateId, voterId, moment(new Date())]);
+      const response = await db.query(text, [officeId, candidateId, voterId, moment(new Date())]);
       return res.status(201).json({
         status: 201,
-        message: 'You\'ve successfuly registered',
-        data: rows[0],
+        message: 'Your vote has been successfuly casted',
+        data: response.rows[0],
       });
     } catch (error) {
       if (error.routine === 'ri_ReportViolation') {
