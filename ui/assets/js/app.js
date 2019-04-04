@@ -90,4 +90,4 @@ setTimeout(() => {
             $form_modal.removeClass('is-visible');
         }
     });
-}, 5000);
+}, 3000);

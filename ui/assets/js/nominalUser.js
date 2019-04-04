@@ -11,3 +11,13 @@ if (localStorage.getItem('loggedIn')) {
 } else {
     window.location.href = './login.html';
 }
+
+const tokenExpiredRedirect = (error) => {
+    if (error.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userDetails');
+        localStorage.removeItem('admin');
+        localStorage.removeItem('loggedIn');
+        window.location.href = './login.html';
+    }
+}

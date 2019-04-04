@@ -1,6 +1,7 @@
 const url = 'https://cryptic-escarpment-28116.herokuapp.com/api/v1/parties';
 const addParty = document.getElementById('add-party');
 const partyBody = document.getElementById('party');
+const partyDetails = document.getElementById('party-details');
 const name = document.getElementById('name');
 const hqAddr = document.getElementById('hq_addr');
 const logoURL = document.getElementById('logo_url');
@@ -54,7 +55,7 @@ addParty.addEventListener('submit', (e) => {
             addBtn.disabled = true;
             setTimeout(() => {
                 window.location.reload();
-            }, 5000);
+            }, 3000);
         }
     })
     .catch(() => {
@@ -67,6 +68,7 @@ addParty.addEventListener('submit', (e) => {
     })
 });
 
+// Get Parties
 (() => {
     fetch(url, {
         method: 'GET',
@@ -87,7 +89,7 @@ addParty.addEventListener('submit', (e) => {
                     <h2 class="card_title">${party.name}</h2>
                     <p class="card_body">${party.hq_address}</p>
                     <div class="more">
-                        <span class="ion-android-more-horizontal"></span>
+                        <span class="icon ion-ios-more"></span>
                         <ul>
                             <li><a href="#" data-modal="#edit-${party.id}">Edit</a></li>
                             <li><a href="#" data-modal="#delete-${party.id}">Delete</a></li>
@@ -137,8 +139,14 @@ addParty.addEventListener('submit', (e) => {
             `
             })
         }
+        partyDetails.textContent = `Parties (${data.data.length})`;
     })
-    .catch(() => {
+    .then(() => {
+        deleteParty();
+        editParty();
+    })
+    .catch((error) => {
+        tokenExpiredRedirect(error);
         alert.style.display = 'block';
         alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
         setTimeout(() => {
@@ -149,14 +157,10 @@ addParty.addEventListener('submit', (e) => {
 })();
 
 
-setTimeout(() => {
+const editParty = () => {
     const editParty = document.querySelectorAll('#edit-party');
-    const deleteParty = document.querySelectorAll('#delete-btn');
-    const alert = document.querySelector('.alert');
-   
 
-    // Edit Party
-    for(i in editParty) {
+    for (i in editParty) {
         if (editParty.hasOwnProperty(i)) {
             editParty[i].addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -165,63 +169,67 @@ setTimeout(() => {
                 const editErrorContainer = e.target.querySelector('.edit-error ul');
                 const editErrorCont = e.target.querySelector('.edit-error');
                 const editBtn = e.target.querySelector('#edit-btn');
-                
+
                 fetch(`${url}/${id}/name`, {
-                    method: 'PATCH',
-                    body: JSON.stringify({
-                        name: editValue
-                    }),
-                    headers: new Headers({
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Authorization': `Bearer ${token}`,
+                        method: 'PATCH',
+                        body: JSON.stringify({
+                            name: editValue
+                        }),
+                        headers: new Headers({
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        })
                     })
-                })
-                .then(res => res.json())
-                .then((response) => {
-                    if (response.error) {
-                        editErrorCont.style.display = 'block';
-                        let li = createNode('li');
-                        li.innerHTML = `${response.error}`;
-                        append(editErrorContainer, li);
-                        setTimeout(() => {
-                            editErrorCont.style.display = 'none';
-                            editErrorContainer.innerHTML = '';
-                        }, 5000);
-                    } else if (response.status === 400) {
-                        const errorBag = response.errors;
-                        errorBag.map((error) => {
+                    .then(res => res.json())
+                    .then((response) => {
+                        if (response.error) {
+                            editErrorCont.style.display = 'block';
                             let li = createNode('li');
-                            li.innerHTML = `${error.msg}`;
-                            errorCont.style.display = 'block';
+                            li.innerHTML = `${response.error}`;
                             append(editErrorContainer, li);
                             setTimeout(() => {
                                 editErrorCont.style.display = 'none';
                                 editErrorContainer.innerHTML = '';
                             }, 5000);
-                        })
-                    } else if (response.status === 200) {
+                        } else if (response.status === 400) {
+                            const errorBag = response.errors;
+                            errorBag.map((error) => {
+                                let li = createNode('li');
+                                li.innerHTML = `${error.msg}`;
+                                errorCont.style.display = 'block';
+                                append(editErrorContainer, li);
+                                setTimeout(() => {
+                                    editErrorCont.style.display = 'none';
+                                    editErrorContainer.innerHTML = '';
+                                }, 5000);
+                            })
+                        } else if (response.status === 200) {
+                            alert.style.display = 'block';
+                            alert.innerHTML = response.message;
+                            editBtn.disabled = true;
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 3000);
+                        }
+                    })
+                    .catch(() => {
                         alert.style.display = 'block';
-                        alert.innerHTML = response.message;
-                        editBtn.disabled = true;
+                        alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
                         setTimeout(() => {
-                            window.location.reload();
-                        }, 3000);
-                    }
-                })
-                .catch(() => {
-                    alert.style.display = 'block';
-                    alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
-                    setTimeout(() => {
-                        alert.style.display = 'none';
-                        alert.innerHTML = '';
-                    }, 5000);
-                })
+                            alert.style.display = 'none';
+                            alert.innerHTML = '';
+                        }, 5000);
+                    })
             });
         }
     }
+}
 
-    // Delete Party
+
+const deleteParty = () => {
+    const deleteParty = document.querySelectorAll('#delete-btn');
+
     for (j in deleteParty) {
         if (deleteParty.hasOwnProperty(j)) {
             deleteParty[j].addEventListener('click', (e) => {
@@ -229,34 +237,33 @@ setTimeout(() => {
                 const id = e.target.getAttribute('index');
 
                 fetch(`${url}/${id}`, {
-                    method: 'DELETE',
-                    headers: new Headers({
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        method: 'DELETE',
+                        headers: new Headers({
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        })
                     })
-                })
-                .then(res => res.json())
-                .then((response) => {
-                    if (response.status === 200) {
+                    .then(res => res.json())
+                    .then((response) => {
+                        if (response.status === 200) {
+                            alert.style.display = 'block';
+                            alert.innerHTML = response.message;
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 3000);
+                        }
+                    })
+                    .catch(() => {
                         alert.style.display = 'block';
-                        alert.innerHTML = response.message;
+                        alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
                         setTimeout(() => {
-                            window.location.reload();
-                        }, 3000);
-                    }
-                })
-                .catch(() => {
-                    alert.style.display = 'block';
-                    alert.innerHTML = 'Error in connecting, Please check your internet connection and try again';
-                    setTimeout(() => {
-                        alert.style.display = 'none';
-                        alert.innerHTML = '';
-                    }, 5000);
-                })
-                
+                            alert.style.display = 'none';
+                            alert.innerHTML = '';
+                        }, 5000);
+                    })
+
             })
         }
     }
-
-}, 5000);
+}
