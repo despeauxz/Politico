@@ -13,33 +13,34 @@ class Party {
   create(data) {
     const newParty = [
       data.name,
-      data.hq_address,
-      data.logo_url,
+      data.hqAddress,
+      data.fullname,
+      data.logoUrl,
       moment(new Date()),
     ];
 
     const text = `INSERT INTO
-        parties(name, hq_address, logo_url, created_at)
-        VALUES ($1, $2, $3, $4) returning *`;
+        Parties(name, hqAddress, fullname, logoUrl, created_at)
+        VALUES ($1, $2, $3, $4, $5) returning *`;
 
     const response = db.query(text, newParty);
     return response;
   }
 
   findOne(id) {
-    const text = 'SELECT * FROM parties WHERE id = $1';
+    const text = 'SELECT * FROM Parties WHERE id = $1';
     const response = db.query(text, [id]);
     return response;
   }
 
   findAll() {
-    const findAllQuery = 'SELECT * FROM parties ORDER BY id ASC';
+    const findAllQuery = 'SELECT * FROM Parties ORDER BY id ASC';
     const response = db.query(findAllQuery);
     return response;
   }
 
   update(id, data) {
-    const text = `UPDATE parties
+    const text = `UPDATE Parties
       SET name=$1, modified_at=$2 WHERE id=$3 returning *`;
     const values = [
       data.name,
@@ -51,7 +52,7 @@ class Party {
   }
 
   delete(id) {
-    const deleteQuery = 'DELETE FROM parties WHERE id=$1 returning *';
+    const deleteQuery = 'DELETE FROM Parties WHERE id=$1 returning *';
     db.query(deleteQuery, [id]);
   }
 }

@@ -9,8 +9,8 @@ const {
   nominalUserDetails, adminUserDetails, invalidUserDetails, emptyUserDetails,
 } = mockData.login;
 
-let userToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOiJCZXJyeSIsImVtYWlsIjoiZXhhbXBsZUBnbWFpbC5jb20iLCJkaWdpdCI6IjEyMzQ1Njc4OSIsImlzX2FkbWluIjpudWxsLCJwYXNzd29yZCI6IiQyYiQxMCRFaThLdjh4RC5lZW5LdkJHQ2dYS1EudjloMUJsS2tzRDIyN24ucnE0Um5wMS5uRU1rUG04dSJ9LCJpYXQiOjE1NTEyNzQ3ODJ9.Q4nCfPi5yqy5uKVvgJTWebzFRJf4w1vEsVwIV_7kJp4';
-let adminToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOiJCZXJyeSIsImVtYWlsIjoiYWRtaW5AZW1haWwuY29tIiwiZGlnaXQiOiIxMjM0NTY3ODkiLCJpc19hZG1pbiI6dHJ1ZSwicGFzc3dvcmQiOiIkMmIkMTAkRWg0anY2Q0lscGJJZmNORjZEVmZ3LkMzc0F3cnYzbkxva1RocnVWOVFPeW9wUjJMODhLNUcifSwiaWF0IjoxNTUxMjc0NzgyfQ.SabqtjrqIxcTU7LA1rZoeVyrqmAQX-Kf7Uqj-t1TozQ';
+let userToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOm51bGwsImVtYWlsIjoiZXhhbXBsZUBnbWFpbC5jb20iLCJwaG9uZU5vIjpudWxsLCJhdmF0YXIiOiJodHRwczovL3d3dy50YW5uZXJmaW5hbmNpYWwuY2Evd3AtY29udGVudC91cGxvYWRzLzIwMTkvMDEvcGVyc29uLXBsYWNlaG9sZGVyLW1hbGUtNS0xLTMwMHgzMDAtMjUweDI1MC5qcGciLCJwYXJ0eUlkIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAxOS0wNi0wOFQxODo0MToyNi41MTRaIiwibW9kaWZpZWRfYXQiOm51bGx9LCJpYXQiOjE1NjAwMjI4ODZ9.rjoLSxdGPrxa2t6cgKrHRsYwbh9kdIboCK8WGFfVhqk';
+let adminToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmaXJzdG5hbWUiOiJKb2huIiwibGFzdG5hbWUiOiJEb2UiLCJvdGhlcm5hbWUiOm51bGwsImVtYWlsIjoiYWRtaW5AZW1haWwuY29tIiwicGhvbmVObyI6bnVsbCwiYXZhdGFyIjoiaHR0cHM6Ly93d3cudGFubmVyZmluYW5jaWFsLmNhL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE5LzAxL3BlcnNvbi1wbGFjZWhvbGRlci1tYWxlLTUtMS0zMDB4MzAwLTI1MHgyNTAuanBnIiwicGFydHlJZCI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMTktMDYtMDhUMTg6NDE6MjYuNjEyWiIsIm1vZGlmaWVkX2F0IjpudWxsfSwiaWF0IjoxNTYwMDIyODg2fQ.I5jk49-dPpcQe3bwHNWIoF5OHn3s8By0jp5dbRiAE-8';
 
 describe('Auth routes: login', () => {
   it('should login a valid nominal user', (done) => {
@@ -25,9 +25,9 @@ describe('Auth routes: login', () => {
         expect(res.body.data.user).to.include.keys('firstname');
         expect(res.body.data.user).to.include.keys('lastname');
         expect(res.body.data.user).to.include.keys('email');
-        expect(res.body.data.user).to.include.keys('is_admin');
+        expect(res.body.data.user).to.include.keys('isAdmin');
         expect(res.body.data.user).to.include.keys('created_at');
-        expect(res.body.data.user.is_admin).to.equal(null);
+        expect(res.body.data.user.isAdmin).to.equal(null);
 
         done(err);
       });
@@ -56,7 +56,7 @@ describe('Auth routes: login', () => {
         adminToken = res.body.data.token;
         expect(res.statusCode).to.equal(200);
         expect(res.body.data).to.include.keys('token');
-        expect(res.body.data.user.is_admin).to.equal(true);
+        expect(res.body.data.user.isAdmin).to.equal(true);
 
         done(err);
       });
@@ -112,7 +112,7 @@ describe('Auth routes: login', () => {
       .send({ ...emptyUserDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors[0].param).to.equal('email');
+        expect(res.body.errors).to.include.keys('email');
 
         done(err);
       });

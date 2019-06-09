@@ -74,8 +74,6 @@ class PartyController {
   }
 
   /**
-   *
-   *
    * @static
    * @param {*} req
    * @param {*} res

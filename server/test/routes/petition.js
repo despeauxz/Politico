@@ -70,8 +70,8 @@ describe('Petition', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.include.keys('errors');
-          expect(res.body.errors[0].param).to.equal('title');
-          expect(res.body.errors[1].param).to.equal('text');
+          expect(res.body.errors).to.include.keys('title');
+          expect(res.body.errors).to.include.keys('text');
 
           done(err);
         });

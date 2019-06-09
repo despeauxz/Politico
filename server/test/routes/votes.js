@@ -12,12 +12,12 @@ const { userToken } = tokens;
 
 describe('Votes', () => {
   describe('## Right Input', () => {
-    it('should vote for a specific candidate', (done) => {
+    it('should be able to vote a candidate', (done) => {
       request(app)
         .post('/api/v1/votes')
         .set('Accept', 'application/json')
         .set('authorization', userToken)
-        .send({ officeId: 1, candidateId: 1 })
+        .send({ officeId: 2, candidateId: 1 })
         .end((err, res) => {
           expect(res.statusCode).to.equal(201);
           expect(res.body).to.include.keys('message');
@@ -25,10 +25,25 @@ describe('Votes', () => {
 
           done(err);
         });
-    })
+    });
   });
 
   describe('## Wrong Input', () => {
+    it('should error for unscheduled election date', (done) => {
+      request(app)
+        .post('/api/v1/votes')
+        .set('Accept', 'application/json')
+        .set('authorization', userToken)
+        .send({ officeId: 1, candidateId: 1 })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.include.keys('error');
+          expect(res.body.error).to.equal('Election date hasn\'t been fixed yet');
+
+          done(err);
+        });
+    });
+
     it('should output error if candidate does not exist', (done) => {
       request(app)
         .post('/api/v1/votes')

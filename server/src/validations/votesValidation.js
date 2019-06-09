@@ -24,6 +24,6 @@ export default {
     check('candidateId')
       .custom(value => notEmpty(value, 'Candidate ID field cannot be left blank'))
       .isNumeric()
-      .withMessage('Office ID must be an Integer'),
+      .withMessage('Candidate ID must be an Integer'),
   ],
 };

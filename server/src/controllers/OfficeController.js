@@ -79,6 +79,71 @@ class OfficeController {
       });
     }
   }
+
+  /**
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns {Object} updated response
+   * @memberof OfficeController
+   */
+  static async update(req, res) {
+    try {
+      const { rows } = await models.findOne(req.params.id);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'Office Not Found',
+        });
+      }
+      const response = await models.update(req.params.id, req.body);
+      return res.status(200).json({
+        status: 200,
+        message: 'Office details updated successfully',
+        data: response.rows[0],
+      });
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return res.status(400).json({
+          status: 400,
+          error: 'Office already exists',
+        });
+      }
+      return res.status(400).json({
+        status: 400,
+        error,
+      });
+    }
+  }
+
+  /**
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns {string} message
+   * @memberof OfficeController
+   */
+  static async delete(req, res) {
+    try {
+      const { rows } = await models.findOne(req.params.id);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'Office Not Found',
+        });
+      }
+      await models.delete(req.params.id);
+      return res.status(200).json({
+        status: 200,
+        message: 'Office successfully deleted',
+      });
+    } catch (error) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error,
+      });
+    }
+  }
 }
 
 export default OfficeController;

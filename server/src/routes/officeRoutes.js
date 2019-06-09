@@ -13,5 +13,7 @@ officeRoutes.use(Authorization.authenticate);
 officeRoutes.post('/', Authorization.isAdmin, officeValidation.createOffice, validation, OfficeController.create);
 officeRoutes.get('/', OfficeController.getOffices);
 officeRoutes.get('/:id', OfficeController.getOfficeByID);
+officeRoutes.patch('/:id', Authorization.isAdmin, officeValidation.update, validation, OfficeController.update);
+officeRoutes.delete('/:id', Authorization.isAdmin, OfficeController.delete);
 
 export default officeRoutes;

@@ -10,7 +10,7 @@ const res = {
     send: message => ({
       status,
       message,
-    })
+    }),
   }),
 };
 

@@ -46,7 +46,7 @@ class ValidationHandler {
     };
 
     if (!errors.isEmpty()) {
-      const mappedErrors = errors.array();
+      const mappedErrors = errors.mapped();
 
       return res.status(400).json({
         status: 400,

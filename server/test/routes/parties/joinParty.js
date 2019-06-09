@@ -18,7 +18,6 @@ describe('Join Party', () => {
       .set('authorization', adminToken)
       .send({ ...createPartyDetails })
       .end((err, res) => {
-        console.log(res.body);
         expect(res.statusCode).to.equal(201);
         expect(res.body).to.be.a('object');
 
@@ -38,7 +37,7 @@ describe('Join Party', () => {
         expect(res.body).to.include.keys('error');
 
         done(err);
-      })
+      });
   });
 
   it('should return error for unauthorized user', (done) => {
@@ -60,7 +59,7 @@ describe('Join Party', () => {
       .patch('/api/v1/auth/join-party')
       .set('Accept', 'application/json')
       .set('authorization', userToken)
-      .send({ party_id: 2 })
+      .send({ partyId: 2 })
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
