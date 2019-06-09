@@ -29,7 +29,7 @@ class Authorization {
   static generateToken({ ...user }) {
     const token = jwt.sign({ user },
       process.env.SECRET, {
-        expiresIn: 86400,
+        expiresIn: '1d',
       });
 
     return token;
@@ -55,7 +55,7 @@ class Authorization {
         });
       }
       const decoded = await jwt.verify(token, process.env.SECRET);
-      const text = 'SELECT * FROM users WHERE id = $1';
+      const text = 'SELECT * FROM Users WHERE id = $1';
       const { rows } = await db.query(text, [decoded.user.id]);
       if (!rows[0]) {
         return res.status(400).json({
@@ -78,7 +78,7 @@ class Authorization {
   // eslint-disable-next-line consistent-return
   static async isAdmin(req, res, next) {
     const { id } = req.user;
-    const text = 'SELECT * FROM users WHERE id=$1 AND is_admin=true';
+    const text = 'SELECT * FROM users WHERE id=$1 AND isAdmin=true';
     const values = [id];
     try {
       const { rows } = await db.query(text, values);

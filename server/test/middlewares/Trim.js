@@ -15,7 +15,7 @@ const req = {
 const res = {
   json: message => ({ message }),
   status: status => ({
-    json: message => ({ status, message })
+    json: message => ({ status, message }),
   }),
 };
 

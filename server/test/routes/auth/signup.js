@@ -29,7 +29,7 @@ describe('Auth routes:', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body).to.be.a('object');
-        expect(res.body.data.user.is_admin).to.equal(true);
+        expect(res.body.data.user.isAdmin).to.equal(true);
 
         done(err);
       });
@@ -63,14 +63,14 @@ describe('Auth routes:', () => {
       });
   });
 
-  it('should return error of missing name field', (done) => {
+  it('should return error of missing firstname field', (done) => {
     request(app)
       .post('/api/v1/auth/signup')
       .set('Accept', 'application/json')
       .send({ ...invalidUserDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors[0].param).to.equal('firstname');
+        expect(res.body.errors).to.include.keys('firstname');
 
         done(err);
       });

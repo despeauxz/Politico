@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 import request from 'supertest';
 import { expect } from 'chai';
@@ -36,7 +37,7 @@ describe('Party Routes: create a new party', () => {
         expect(res.body.message).to.equal('Unauthorized Access! Admin only');
 
         done(err);
-      })
+      });
   });
 
   it('should return error for unauthorized user', (done) => {
@@ -50,7 +51,7 @@ describe('Party Routes: create a new party', () => {
         expect(res.body.error).to.equal('Unauthorized user');
 
         done(err);
-      })
+      });
   });
 
   it('should return errors for invalid fields', (done) => {
@@ -62,7 +63,7 @@ describe('Party Routes: create a new party', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.a('object');
-        expect(res.body.errors).to.be.a('array');
+        expect(res.body.errors).to.be.a('object');
 
         done(err);
       });
@@ -76,7 +77,7 @@ describe('Party Routes: create a new party', () => {
       .send({ ...invalidPartyDetails })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors[0].param).to.equal('name');
+        expect(res.body.errors).to.include.keys('name');
         done(err);
       });
   });

@@ -6,7 +6,9 @@ import mockData from '../../utils/mockData';
 import app from '../../../src/app';
 import tokens from '../auth/login';
 
-const { createOfficeDetails, invalidOfficeDetails } = mockData.createOffice;
+const {
+  createOfficeDetails, secondOfficeDetails, thirdOfficeDetails, invalidOfficeDetails,
+} = mockData.createOffice;
 const { userToken, adminToken } = tokens;
 
 describe('Office Routes: create a new office', () => {
@@ -22,7 +24,35 @@ describe('Office Routes: create a new office', () => {
 
         done();
       });
-  })
+  });
+
+  it('should add another new office', (done) => {
+    request(app)
+      .post('/api/v1/offices')
+      .set('Accept', 'application/json')
+      .set('authorization', adminToken)
+      .send({ ...secondOfficeDetails })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body).to.be.a('object');
+
+        done();
+      });
+  });
+
+  it('should add another new office for deletion', (done) => {
+    request(app)
+      .post('/api/v1/offices')
+      .set('Accept', 'application/json')
+      .set('authorization', adminToken)
+      .send({ ...thirdOfficeDetails })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body).to.be.a('object');
+
+        done();
+      });
+  });
 
   it('should check for office unique name field', (done) => {
     request(app)
@@ -36,7 +66,7 @@ describe('Office Routes: create a new office', () => {
 
         done();
       });
-  })
+  });
 
 
   it('should return errors for unauthorized access', (done) => {

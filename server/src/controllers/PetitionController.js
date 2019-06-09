@@ -1,7 +1,6 @@
 import models from '../models/petition';
 
 class PetitionController {
-
   /**
      * @static
      * @param {*} req

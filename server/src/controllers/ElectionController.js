@@ -8,7 +8,7 @@ class ElectionController {
   static async candidates(req, res) {
     const userId = req.params.id;
     const { officeId, partyId } = req.body;
-    const searchText = 'SELECT * FROM users WHERE id=$1';
+    const searchText = 'SELECT * FROM Users WHERE id=$1';
     const { rows } = await db.query(searchText, [userId]);
     if (!rows[0]) {
       return res.status(404).json({
@@ -16,7 +16,7 @@ class ElectionController {
         message: 'User not found',
       });
     }
-    const text = 'INSERT INTO candidates(office_id, party_id, user_id) VALUES ($1, $2, $3) RETURNING office_id, user_id, party_id';
+    const text = 'INSERT INTO Candidates(officeId, partyId, userId) VALUES ($1, $2, $3) RETURNING officeId, userId, partyId';
     try {
       const response = await db.query(text, [officeId, partyId, userId]);
       return res.status(201).json({
@@ -48,7 +48,7 @@ class ElectionController {
    */
   static async confirm(req, res) {
     try {
-      const query = 'SELECT * FROM candidates WHERE id=$1';
+      const query = 'SELECT * FROM Candidates WHERE id=$1';
       const response = await db.query(query, [req.params.id]);
       if (!response.rows[0]) {
         return res.status(404).json({
@@ -56,7 +56,7 @@ class ElectionController {
           error: 'Candidate does not exist',
         });
       }
-      const updateQuery = 'UPDATE candidates SET confirm=$1 WHERE id=$2 returning *';
+      const updateQuery = 'UPDATE Candidates SET confirm=$1 WHERE id=$2 returning *';
       const result = await db.query(updateQuery, [true, req.params.id]);
       return res.status(200).json({
         status: 200,
@@ -81,7 +81,7 @@ class ElectionController {
    */
   static async getConfirmedCandidates(req, res) {
     try {
-      const officeQuery = 'SELECT * FROM offices WHERE id=$1';
+      const officeQuery = 'SELECT * FROM Offices WHERE id=$1';
       const response = await db.query(officeQuery, [req.params.id]);
       if (!response.rows[0]) {
         return res.status(404).json({
@@ -89,11 +89,11 @@ class ElectionController {
           message: 'Office does not exist',
         });
       }
-      const query = `SELECT candidates.id, candidates.confirm, users.firstname as firstname,
-        users.lastname as lastname, parties.name as partyname FROM candidates 
-        LEFT JOIN users ON users.id = candidates.user_id 
-        LEFT JOIN parties ON parties.id = candidates.party_id 
-        WHERE candidates.office_id=$1 AND candidates.confirm=true`;
+      const query = `SELECT Candidates.id, Candidates.confirm, Users.firstname as firstname,
+        Users.lastname as lastname, Parties.name as partyname FROM Candidates 
+        LEFT JOIN Users ON Users.id = Candidates.userId 
+        LEFT JOIN Parties ON Parties.id = Candidates.partyId 
+        WHERE Candidates.officeId=$1 AND Candidates.confirm=true`;
       const { rows, rowCount } = await db.query(query, [req.params.id]);
       return res.status(200).json({
         status: 200,
@@ -110,12 +110,12 @@ class ElectionController {
 
   static async getAllCandidates(req, res) {
     try {
-      const query = `SELECT candidates.id, candidates.confirm, users.firstname as firstname,
-        users.lastname as lastname, parties.name as partyname, offices.name as officename FROM candidates 
-        LEFT JOIN users ON users.id = candidates.user_id 
-        LEFT JOIN parties ON parties.id = candidates.party_id
-        LEFT JOIN offices ON offices.id = candidates.office_id
-        ORDER BY candidates.office_id ASC`;
+      const query = `SELECT Candidates.id, Candidates.confirm, Users.firstname as firstname,
+        Users.lastname as lastname, Parties.name as partyname, Offices.name as officename FROM Candidates 
+        LEFT JOIN Users ON Users.id = Candidates.userId 
+        LEFT JOIN Parties ON Parties.id = Candidates.partyId
+        LEFT JOIN Offices ON Offices.id = Candidates.officeId
+        ORDER BY Candidates.officeId ASC`;
       const { rows, rowCount } = await db.query(query);
       return res.status(200).json({
         status: 200,
@@ -138,7 +138,7 @@ class ElectionController {
      * @memberof ElectionController
      */
   static async getResults(req, res) {
-    const query = 'SELECT COUNT(votes.candidate_id) AS total, candidates.office_id, candidates.id FROM votes JOIN candidates ON candidates.id=votes.candidate_id WHERE votes.candidate_id=candidates.id AND candidates.office_id=$1 GROUP BY candidates.id, candidates.user_id, candidates.office_id';
+    const query = 'SELECT COUNT(Votes.candidateId) AS total, Candidates.officeId, Candidates.id FROM Votes JOIN Candidates ON Candidates.id=Votes.candidateId WHERE Votes.candidateId=Candidates.id AND Candidates.officeId=$1 GROUP BY Candidates.id, Candidates.userId, Candidates.officeId';
 
     try {
       const { rows } = await db.query(query, [req.params.id]);
@@ -151,7 +151,7 @@ class ElectionController {
       return res.status(200).json({
         status: 200,
         data: [{
-          office: rows[0].office_id,
+          office: rows[0].officeId,
           candidate: rows[0].id,
           result: rows[0].total,
         }],

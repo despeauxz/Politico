@@ -1,4 +1,3 @@
-import multer from 'multer';
 import express from 'express';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import UserController from '../controllers/UserController';
@@ -13,6 +12,7 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
 userRoutes.post('/signup', UserValidation.signup, validation, UserController.signup);
 userRoutes.post('/login', UserValidation.login, validation, UserController.login);
 userRoutes.post('/forgot_password', UserValidation.forgotPassword, validation, UserController.forgotPassword);
+userRoutes.post('/reset_password', UserValidation.resetPassword, validation, UserController.resetPassword);
 userRoutes.patch('/join-party', Authorization.authenticate, UserController.updateUserParty);
 userRoutes.patch('/user', Authorization.authenticate, UserController.user);
 userRoutes.get('/details', Authorization.authenticate, Authorization.isAdmin, UserController.details);

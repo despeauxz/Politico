@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 import request from 'supertest';
 import { expect } from 'chai';
@@ -21,7 +22,7 @@ describe('Party\'s Route: Update parties name', () => {
         expect(res.body.data).to.include.keys('name');
 
         done(err);
-      })
+      });
   });
 
   it('should return error for forbidden access', (done) => {
@@ -36,7 +37,7 @@ describe('Party\'s Route: Update parties name', () => {
         expect(res.body).to.include.keys('message');
 
         done(err);
-      })
+      });
   });
 
   it('should return error for unauthorized user', (done) => {
@@ -51,7 +52,7 @@ describe('Party\'s Route: Update parties name', () => {
         expect(res.body.error).to.equal('Unauthorized user');
 
         done(err);
-      })
+      });
   });
 
   it('should output error for invalid party ID', (done) => {
@@ -65,6 +66,6 @@ describe('Party\'s Route: Update parties name', () => {
         expect(res.body).to.include.keys('error');
 
         done(err);
-      })
+      });
   });
 });

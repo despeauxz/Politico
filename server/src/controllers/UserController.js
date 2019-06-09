@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
+import randomString from 'random-string';
 import Mailer from '../utils/Mailer';
 import partyModel from '../models/party';
 import models from '../models/users';
@@ -25,7 +26,7 @@ class UserController {
   static async signup(req, res) {
     try {
       const { rows } = await models.create(req, req.body);
-      const token = Authorization.generateToken(UserController.getTokenObj(rows[0]));
+      const token = Authorization.generateToken(UserController.getUserobj(rows[0]));
       return res.status(201).json({
         status: res.statusCode,
         message: 'User registered successfully',
@@ -72,7 +73,8 @@ class UserController {
         error: 'Invalid Credentials',
       });
     }
-    const token = Authorization.generateToken(UserController.getTokenObj(rows[0]));
+    const token = Authorization.generateToken(UserController.getUserobj(rows[0]));
+
     return res.status(200).json({
       status: 200,
       data: {
@@ -129,13 +131,28 @@ class UserController {
       });
     }
 
-    const token = Authorization.generateToken(rows[0].email);
+    const expiry = Date.now() + 3600000;
+    const token = randomString({ length: 40 });
+    await models.updateToken(req, token, expiry, rows[0].email);
     await Mailer.forgotPasswordMail(token, email);
 
     return res.status(200).json({
       status: 200,
       message: 'A reset token has been sent to your email address',
     });
+  }
+
+  static async resetPassword(req, res) {
+    const { password } = req.body;
+    const { email, token } = req.query;
+
+    const user = await models.findByToken(req, token, Date.now());
+
+    if (!user) return res.status(400).send({ status: 400, error: 'Password reset token is invalid or has expired' });
+
+    await models.updateToken(req, null, null, email);
+
+    return res.status(200).json({ status: 200, message: 'Password reset successful' });
   }
 
   static getUserobj(data) {
@@ -145,25 +162,12 @@ class UserController {
       lastname: data.lastname,
       othername: data.othername,
       email: data.email,
-      digit: data.digit,
+      phoneNo: data.phoneno,
       avatar: data.avatar,
-      is_admin: data.is_admin,
-      party_id: data.party_id,
+      isAdmin: data.isadmin,
+      partyId: data.partyid,
       created_at: data.created_at,
       modified_at: data.modified_at,
-    };
-  }
-
-  static getTokenObj(data) {
-    return {
-      id: data.id,
-      firstname: data.firstname,
-      lastname: data.lastname,
-      othername: data.othername,
-      email: data.email,
-      digit: data.digit,
-      is_admin: data.is_admin,
-      password: data.password,
     };
   }
 
@@ -187,7 +191,7 @@ class UserController {
 
   static async updateUserParty(req, res) {
     try {
-      const { rows } = await partyModel.findOne(req.body.party_id);
+      const { rows } = await partyModel.findOne(req.body.partyId);
       if (!rows[0]) {
         return res.status(404).json({
           status: res.statusCode,

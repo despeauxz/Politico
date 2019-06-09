@@ -6,12 +6,12 @@ export default {
     check('title')
       .trim()
       .exists().withMessage('Title must be specified')
-      .custom(value => notEmpty(value, 'Title cannot be left blank')),
+      .custom(value => notEmpty(value, 'Title is required')),
     check('text')
       .trim()
       .exists().withMessage('Text body must be specified')
-      .custom(value => notEmpty(value, 'Text body cannot be left blank')),
-    check('office_id')
+      .custom(value => notEmpty(value, 'Text is required')),
+    check('officeId')
       .trim()
       .exists().withMessage('Office Id must be specified')
       .custom(value => notEmpty(value, 'Office Id cannot be left blank'))

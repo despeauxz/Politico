@@ -6,20 +6,24 @@ export default {
     check('name')
       .trim()
       .exists().withMessage('Name must be specified')
-      .custom(value => notEmpty(value, 'Name field cannot be left blank')),
-    check('hq_address')
+      .custom(value => notEmpty(value, 'Name field is required')),
+    check('hqAddress')
       .trim()
       .exists().withMessage('HQ Address must be specified')
-      .custom(value => notEmpty(value, 'HQ Address field cannot be left blank')),
-    check('logo_url')
+      .custom(value => notEmpty(value, 'HQ Address is required')),
+    check('fullname')
+      .trim()
+      .exists().withMessage('Fullname must be specified')
+      .custom(value => notEmpty(value, 'Fullname field is required')),
+    check('logoUrl')
       .trim()
       .exists().withMessage('Logo URL must be specified')
-      .custom(value => notEmpty(value, 'Logo URL field cannot be left blank'))
+      .custom(value => notEmpty(value, 'Logo URL is required'))
       .isURL()
       .withMessage('Logo URL must be a URL'),
   ],
   update: [
     check('name')
-      .custom(value => notEmpty(value, 'Name field cannot be left blank')),
+      .custom(value => notEmpty(value, 'Name field is required')),
   ],
 };

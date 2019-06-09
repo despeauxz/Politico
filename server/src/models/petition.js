@@ -7,14 +7,14 @@ class Petition {
   create(req, data) {
     const value = [
       req.user.id,
-      data.office_id,
+      data.officeId,
       data.title,
       data.text,
       moment(new Date()),
     ];
 
     const text = `INSERT INTO
-        petitions(created_by, office_id, title, text, created_at)
+        Petitions(created_by, officeId, title, text, created_at)
         VALUES ($1, $2, $3, $4, $5) returning *`;
 
     const response = db.query(text, value);
@@ -22,10 +22,10 @@ class Petition {
   }
 
   findAll() {
-    const findAllQuery = `SELECT petitions.id, petitions.title, petitions.text, petitions.evidence, petitions.created_at, 
-      users.firstname as firstname, users.lastname as lastname, offices.name as officename FROM petitions 
-      LEFT JOIN users ON users.id = petitions.created_by 
-      LEFT JOIN offices ON offices.id = petitions.office_id`;
+    const findAllQuery = `SELECT Petitions.id, Petitions.title, Petitions.text, Petitions.evidence, Petitions.created_at, 
+      Users.firstname as firstname, Users.lastname as lastname, Offices.name as officename FROM Petitions 
+      LEFT JOIN Users ON Users.id = Petitions.created_by 
+      LEFT JOIN Offices ON Offices.id = Petitions.officeid`;
     const response = db.query(findAllQuery);
     return response;
   }
