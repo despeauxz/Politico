@@ -27,7 +27,6 @@ export default {
       .withMessage('Password must be minimum of 6 characters'),
     check('passwordConfirm', 'Passwords don\'t match')
       .trim()
-      .custom(value => notEmpty(value, 'Password Confirm field field cannot be left blank'))
       .custom((value, { req }) => value === req.body.password),
   ],
   login: [
