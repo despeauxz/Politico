@@ -16,5 +16,6 @@ userRoutes.post('/reset_password', UserValidation.resetPassword, validation, Use
 userRoutes.patch('/join-party', Authorization.authenticate, UserController.updateUserParty);
 userRoutes.patch('/user', Authorization.authenticate, UserController.user);
 userRoutes.get('/details', Authorization.authenticate, Authorization.isAdmin, UserController.details);
+userRoutes.get('/profile', Authorization.authenticate, UserController.getProfile);
 
 export default userRoutes;

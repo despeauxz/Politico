@@ -84,6 +84,18 @@ class UserController {
     });
   }
 
+  static async getProfile(req, res) {
+    const { email } = req.user;
+    const { rows } = await models.find(email);
+
+    return res.status(200).json({
+      status: 200,
+      data: {
+        payload: UserController.getUserobj(rows[0]),
+      },
+    });
+  }
+
 
   /**
    * @method verifyPassword
